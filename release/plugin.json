@@ -1,0 +1,75 @@
+{
+  "header": {
+    "id": "org.openwalletstack.wallet.plugin.applet.coinbase",
+    "kind": "applet",
+    "name": "Coinbase",
+    "version": "0.0.1",
+    "description": "An OWS Wallet applet plugin for Coinbase.",
+    "author": "Open Wallet Stack",
+    "url": {
+      "marketing": "https://openwalletstack.org",
+      "support": "https://github.com/owstack/ows-wallet-applet-coinbase/issues",
+      "privacy": "https://openwalletstack.org/disclaimer",
+      "terms": "https://openwalletstack.org/terms",
+      "git": "https://github.com/owstack/ows-wallet-applet-coinbase/"
+    },
+    "commitHash": "fatal: "
+  },
+  "permissions": {
+    "delete": false
+  },
+  "galleryImage": "<plugin-path>/img/gallery.png",
+  "previewImage": "<plugin-path>/img/preview.png",
+  "iconImage": "<plugin-path>/img/icon.png",
+  "splashImage": "<plugin-path>/img/splash.png",
+  "store": {
+    "id": "0",
+    "rating": "4+",
+    "price": {
+      "amount": "0",
+      "currency": "USD"
+    },
+    "category": {
+      "primary": "General",
+      "secondary": "OWS"
+    },
+    "keywords": [
+      "ows",
+      "plugin",
+      "applet"
+    ]
+  },
+  "skins": {
+    "default": {
+      "default": true
+    }
+  },
+  "dependencies": {
+    "org.openwalletstack.wallet.plugin.servlet.coinbase": {
+      "package": {
+        "@owstack/ows-wallet-servlet-coinbase": "^0.0.1"
+      },
+      "options": {
+        "startMode": "auto"
+      },
+      "service": {
+        "redirect_uri": {
+          "mobile": "owswallet://coinbase",
+          "desktop": "owswallet://coinbase"
+        },
+        "sandbox": {
+          "host": "",
+          "api": "",
+          "client_id": "",
+          "client_secret": ""
+        },
+        "production": {
+          "host": "https://www.coinbase.com",
+          "api": "https://api.coinbase.com",
+          "client_id": "fca0cdbbbde321f471b2d94caa12030f5353ef496fbae2560fd8cb03093bdb41",
+          "client_secret": "fca0cdbbbde321f471b2d94caa12030f5353ef496fbae2560fd8cb03093bdb41"
+        }
+      }
+    }
+  }
+}
