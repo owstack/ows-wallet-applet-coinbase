@@ -1,0 +1,53 @@
+<ion-view id="start">
+  <ion-content scroll="false">
+    <div class="logo">
+      <img src="img/logo.png">
+    </div>
+    <div class="feature-button-group currency">
+      <span>
+        <button class="button button-small" ng-repeat="c in currencies track by $index" ng-class="{'selected': $index == selectedCurrency}"
+          ng-click="selectCurrency($index)">
+          {{c.base}}
+        </button>
+      </span>
+    </div>
+    <div class="feature-group row">
+      <div class="feature-left-group col col-50">
+        <div class="feature-value">
+          {{featureLeft.symbol}}{{featureLeft.value}}
+        </div>
+        <div class="feature-label">
+          {{featureLeft.label}}
+        </div>
+      </div>
+      <div class="feature-right-group col">
+        <div class="feature-value">
+          <span ng-show="featureRight.direction < 0">-</span>
+          {{featureRight.symbol}}{{featureRight.value}}
+          <span ng-class="{'triangle up': featureRight.direction >= 0}"></span>
+          <span ng-class="{'triangle down': featureRight.direction < 0}"></span>
+        </div>
+        <div class="feature-label">
+          {{featureRight.label}}
+        </div>
+      </div>
+    </div>
+    <div class="feature-button-group time-frame">
+      <span>
+        <button class="button button-small" ng-repeat="t in timeFrames track by $index" ng-class="{'selected': $index == selectedTimeFrame}"
+          ng-click="selectTimeFrame($index)">
+          {{t.button}}
+        </button>
+      </span>
+    </div>
+    <!-- TODO: chart goes here -->
+    <div class="main-button-group">
+      <button class="button button-block button-primary" ng-click="openSignupWindow()" translate>
+        Sign Up
+      </button>
+      <button class="button button-block button-secondary" ng-click="signIn()" translate>
+        Log In
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

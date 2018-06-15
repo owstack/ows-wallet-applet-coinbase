@@ -1,0 +1,36 @@
+<ion-modal-view id="sign-in-form">
+  <ion-header-bar class="bar bar-coinbase">
+  </ion-header-bar>
+  <ion-content scroll="false">
+  <div class="container">
+    <div class="item title" translate>
+      Account Authorization
+    </div>
+    <div class="item item-text-wrap" translate>
+      Waiting for your authorization to access your Coinbase account.
+      <div translate>
+        After you authorize you will be automatically forwarded to your account dashboard. 
+        If you are not automatically forwarded and have an authorization code you may enter it below to continue.
+      </div>
+    </div>
+    <label class="item item-input">
+      <input type="text" placeholder="Enter Code" ng-model="formData.oauthCode">
+    </label>
+    <div class="row">
+      <div class="col col-50">
+        <button class="button button-clear cancel" ng-click="cancel()" translate>
+          CANCEL
+        </button>
+      </div>
+      <div class="col">
+        <button class="button button-clear submit" ng-click="submit()" translate>
+          SUBMIT CODE
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="help">
+    Need help?
+  </div>
+  </ion-content>
+</ion-modal-view>

@@ -1,131 +1,64 @@
 'use strict';
 
-angular.module('owsWalletPlugin.services').service('coinbaseService', function ($rootScope, $log, lodash, Account, Coinbase) {
+angular.module('owsWalletPlugin.services').factory('coinbaseService', function($log, $timeout, lodash, gettextCatalog, popupService, Coinbase, Settings) {
 
   var root = {};
+  var isAvailable = false;
+  var availableCallbacks = [];
 
-  var coinbase = new Coinbase('service');
-  var account;
-  var priceInfo;
-  var urls;
+  root.coinbase;
+  root.currencyOrder = ['BTC', 'BCH', 'ETH', 'LTC'];
+  root.settings;
 
-  //
-  coinbase.init().then(function(accountId) {
-
-    if (accountId != undefined) {
-      account = new Account(accountId);
+  root.whenAvailable = function(cb) {
+    // Can't do this when service loads since Coinbase servlet may not yet be ready.
+    // Coinbase object is created only once.
+    if (!root.coinbase) {
+      // Create our connection to the Coinbase service (via the Coinbase servlet).
+      // Use the 'default' plugin configuration for setup.
+      root.coinbase = new Coinbase('default', onCoinbaseConnect);
     }
 
-    return coinbase.getPriceInfo();
-
-  }).then(function(pi) {
-
-    priceInfo = pi;
-
-    return coinbase.getUrls();
-
-  }).then(function(u) {
-
-    urls = u;
-    return;
-
-  }).catch(function(error) {
-    $log.error('Could not initialize Coinbase service: ' + error);
-
-  });
-
-  root.accessApi = function() {
-    coinbase.accessApi(oauthCode);
+    if (!isAvailable) {
+      availableCallbacks.push(cb);
+      return;
+    }
+    return cb(root.coinbase);
   };
 
-  root.getStoredToken = function() {};
-//  root.setCredentials = function() {};
-  root.init = function() {};
-//  coinbase.accessAccount();
+  root.showError =function(err) {
+    $log.error('Could not connect to Coinbase: ' + err.message + ', ' + err.detail);
 
-//  account.getTransactions();
-
-
-  root.logout = function() {
-    coinbase.logout();
+    var title = gettextCatalog.getString('Could not connect to Coinbase');
+    var message = gettextCatalog.getString('An error occurred while trying to connect to Coinbase. Please try again.');
+    return popupService.showAlert(title, message);
   };
 
-  root.getAvailableCurrencies = function() {
-    return coinbase.getAvailableCurrencies();
+  // Called when we have at least and initial connection to Coinbase (may not have been paired or have access to an account).
+  function onCoinbaseConnect(err) {
+    if (err) {
+      return root.showError(err);
+    }
+
+    // Get host app settings.
+    Settings.get().then(function(settingsObj) {
+      root.settings = settingsObj;
+      available();
+
+    }).catch(function(err) {
+      return root.showError(err);
+    });
   };
 
-  root.buyPrice = function() {
-    return coinbase.buyPrice(currency);
+  function available() {
+    isAvailable = true;
+    lodash.each(availableCallbacks, function(x) {
+      $timeout(function() {
+        return x(root.coinbase);
+      }, 1);
+    });
+    availableCallbacks = [];
   };
-
-  root.sellPrice = function() {
-    return coinbase.sellPrice(currency);
-  };
-
-  root.getPendingTransactions = function() {
-    return coinbase.getPendingTransactions();
-  };
-
-  root.getSignupUrl = function() {
-    return urls.signupUrl;
-  };
-
-  root.getSupportUrl = function() {
-    return urls.supportUrl;
-  };
-
-  root.getOauthCodeUrl = function() {
-    return urls.oauthCodeUrl;
-  };
-
-  root.savePendingTransaction = function() {
-    return coinbase.savePendingTransaction(tx, options);    
-  };
-
-  root.getPaymentMethods = function() {
-    return coinbase.getPaymentMethods();
-  };
-
-  root.getNetwork = function() {};
-
-  root.buyRequest = function() {
-    return account.buyRequest(data);
-  };
-
-  root.getTransaction = function() {
-    return account.getTransaction(txId);
-  };
-
-  root.getBuyOrder = function() {
-    return account.getBuyOrder(buyId);
-  };
-
-  root.checkEnoughFundsForFee = function() {};
-  root.getErrorsAsString = function() {};
-
-  root.priceSensitivity = function() {
-    return priceInfo.priceSensitivity.values;
-  };
-  root.selectedPriceSensitivity = function() {
-    return priceInfo.priceSensitivity.selected;
-  };
-
-  root.sellRequest = function() {
-    return account.sellRequest(data);
-  };
-
-  root.createAddress = function() {
-    return account.createAddress(data);
-  };
-
-  root.getAccount = function() {
-    return coinbase.getAccount(accountId);
-  };
-
-  root.getCurrentUser = function() {
-    return coinbase.getCurrentUser();
-  };
-
 
   return root;
 });

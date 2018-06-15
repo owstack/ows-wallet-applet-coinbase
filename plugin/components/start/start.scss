@@ -1,0 +1,141 @@
+#start {
+
+	ion-content {
+		background: $v-background;
+	}
+
+	.logo {
+		position: absolute;
+    top: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    >img {
+    	height: 38px;
+    }
+	}
+
+  .feature-button-group {
+		position: absolute;
+		width: 100%;
+		display: flex;
+
+		&.currency {
+			top: 93px;
+
+			&:before {
+		    top: 15px;
+			}
+
+			>span {
+	    	background: #0c62c9;
+			}
+		}
+
+		&.time-frame {
+			top: 205px;
+
+			&:before {
+		    top: 40px;
+			}
+
+			>span {
+	    	background: none;
+			}
+		}
+
+		&:before {
+	    content: ' ';
+	    position: absolute;
+	    width: 100%;
+			border-bottom: 1px solid $v-white-transparent-light;
+ 	  }
+
+		>span {
+	    position: relative;
+			left: 50%;
+	    transform: translateX(-50%);
+    	padding: 0 15px;
+
+			>.button {
+		    font-size: 14px;
+				color: $v-white-transparent-mid;
+		    background: none;
+		    border-radius: 3px;
+		    min-width: 45px;
+
+		    &.selected {
+			    background: $v-white-transparent-subtle;
+			    color: $v-button-primary-color;
+		    }
+			}
+		}	
+	}	
+
+  .feature-group {
+	   position: absolute;
+	   top: 135px;
+
+    .feature-left-group {
+    	text-align: center;
+    	border-right: 1px solid $v-white-transparent-light;
+    }
+
+    .feature-right-group {
+    	text-align: center;
+    }
+
+  	.feature-value {
+  		color: white;
+  		font-size: 24px;
+  		font-weight: 600;
+  	}
+
+  	.feature-label {
+  		margin-top: 5px;
+  		color: $v-white-transparent-mid;
+  		font-size: 12px;
+  	}
+
+		.triangle {
+			width: 0;
+			height: 0;
+			position: absolute;
+	    margin-left: 7px;
+	    margin-top: 7px;
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+	
+	    &.up {
+				border-bottom: 7px solid $v-change-up-color;
+	    }
+
+	    &.down {
+				border-top: 7px solid $v-change-down-color;
+	    }
+    }
+	}
+
+	.main-button-group {
+    position: absolute;
+    bottom: 0;
+    width: 78%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .button {
+    	height: 64px;
+    	font-weight: 600;
+
+    	&.button-primary {
+    		background: $v-button-primary-bg;
+    		color: $v-button-primary-color !important;
+    	}
+
+    	&.button-secondary {
+    		background: $v-button-secondary-bg;
+    		color: $v-button-secondary-color !important;
+    	}
+    }
+	}
+}

@@ -3,11 +3,20 @@
 angular.module('owsWalletPlugin').config(function($stateProvider) {
 
 	$stateProvider
+    .state('start', {
+      url: '/start',
+      controller: 'StartCtrl',
+      templateUrl: 'views/start/start.html'
+    })
     .state('home', {
-      url: '/home/:code',
+      url: '/home',
       controller: 'HomeCtrl',
-      controllerAs: 'coinbase',
       templateUrl: 'views/home/home.html'
+    })
+    .state('sign-in', {
+      url: '/sign-in',
+      controller: 'SignInCtrl',
+      templateUrl: 'views/sign-in/sign-in.html'
     })
     .state('settings', {
       url: '/settings',
@@ -32,16 +41,19 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
       templateUrl: 'views/sell/sell.html'
     });
 
-})
-.run(function($rootScope, $state, $log, Coinbase) {
+}).run(function($rootScope, $state, $log, CoinbaseServlet, coinbaseService) {
 
-  owswallet.Plugin.ready(function() {
+  owswallet.Plugin.openForBusiness(CoinbaseServlet.id, function() {
 
-    owswallet.Plugin.openForBusiness(Coinbase.pluginId , function() {
-
-      $state.go('home');
-
+    // Wait for initial Coinbase service connection.
+    coinbaseService.whenAvailable(function(coinbase) {
+      if (coinbase.account) {
+        $state.go('home');
+      } else {
+        $state.go('start');
+      }
     });
+
   });
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {

@@ -13,7 +13,7 @@
       "terms": "https://openwalletstack.org/terms",
       "git": "https://github.com/owstack/ows-wallet-applet-coinbase/"
     },
-    "commitHash": "fatal: "
+    "commitHash": "86c6453"
   },
   "permissions": {
     "delete": false
@@ -52,10 +52,10 @@
       "options": {
         "startMode": "auto"
       },
-      "service": {
+      "default": {
         "redirect_uri": {
           "mobile": "owswallet://coinbase",
-          "desktop": "owswallet://coinbase"
+          "desktop": "https://conduitpay.com"
         },
         "sandbox": {
           "host": "",
@@ -67,7 +67,7 @@
           "host": "https://www.coinbase.com",
           "api": "https://api.coinbase.com",
           "client_id": "fca0cdbbbde321f471b2d94caa12030f5353ef496fbae2560fd8cb03093bdb41",
-          "client_secret": "fca0cdbbbde321f471b2d94caa12030f5353ef496fbae2560fd8cb03093bdb41"
+          "client_secret": "fa6dafda2ee9a067bca173cbb52b58e47e3703cf95d3e68985c8eee107fb3881"
         }
       }
     }

@@ -1,4 +1,120 @@
 #home {
-}
 
-@import "tx-details/tx-details";
+	ion-content {
+		background: #f5f7fa;
+	}
+
+	.header {
+		background: $v-primary-color;
+    width: 100%;
+		height: 216px;
+    position: absolute;
+    top: 0;
+	}
+
+	.amount-group {
+    width: 100%;
+    position: absolute;
+    top: 39px;
+    font-size: 44px;
+    color: $v-white-color;
+    text-align: center;
+
+    button {
+			font-size: 18px;
+	    color: $v-white-color;
+	    position: relative;
+	    top: 12px;
+
+	    &:before {
+    		font-size: 14px;	    
+	    }
+    }
+  }
+
+  .card-group {
+    height: 100%;
+    padding-top: 121px;
+
+		.card {
+    	height: 180px;
+    	border-radius: $v-visible-radius;
+	    position: relative;
+	    margin-left: 15px;
+	    margin-right: 15px;
+			box-shadow: 1px 1px 5px 0px $v-black-transparent-subtle;
+
+	    .item.item-body {
+	      padding: 0px;
+
+	      .currency-name {
+			    font-size: 24px;
+			    position: relative;
+			    top: 5px;
+	      }
+
+	      .currency-amount {
+			    font-size: 24px;
+			    position: relative;
+			    top: 5px;
+			    text-align: right;
+	      }
+
+	      .currency-base {
+			    font-size: 14px;
+					font-weight: 500;
+	      }
+
+	      .currency-change {
+	      	color: red;
+			    font-size: 14px;
+					font-weight: 500;
+			    text-align: right;
+	      }
+
+				.circle {
+					width: 12px;
+					height: 12px;
+					background: red;
+					border-radius: 50%;
+					float: left;
+					position: relative;
+			    top: 3px;
+	    		margin-right: 5px;
+				}
+
+	      .currency-period {
+			    font-size: 11px;
+			    position: relative;
+			    top: -8px;
+
+			    &:before {
+			    	content: ' ';
+			    	display: block;
+				    position: relative;
+				    top: 50%;
+				    left: 55px;
+				    width: calc(100% - 55px + 10px);
+				    border-top: 1.5px solid $v-black-transparent-subtle;
+			    }
+			  }
+
+				.btc {
+					background: #ffb119;
+				}
+
+				.bch {
+					background: #8dc451;
+				}
+
+				.eth {
+					background: #6e7bba;
+				}
+
+				.ltc {
+					background: #b5b5b5;
+				}
+	    }
+		}
+	}
+}

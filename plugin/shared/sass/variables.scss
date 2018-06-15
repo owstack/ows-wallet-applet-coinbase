@@ -2,7 +2,87 @@
  * Plugin variables
  */
 
-$v-debug-color:   #444444 !default;
-$v-info-color:    #0000ff !default;
-$v-warning-color: #ffa500 !default;
-$v-error-color:   #ff0000 !default;
+/* Fonts */
+
+$v-font-family:                                      'Avenir Next', sans-serif !default;
+$v-font-family-light:                                'Avenir Next Thin', sans-serif-light !default;
+$v-font-family-bold:                                 'Avenir Next Bold', sans-serif-bold !default;
+
+/* Transparency */
+
+$v-black-transparent-darker:                         rgba(0, 0, 0, 0.8) !default;
+$v-black-transparent-dark:                           rgba(0, 0, 0, 0.7) !default;
+$v-black-transparent-mid:                            rgba(0, 0, 0, 0.5) !default;
+$v-black-transparent-light:                          rgba(0, 0, 0, 0.3) !default;
+$v-black-transparent-subtle:                         rgba(0, 0, 0, 0.1) !default;
+
+$v-white-transparent-darker:                         rgba(255, 255, 255, 0.9) !default;
+$v-white-transparent-dark:                           rgba(255, 255, 255, 0.7) !default;
+$v-white-transparent-mid:                            rgba(255, 255, 255, 0.5) !default;
+$v-white-transparent-light:                          rgba(255, 255, 255, 0.3) !default;
+$v-white-transparent-subtle:                         rgba(255, 255, 255, 0.05) !default;
+
+/* Colors */
+
+$v-black-color:                                      #000000 !default;
+$v-white-color:                                      #ffffff !default;
+
+$v-dark-gray:                                        #444455 !default;
+$v-mid-gray:                                         #666677 !default;
+$v-light-gray:                                       #9b9bab !default;
+$v-subtle-gray:                                      darken(#ffffff, 5%) !default;
+
+$v-debug-color:                                      #444444 !default;
+$v-info-color:                                       #0000ff !default;
+$v-warning-color:                                    #ffa500 !default;
+$v-error-color:                                      #ff0000 !default;
+
+$v-primary-color:                                    #0966d0 !default;
+
+$v-success-color:                                    #0EC286 !default;
+
+/*
+$v-secondary-color:                                  #313131 !default;
+$v-accent-1-color:                                   #00afff !default;
+$v-accent-2-color:                                   #004466 !default;
+
+$v-text-color:                                       #ffffff !default;
+$v-heading-text-color:                               #ffffff !default;
+$v-link-color:                                       #00afff !default;
+$v-disabled-color:                                   $v-white-transparent-light !default;
+$v-success-bg-color:                                 #0EC286 !default;
+$v-assertive-color:                                  #ff473a !default;
+$v-nav-item-primary-color:                           #303030 !default;
+$v-nav-item-secondary-color:                         #3b3b3b !default;
+*/
+
+/* Corners */
+
+$v-subtle-radius:                                    2px !default;
+$v-visible-radius:                                   5px !default;
+$v-unmistakable-radius:                              10px !default;
+
+/* Views */
+
+$v-background:                                       linear-gradient(to bottom, #0966d0 0%,#0854ab 100%) !default;
+
+/* Buttons */
+
+$v-button-primary-bg:                                #4B84FF !default;
+$v-button-primary-color:                             $v-white-color !default;
+
+$v-button-secondary-bg:                              transparent !default;
+$v-button-secondary-color:                           $v-white-color !default;
+
+/* Content */
+
+$v-change-up-color:                                  #49dc49 !default;
+$v-change-down-color:                                #ff9393 !default;
+
+/* Ionic variables */
+
+$font-size-base:                                     16px !default;
+$font-size-small:                                    12px !default;
+$font-family-sans-serif:                             $v-font-family !default;
+$font-family-light-sans-serif:                       $v-font-family-light !default;
+$font-family-bold-sans-serif:                        $v-font-family-bold !default;

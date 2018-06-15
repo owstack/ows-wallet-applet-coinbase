@@ -1,0 +1,19 @@
+/**
+ * Plugin common SASS
+ */
+
+body,
+body button {
+	font-family: $v-font-family;
+}
+
+.bar.bar-coinbase {
+  background-color: $v-primary-color !important;
+  border-color: $v-primary-color;
+  color: $v-white-color;
+	background-size: 0;
+}
+
+button.activated {
+	border: none;
+}

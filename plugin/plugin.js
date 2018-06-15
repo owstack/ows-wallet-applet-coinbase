@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('owsWalletPlugin', [
+	'angularMoment',
 	'gettext',
 	'ionic',
 	'ngLodash',

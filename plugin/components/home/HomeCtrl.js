@@ -1,125 +1,146 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('HomeCtrl', function($scope, $timeout, $ionicModal, $ionicHistory, $log, coinbaseService, lodash, popupService, externalLinkService) {
+angular.module('owsWalletPlugin.controllers').controller('HomeCtrl', function($scope, $timeout, $log, $ionicScrollDelegate, lodash, utils, coinbaseService, Constants) {
 
-  var isNodeWebKit = owswallet.Plugin.isNodeWebKit();
-  var isCordova = owswallet.Plugin.isCordova();
+  var language;
+  var coinbase;
 
-  var self = this;
+  var DATA_UPDATE_FREQUENCY = 30000; // ms
+  var dataUpdater;
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
-    $scope.showOauthForm = false;
-
+    coinbase = coinbaseService.coinbase;
     init();
-
   });
 
-  function init() {
-/*
-    coinbaseService.getAvailableCurrencies().then(function(currencies) {
+  $scope.$on("$ionicView.beforeLeave", function(event) {
+    // Stop retrieving Coinbase data.
+    $timeout.cancel(dataUpdater);
+  });
 
-      // Currently only one currency.
-      $scope.currency = currencies[0];
+  $scope.onScroll = function() {
+    var position = $ionicScrollDelegate.$getByHandle('cards').getScrollPosition().top;
 
-      // Get buy and sell prices.
-      return coinbaseService.buyPrice($scope.currency);
+    $scope.headerTop = -1.5 * position + 'px';
+    $scope.amountGroupOpacity = 1 - (position * 0.01);
 
-    }).then(function(buyPrice) {
-
-      $scope.buyPrice = buyPrice;
-      return coinbaseService.sellPrice($scope.currency);
-
-    }).then(function(sellPrice) {
-
-      $scope.sellPrice = buyPrice;
-
-    }).catch(function(error) {
-      $log.error('Initialization failed: ' + error);
-
-    });
-*/
-/*
-
-    // Updating accessToken and accountId
-    $timeout(function() {
-      $scope.accessToken = data.accessToken;
-      $scope.accountId = data.accountId;
-      $scope.updateTransactions();
-      $scope.$apply();
-    }, 100);
-*/
-  };
-
-  $scope.updateTransactions = function() {
-    $log.debug('Getting transactions...');
-    $scope.pendingTransactions = { data: {} };
-    coinbaseService.getPendingTransactions($scope.pendingTransactions);
-  };
-
-  this.openAuthenticateWindow = function() {
-    var oauthUrl = this.getAuthenticateUrl();
-    if (!isNodeWebKit) {
-      externalLinkService.open(oauthUrl);
+    if (position < 130) {
+      $scope.titleOpacity = 0;
     } else {
-      var self = this;
-      var gui = require('nw.gui');
-      gui.Window.open(oauthUrl, {
-        focus: true,
-        position: 'center'
-      }, function(new_win) {
-        new_win.on('loaded', function() {
-          var title = new_win.window.document.title;
-          $timeout(function() {
-            if (title.indexOf('Coinbase') == -1) {
-              $scope.code = title;
-              self.submitOauthCode($scope.code);
-              new_win.close();
-            }
-          }, 100);
-        });
-      });
+      $scope.titleOpacity = ((position - 130) * 0.20);
     }
-  }
 
-  this.openSignupWindow = function() {
-    var url = coinbaseService.getSignupUrl();
-    var optIn = true;
-    var title = 'Sign Up for Coinbase';
-    var message = 'This will open Coinbase.com, where you can create an account.';
-    var okText = 'Go to Coinbase';
-    var cancelText = 'Back';
-    externalLinkService.open(url, optIn, title, message, okText, cancelText);
-  }
-
-  this.openSupportWindow = function() {
-    var url = coinbaseService.getSupportUrl();
-    var optIn = true;
-    var title = 'Coinbase Support';
-    var message = 'You can email support@coinbase.com for direct support, or you can view their help center.';
-    var okText = 'Open Help Center';
-    var cancelText = 'Go Back';
-    externalLinkService.open(url, optIn, title, message, okText, cancelText);
-  }
-
-  this.getAuthenticateUrl = function() {
-    $scope.showOauthForm = isCordova || isNodeWebKit ? false : true;
-    return coinbaseService.getOauthCodeUrl();
+    $scope.$apply();
   };
 
-  this.toggleOauthForm = function() {
-    $scope.showOauthForm = !$scope.showOauthForm;
-  }
+  $scope.format = function(num, currency) {
+    return Math.abs(num).toLocaleString(language, {minimumFractionDigits: currency.decimals, maximumFractionDigits: currency.decimals});
+  };
 
-  this.openTxModal = function(tx) {
-    $scope.tx = tx;
+  function init() {
+    language = coinbaseService.settings.language || 'en';
+    $scope.period = 'day';
+    $scope.amountGroupOpacity = 1;
+    $scope.titleOpacity = 0;
 
-    $ionicModal.fromTemplateUrl('views/modals/coinbase-tx-details.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-      $scope.modal.show();
+    getAccountBalance();
+    updateData();
+  };
+
+  function getAccountBalance() {
+    var accountBalance = 0.00;
+    var decimals = Constants.currencyMap('USD', 'decimals');
+    var symbol = Constants.currencyMap('USD', 'symbol');
+
+    $scope.accountBalance = symbol + $scope.format(accountBalance, {decimals: decimals});
+  };
+
+  function updateData() {
+    getData().then(function(data) {
+      $scope.currencies = data.currencies;
+      $scope.$apply();
+
+      // Continue updating until canceled.
+      dataUpdater = $timeout(function() {
+        updateData();
+      }, DATA_UPDATE_FREQUENCY);
     });
+  };
+
+  function getData() {
+    return new Promise(function(resolve, reject) {
+      // Get spot prices for all currency pairs.
+      coinbase.spotPrice().then(function(spotPrice) {
+
+        // Reject any entries that have an error.
+        spotPrice = lodash.pickBy(spotPrice, function(value, key) {
+          if (value.error != undefined) {
+            $log.error('Could not spot price for ' + key + ': ' + value.error);
+            return false;
+          }
+          return true;
+        });
+
+        // Convert to an array and map in some derived info.
+        var sortOrder = ['BTC', 'BCH', 'ETH', 'LTC'];
+        var currencies = lodash.map(Object.keys(spotPrice), function(k) {
+          var decimals = Constants.currencyMap(spotPrice[k].currency, 'decimals');
+
+          spotPrice[k].pair = spotPrice[k].base + '-' + spotPrice[k].currency;
+          spotPrice[k].amount = utils.float(spotPrice[k].amount); // Convert to number
+          spotPrice[k].symbol = Constants.currencyMap(spotPrice[k].currency, 'symbol');
+          spotPrice[k].decimals = decimals;
+
+          // Set a sort order.
+          spotPrice[k].sort = sortOrder.indexOf(spotPrice[k].base);
+          spotPrice[k].sort = (spotPrice[k].sort < 0 ? 99 : spotPrice[k].sort); // Move items not found to end of sort.
+
+          return spotPrice[k];
+        });
+
+        return lodash.sortBy(currencies, function(c) {
+          return c.sort;
+        });
+
+      }).then(function(currencies) {
+
+        var count = currencies.length;
+
+        // Get some history for each currency pair.
+        lodash.forEach(currencies, function(currency) {
+
+          coinbase.historicPrice(currency.pair, $scope.period).then(function(data) {
+            // data: {
+            //   base: 'BTC',
+            //   currency: 'USD',
+            //   prices: [{
+            //     price: '6844.29',
+            //     time: '2018-06-12T00:00:00Z'
+            //   }, {
+            //     ...
+            //   }]
+            // }
+
+            var periodPrice = utils.float(data.prices[data.prices.length-1].price); // Convert to number
+            currency.amountChange = currency.amount - periodPrice;
+            currency.percentChange = Math.abs(100 * currency.amountChange / currency.amount);
+
+            count--;
+
+            if (count == 0) {
+              return resolve ({
+                currencies: currencies
+              });
+            }
+          });
+
+        });
+
+      }).catch(function(error) {
+        $log.error('Could not get Coinbase data: ' + error);
+
+      });
+    }); // Promise
   };
 
 });

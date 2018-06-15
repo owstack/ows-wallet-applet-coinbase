@@ -1,0 +1,82 @@
+#sign-in-form {
+
+	ion-content {
+		background: $v-background;
+	}
+
+	.container {
+	  background: $v-white-color;
+	  position: absolute;
+	  top: 50%;
+	  left:50%;
+	  z-index: 10;
+	  width: 90%;
+	  max-width: 350px;
+	  transform: translate(-50%, -50%);
+	  border-radius: $v-visible-radius;
+	  text-align: center;
+	  padding: 5px;
+
+	  .item:not(.item-input) {
+      border: none;
+      border-bottom: 1px solid $v-black-transparent-subtle;
+      font-size: 16px;
+      margin: 1px;
+
+      &.title {
+      	font-weight: 600;
+      }
+
+      >div {
+        border: none;
+        font-size: 12px;
+        margin-top: 5px;      
+      }
+	  }
+
+	  .item.item-input {
+      border: none;
+      border-bottom: 1px solid $v-black-transparent-subtle;
+      min-height: 53px;
+
+      input {
+      	text-align: center;
+      }
+    }
+
+    .row {
+	    padding: 0;
+	    min-height: 53px;
+
+      .col {
+        padding: 0;
+
+        &.col-50 {
+	        border-right: 1px solid $v-black-transparent-subtle;
+	      }
+      }
+
+      button {
+        font-size: 14px;
+        padding: 8px;
+        font-weight: 600;
+
+        &.cancel {
+          color: #939ca0;
+        }
+
+        &.submit {
+          color: #0b4e78;
+        }
+      }
+    }
+	}
+
+	.help {
+    text-align: center;
+    color: $v-white-color;
+    font-size: 15px;
+    position: relative;
+    top: 80px;
+  }
+}
