@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('HomeCtrl', function($scope, $timeout, $log, $ionicScrollDelegate, lodash, utils, coinbaseService, Constants) {
+angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function($scope, $timeout, $log, $ionicScrollDelegate, lodash, utils, coinbaseService, settingsService, Constants) {
 
-  var language;
-  var coinbase;
+  var coinbase = coinbaseService.coinbase;
+  var currency = 'USD';
+  var language = settingsService.language;
 
   var DATA_UPDATE_FREQUENCY = 30000; // ms
   var dataUpdater;
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
-    coinbase = coinbaseService.coinbase;
     init();
   });
 
@@ -38,21 +38,31 @@ angular.module('owsWalletPlugin.controllers').controller('HomeCtrl', function($s
   };
 
   function init() {
-    language = coinbaseService.settings.language || 'en';
     $scope.period = 'day';
     $scope.amountGroupOpacity = 1;
     $scope.titleOpacity = 0;
 
-    getAccountBalance();
+    getAccountsTotalBalance();
     updateData();
   };
 
-  function getAccountBalance() {
-    var accountBalance = 0.00;
-    var decimals = Constants.currencyMap('USD', 'decimals');
-    var symbol = Constants.currencyMap('USD', 'symbol');
+  function getAccountsTotalBalance() {
+    // Get our total balance for all accounts.
+    var decimals = Constants.currencyMap(currency, 'decimals');
+    var symbol = Constants.currencyMap(currency, 'symbol');
 
-    $scope.accountBalance = symbol + $scope.format(accountBalance, {decimals: decimals});
+    var totalBalance = 0;
+    lodash.forEach(coinbase.accounts, function(account) {
+      account.getBalance(currency).then(function(balance) {
+
+        totalBalance += balance;
+        $scope.totalBalance = symbol + $scope.format(totalBalance, {decimals: decimals});
+
+      }).catch(function(error) {
+        $log.error(error);
+
+      });
+    });
   };
 
   function updateData() {
@@ -82,7 +92,6 @@ angular.module('owsWalletPlugin.controllers').controller('HomeCtrl', function($s
         });
 
         // Convert to an array and map in some derived info.
-        var sortOrder = ['BTC', 'BCH', 'ETH', 'LTC'];
         var currencies = lodash.map(Object.keys(spotPrice), function(k) {
           var decimals = Constants.currencyMap(spotPrice[k].currency, 'decimals');
 
@@ -90,9 +99,10 @@ angular.module('owsWalletPlugin.controllers').controller('HomeCtrl', function($s
           spotPrice[k].amount = utils.float(spotPrice[k].amount); // Convert to number
           spotPrice[k].symbol = Constants.currencyMap(spotPrice[k].currency, 'symbol');
           spotPrice[k].decimals = decimals;
+          spotPrice[k].color = coinbase.getAccountByCurrencyCode(spotPrice[k].base).currency.color;
 
           // Set a sort order.
-          spotPrice[k].sort = sortOrder.indexOf(spotPrice[k].base);
+          spotPrice[k].sort = coinbase.currencySortOrder.indexOf(spotPrice[k].base);
           spotPrice[k].sort = (spotPrice[k].sort < 0 ? 99 : spotPrice[k].sort); // Move items not found to end of sort.
 
           return spotPrice[k];

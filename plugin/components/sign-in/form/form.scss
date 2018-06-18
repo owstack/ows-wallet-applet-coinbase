@@ -62,11 +62,11 @@
         font-weight: 600;
 
         &.cancel {
-          color: #939ca0;
+          color: $v-light-gray !important;
         }
 
         &.submit {
-          color: #0b4e78;
+          color: $v-text-color !important;
         }
       }
     }

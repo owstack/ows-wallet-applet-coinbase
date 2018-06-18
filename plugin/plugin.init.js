@@ -2,34 +2,106 @@
 
 angular.module('owsWalletPlugin').config(function($stateProvider) {
 
+  // Routing.
 	$stateProvider
-    .state('start', {
+
+    /**
+     * Onboarding navigation (logged out)
+     */
+
+    .state('onboarding', {
+      url: '/onboarding',
+      abstract: true,
+      template: '<ion-nav-view name="onboarding"></ion-nav-view>'
+    })
+    .state('onboarding.start', {
       url: '/start',
-      controller: 'StartCtrl',
-      templateUrl: 'views/start/start.html'
+      views: {
+        'onboarding': {
+          controller: 'StartCtrl',
+          templateUrl: 'views/start/start.html'
+        }
+      }
     })
-    .state('home', {
-      url: '/home',
-      controller: 'HomeCtrl',
-      templateUrl: 'views/home/home.html'
-    })
-    .state('sign-in', {
+    .state('onboarding.sign-in', {
       url: '/sign-in',
-      controller: 'SignInCtrl',
-      templateUrl: 'views/sign-in/sign-in.html'
+      views: {
+        'onboarding': {
+          controller: 'SignInCtrl',
+          templateUrl: 'views/sign-in/sign-in.html'
+        }
+      }
     })
-    .state('settings', {
+
+    /**
+     * Tabs navigation (logged in)
+     */
+
+    .state('tabs', {
+      url: '/tabs',
+      abstract: true,
+      controller: 'TabsCtrl',
+      templateUrl: 'views/navigation/tabs/tabs.html'
+    })
+    .state('tabs.prices', {
+      url: '/prices',
+      views: {
+        'tab-prices': {
+          controller: 'PricesCtrl',
+          templateUrl: 'views/prices/prices.html'
+        }
+      }
+    })
+    .state('tabs.accounts', {
+      url: '/accounts',
+      views: {
+        'tab-accounts': {
+          controller: 'AccountsCtrl',
+          templateUrl: 'views/accounts/accounts.html'
+        }
+      }
+    })
+    .state('tabs.alerts', {
+      url: '/alerts',
+      views: {
+        'tab-alerts': {
+          controller: 'AlertsCtrl',
+          templateUrl: 'views/alerts/alerts.html'
+        }
+      }
+    })
+    .state('tabs.settings', {
       url: '/settings',
-      controller: 'SettingsCtrl',
-      templateUrl: 'views/settings/settings.html'
+      views: {
+        'tab-settings': {
+          controller: 'SettingsCtrl',
+          templateUrl: 'views/settings/settings.html',
+        }
+      }
     })
+
+    /**
+     * Accounts tab
+     */
+
+    .state('tabs.account', {
+      url: '/account/:id',
+      views: {
+        'tab-accounts@tabs': {
+          controller: 'AccountCtrl',
+          templateUrl: 'views/account/account.html'
+        }
+      }
+    });
+
+
 /*
     .state('coinbase.amount', {
       url: '/amount/:nextStep/:currency',
       controller: 'amountController',
       templateUrl: 'views/amount.html'
     })
-*/
+
     .state('buy', {
       url: '/buy/:amount/:currency',
       controller: 'BuyCtrl',
@@ -40,17 +112,21 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
       controller: 'SellCtrl',
       templateUrl: 'views/sell/sell.html'
     });
+*/
+}).run(function($rootScope, $state, $log, CoinbaseServlet, coinbaseService, $ionicConfig) {
 
-}).run(function($rootScope, $state, $log, CoinbaseServlet, coinbaseService) {
+  // Ionic platform defaults.
+  $ionicConfig.backButton.icon('icon ion-arrow-left-c').text('');
 
+  // Wait for this plugin and its dependents to become ready.
   owswallet.Plugin.openForBusiness(CoinbaseServlet.id, function() {
 
     // Wait for initial Coinbase service connection.
     coinbaseService.whenAvailable(function(coinbase) {
-      if (coinbase.account) {
-        $state.go('home');
+      if (coinbase.accounts) {
+        $state.go('tabs.prices');
       } else {
-        $state.go('start');
+        $state.go('onboarding.start');
       }
     });
 

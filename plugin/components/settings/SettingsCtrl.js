@@ -1,49 +1,53 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('SettingsCtrl', function($scope, $timeout, $log, $state, $ionicHistory, lodash, ongoingProcess, popupService, coinbaseService) {
+angular.module('owsWalletPlugin.controllers').controller('SettingsCtrl', function($scope, $timeout, $log, $state, $ionicHistory, gettextCatalog, Session, popupService, externalLinkService, coinbaseService) {
 
-  $scope.revokeToken = function() {
-    popupService.showConfirm('Coinbase', 'Are you sure you would like to log out of your Coinbase account?', null, null, function(res) {
-      if (res) {
-        coinbaseService.logout(function() {
+  var coinbase = coinbaseService.coinbase;
+  var session = Session.getInstance();
+
+  $scope.$on("$ionicView.beforeEnter", function(event, data) {
+    coinbase.getCurrentUser().then(function(user) {
+      $scope.user = user;
+      $scope.$apply();
+    });
+  });
+
+  $scope.externalLinks = {
+    support: {
+      itemName: gettextCatalog.getString('Support'),
+      title: gettextCatalog.getString('Get Support'),
+      message: gettextCatalog.getString('Get support from Coinbase.'),
+      okText: gettextCatalog.getString('Visit Website'),
+      cancelText: gettextCatalog.getString('Go Back'),
+      url: coinbase.urls.supportUrl
+    },
+    privacy: {
+      itemName: gettextCatalog.getString('Privacy'),
+      title: gettextCatalog.getString('View Privacy Policy'),
+      message: gettextCatalog.getString('Read the Coinbase privacy policy.'),
+      okText: gettextCatalog.getString('Visit Website'),
+      cancelText: gettextCatalog.getString('Go Back'),
+      url: coinbase.urls.privacyUrl
+    }
+  };
+
+  $scope.openExternalLink = function(link) {
+    var optIn = true;
+    externalLinkService.open(link.url, optIn, link.title, link.message, link.okText, link.cancelText);
+  };
+
+  $scope.logout = function() {
+    var message = gettextCatalog.getString('Are you sure you would like to log out of your Coinbase account?');
+    popupService.showConfirm('Coinbase', message, null, null, function(ok) {
+      if (ok) {
+        coinbase.logout(function() {
           $ionicHistory.clearHistory();
           $timeout(function() {
-            $state.go('tabs.home');
+            $state.go('onboarding.start');
           }, 100);
         });
       }
     });
   };
-
-  $scope.$on("$ionicView.enter", function(event, data){
-    ongoingProcess.set('connectingCoinbase', true);
-
-    coinbaseService.init(function(err, data) {
-      if (err || lodash.isEmpty(data)) {
-        ongoingProcess.set('connectingCoinbase', false);
-        if (err) {
-          $log.error(err);
-          var errorId = err.errors ? err.errors[0].id : null;
-          err = err.errors ? err.errors[0].message : err;
-          popupService.showAlert('Error connecting to Coinbase', err, function() {
-            if (errorId == 'revoked_token') {
-              coinbaseService.logout(function() {});
-              $ionicHistory.goBack();
-            }
-          });
-        }
-        return;
-      }
-//      var accessToken = data.accessToken;
-      var accountId = data.accountId;
-      coinbaseService.getAccount(accountId, function(err, account) {
-        ongoingProcess.set('connectingCoinbase', false);
-        $scope.coinbaseAccount = account.data;
-      });
-      coinbaseService.getCurrentUser(function(err, user) {
-        $scope.coinbaseUser = user.data;
-      });
-    });
-  });
 
 });

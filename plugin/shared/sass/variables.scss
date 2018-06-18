@@ -30,20 +30,27 @@ $v-white-color:                                      #ffffff !default;
 $v-dark-gray:                                        #444455 !default;
 $v-mid-gray:                                         #666677 !default;
 $v-light-gray:                                       #9b9bab !default;
-$v-subtle-gray:                                      darken(#ffffff, 5%) !default;
+$v-subtle-gray:                                      #d0d0d0 !default;
+$v-hint-gray:                                        #f6f9fc !default;
 
 $v-debug-color:                                      #444444 !default;
 $v-info-color:                                       #0000ff !default;
 $v-warning-color:                                    #ffa500 !default;
 $v-error-color:                                      #ff0000 !default;
+$v-success-color:                                    #00c365 !default;
+$v-assertive-color:                                  #a00000 !default;
 
-$v-primary-color:                                    #0966d0 !default;
+$v-primary-color:                                    #0867d0 !default;
+$v-secondary-color:                                  #4B84FF !default;
 
-$v-success-color:                                    #0EC286 !default;
+$v-down-color:                                       #ff7371 !default;
+$v-up-color:                                         #00c365 !default;
+$v-text-color:                                       #124763 !default;
+
 
 /*
 $v-secondary-color:                                  #313131 !default;
-$v-accent-1-color:                                   #00afff !default;
+$v-accent-1-color:                                   #4B84FF !default;
 $v-accent-2-color:                                   #004466 !default;
 
 $v-text-color:                                       #ffffff !default;
@@ -51,9 +58,6 @@ $v-heading-text-color:                               #ffffff !default;
 $v-link-color:                                       #00afff !default;
 $v-disabled-color:                                   $v-white-transparent-light !default;
 $v-success-bg-color:                                 #0EC286 !default;
-$v-assertive-color:                                  #ff473a !default;
-$v-nav-item-primary-color:                           #303030 !default;
-$v-nav-item-secondary-color:                         #3b3b3b !default;
 */
 
 /* Corners */
@@ -66,12 +70,21 @@ $v-unmistakable-radius:                              10px !default;
 
 $v-background:                                       linear-gradient(to bottom, #0966d0 0%,#0854ab 100%) !default;
 
+/* Tabs Navigation */
+
+$v-tabs-bg:                                          $v-white-color !default;
+$v-tabs-active-bg:                                   $v-white-color !default;
+$v-tabs-active-color:                                $v-primary-color !default;
+$v-tabs-inactive-bg:                                 $v-white-color !default;
+$v-tabs-inactive-color:                              $v-light-gray !default;
+$v-tabs-show-labels:                                 true !default;
+
 /* Buttons */
 
-$v-button-primary-bg:                                #4B84FF !default;
+$v-button-primary-bg:                                $v-primary-color !default;
 $v-button-primary-color:                             $v-white-color !default;
 
-$v-button-secondary-bg:                              transparent !default;
+$v-button-secondary-bg:                              $v-secondary-color !default;
 $v-button-secondary-color:                           $v-white-color !default;
 
 /* Content */

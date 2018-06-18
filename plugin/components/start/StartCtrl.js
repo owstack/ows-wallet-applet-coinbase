@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($scope, $timeout, $log, $state, lodash, gettextCatalog, popupService, externalLinkService, utils, coinbaseService, Constants) {
+angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($scope, $timeout, $log, $state, lodash, gettextCatalog, popupService, externalLinkService, utils, coinbaseService, settingsService, Constants) {
 
   var coinbase = coinbaseService.coinbase;
-  var language = coinbaseService.settings.language || 'en';
+  var language = settingsService.language;
 
   var DATA_UPDATE_FREQUENCY = 30000; // ms
   var dataUpdater;
@@ -36,8 +36,8 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
   }];
 
   // If we're here then we don't have a Coinbase account yet.
-  $scope.$on("$ionicView.beforeEnter", function(event, data) {
-    $scope.selectedCurrency = 0;  // BTC
+  $scope.$on("$ionicView.beforeEnter", function(event) {
+    $scope.selectedCurrency = 0;  // Default to first entry.
     $scope.selectedTimeFrame = lodash.findIndex($scope.timeFrames, ['period', 'year']);
 
     updateFeatureCurrency();
@@ -49,7 +49,7 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
   });
 
   $scope.signIn = function() {
-    $state.go('sign-in');
+    $state.go('onboarding.sign-in');
   };
 
   $scope.openSignupWindow = function() {
@@ -139,7 +139,7 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
         spotPrice[k].decimals = Constants.currencyMap(spotPrice[k].currency, 'decimals');
 
         // Set a sort order.
-        spotPrice[k].sort = coinbaseService.currencyOrder.indexOf(spotPrice[k].base);
+        spotPrice[k].sort = coinbase.currencySortOrder.indexOf(spotPrice[k].base);
         spotPrice[k].sort = (spotPrice[k].sort < 0 ? 99 : spotPrice[k].sort); // Move items not found to end of sort.
 
         return spotPrice[k];

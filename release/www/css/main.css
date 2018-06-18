@@ -9,7 +9,7 @@
 /* Colors */
 /*
 $v-secondary-color:                                  #313131 !default;
-$v-accent-1-color:                                   #00afff !default;
+$v-accent-1-color:                                   #4B84FF !default;
 $v-accent-2-color:                                   #004466 !default;
 
 $v-text-color:                                       #ffffff !default;
@@ -17,30 +17,92 @@ $v-heading-text-color:                               #ffffff !default;
 $v-link-color:                                       #00afff !default;
 $v-disabled-color:                                   $v-white-transparent-light !default;
 $v-success-bg-color:                                 #0EC286 !default;
-$v-assertive-color:                                  #ff473a !default;
-$v-nav-item-primary-color:                           #303030 !default;
-$v-nav-item-secondary-color:                         #3b3b3b !default;
 */
 /* Corners */
 /* Views */
+/* Tabs Navigation */
 /* Buttons */
 /* Content */
 /* Ionic variables */
 /**
- * Plugin common SASS
+ * SASS shared across applet
  */
 body,
 body button {
   font-family: "Avenir Next", sans-serif; }
 
+.assertive {
+  color: #a00000 !important; }
+
+/* Header bar */
 .bar.bar-coinbase {
-  background-color: #0966d0 !important;
-  border-color: #0966d0;
+  background-color: #0867d0 !important;
+  border-color: #0867d0;
   color: #ffffff;
   background-size: 0; }
 
+.back-button {
+  color: #ffffff !important; }
+
+/* View */
+ion-content {
+  background: #f6f9fc; }
+
+/* Buttons */
 button.activated {
   border: none; }
+
+button.button-primary {
+  background: #0867d0;
+  color: #ffffff !important; }
+
+button.button-secondary {
+  background: #0867d0;
+  color: #ffffff !important; }
+
+button.button-clear {
+  background: transparent;
+  color: #ffffff !important; }
+
+/* List item */
+svg {
+  width: 30px !important; }
+
+.item-icon-left svg,
+.item-icon-right svg {
+  position: absolute;
+  top: 0;
+  left: 15px !important;
+  display: flex;
+  height: 100%;
+  align-items: center; }
+
+.item {
+  color: #124763;
+  min-height: 65px; }
+  .item h2 {
+    color: #124763; }
+  .item.item-icon-left {
+    padding-left: 57px; }
+  .item > h2 {
+    float: left;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); }
+  .item > .item-note {
+    text-align: right;
+    line-height: 22px;
+    color: #9b9bab;
+    position: relative;
+    top: 12px; }
+    .item > .item-note.two-lines {
+      top: 0; }
+
+.ion-ios-arrow-right:before {
+  content: "\f125";
+  font-family: Ionicons;
+  font-size: 20px;
+  color: #d0d0d0; }
 
 .popup-modal {
   background: #ffffff;
@@ -59,7 +121,7 @@ button.activated {
     border-radius: 10px 10px 0 0;
     min-height: 120px; }
     .popup-modal-header-success {
-      background: #0EC286; }
+      background: #00c365; }
     .popup-modal-header-warning {
       background: #ffa500; }
     .popup-modal-header-img {
@@ -97,81 +159,148 @@ button.activated {
   .popup-modal .button {
     margin-top: 1rem; }
   .popup-modal-content-success .button {
-    color: #0EC286 !important; }
+    color: #00c365 !important; }
   .popup-modal-content-warning .button:not(.button-secondary) {
     color: #ffa500 !important; }
 
 .modal-backdrop.active {
   background: rgba(0, 0, 0, 0.7); }
 
-#home ion-content {
+#account .header {
+  width: 100%;
+  color: #ffffff;
+  text-align: center; }
+
+#account .amount-group {
+  background: #0867d0;
+  height: 132px; }
+  #account .amount-group .amount {
+    width: 100%;
+    position: absolute;
+    top: 35px;
+    font-size: 32px;
+    text-align: center; }
+
+#account .button-group button {
+  margin-top: 6px;
+  margin-bottom: 6px; }
+
+#account .button-group .col {
+  padding-left: 5px;
+  padding-right: 5px; }
+
+#accounts a.item {
+  min-height: 78px; }
+
+#tabs .tabs {
+  background: #ffffff;
+  border-top: 1px solid #d0d0d0 !important; }
+
+#tabs > .tabs {
+  display: flex;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1); }
+
+#tabs.tabs-item-hide > .tabs {
+  display: flex;
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1); }
+
+#tabs .tabs .tab-item {
+  background: #ffffff;
+  color: #9b9bab;
+  opacity: 1.0; }
+  #tabs .tabs .tab-item.tab-item-active {
+    background: #ffffff;
+    color: #0867d0; }
+  #tabs .tabs .tab-item .icon {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 18px;
+    height: 20px;
+    margin: 6px 0 2px; }
+    #tabs .tabs .tab-item .icon.icon-prices {
+      background-image: url("../img/tab-icons/icon-prices.svg"); }
+    #tabs .tabs .tab-item .icon.icon-prices-selected {
+      background-image: url("../img/tab-icons/icon-prices-selected.svg"); }
+    #tabs .tabs .tab-item .icon.icon-accounts {
+      background-image: url("../img/tab-icons/icon-accounts.svg"); }
+    #tabs .tabs .tab-item .icon.icon-accounts-selected {
+      background-image: url("../img/tab-icons/icon-accounts-selected.svg"); }
+    #tabs .tabs .tab-item .icon.icon-alerts {
+      background-image: url("../img/tab-icons/icon-alerts.svg"); }
+    #tabs .tabs .tab-item .icon.icon-alerts-selected {
+      background-image: url("../img/tab-icons/icon-alerts-selected.svg"); }
+    #tabs .tabs .tab-item .icon.icon-settings {
+      background-image: url("../img/tab-icons/icon-settings.svg"); }
+    #tabs .tabs .tab-item .icon.icon-settings-selected {
+      background-image: url("../img/tab-icons/icon-settings-selected.svg"); }
+
+#prices ion-content {
   background: #f5f7fa; }
 
-#home .header {
-  background: #0966d0;
+#prices .header {
+  background: #0867d0;
   width: 100%;
   height: 216px;
   position: absolute;
   top: 0; }
 
-#home .amount-group {
+#prices .amount-group {
   width: 100%;
   position: absolute;
   top: 39px;
   font-size: 44px;
   color: #ffffff;
-  text-align: center; }
-  #home .amount-group button {
+  text-align: center;
+  z-index: 10; }
+  #prices .amount-group button {
     font-size: 18px;
     color: #ffffff;
     position: relative;
     top: 12px; }
-    #home .amount-group button:before {
+    #prices .amount-group button:before {
       font-size: 14px; }
 
-#home .card-group {
+#prices .card-group {
   height: 100%;
   padding-top: 121px; }
-  #home .card-group .card {
+  #prices .card-group .card {
     height: 180px;
     border-radius: 5px;
     position: relative;
     margin-left: 15px;
     margin-right: 15px;
     box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.1); }
-    #home .card-group .card .item.item-body {
+    #prices .card-group .card .item.item-body {
       padding: 0px; }
-      #home .card-group .card .item.item-body .currency-name {
+      #prices .card-group .card .item.item-body .currency-name {
         font-size: 24px;
         position: relative;
         top: 5px; }
-      #home .card-group .card .item.item-body .currency-amount {
+      #prices .card-group .card .item.item-body .currency-amount {
         font-size: 24px;
         position: relative;
         top: 5px;
         text-align: right; }
-      #home .card-group .card .item.item-body .currency-base {
+      #prices .card-group .card .item.item-body .currency-base {
         font-size: 14px;
         font-weight: 500; }
-      #home .card-group .card .item.item-body .currency-change {
-        color: red;
+      #prices .card-group .card .item.item-body .currency-change {
         font-size: 14px;
         font-weight: 500;
         text-align: right; }
-      #home .card-group .card .item.item-body .circle {
-        width: 12px;
-        height: 12px;
-        background: red;
-        border-radius: 50%;
-        float: left;
-        position: relative;
-        top: 3px;
-        margin-right: 5px; }
-      #home .card-group .card .item.item-body .currency-period {
+        #prices .card-group .card .item.item-body .currency-change.down {
+          color: #ff7371; }
+        #prices .card-group .card .item.item-body .currency-change.up {
+          color: #00c365; }
+      #prices .card-group .card .item.item-body .currency-period {
         font-size: 11px;
         position: relative;
         top: -8px; }
-        #home .card-group .card .item.item-body .currency-period:before {
+        #prices .card-group .card .item.item-body .currency-period:before {
           content: ' ';
           display: block;
           position: relative;
@@ -179,14 +308,27 @@ button.activated {
           left: 55px;
           width: calc(100% - 55px + 10px);
           border-top: 1.5px solid rgba(0, 0, 0, 0.1); }
-      #home .card-group .card .item.item-body .btc {
-        background: #ffb119; }
-      #home .card-group .card .item.item-body .bch {
-        background: #8dc451; }
-      #home .card-group .card .item.item-body .eth {
-        background: #6e7bba; }
-      #home .card-group .card .item.item-body .ltc {
-        background: #b5b5b5; }
+      #prices .card-group .card .item.item-body .circle {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        float: left;
+        position: relative;
+        top: 3px;
+        margin-right: 5px; }
+
+#settings .header {
+  background: #0867d0;
+  width: 100%;
+  height: 125px;
+  color: #ffffff;
+  text-align: center; }
+  #settings .header .title {
+    font-size: 20px;
+    padding-top: 34px; }
+  #settings .header .detail {
+    font-size: 14px;
+    padding-top: 10px; }
 
 #sign-in ion-content {
   background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }
@@ -235,9 +377,9 @@ button.activated {
       padding: 8px;
       font-weight: 600; }
       #sign-in-form .container .row button.cancel {
-        color: #939ca0; }
+        color: #9b9bab !important; }
       #sign-in-form .container .row button.submit {
-        color: #0b4e78; }
+        color: #124763 !important; }
 
 #sign-in-form .help {
   text-align: center;
@@ -332,8 +474,8 @@ button.activated {
     height: 64px;
     font-weight: 600; }
     #start .main-button-group .button.button-primary {
-      background: #4B84FF;
+      background: #0867d0;
       color: #ffffff !important; }
     #start .main-button-group .button.button-secondary {
-      background: transparent;
+      background: #4B84FF;
       color: #ffffff !important; }

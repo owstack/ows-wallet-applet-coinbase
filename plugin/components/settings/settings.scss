@@ -1,2 +1,20 @@
 #settings {
+
+	.header {
+		background: $v-primary-color;
+    width: 100%;
+		height: 125px;
+    color: $v-white-color;
+    text-align: center;
+
+    .title {
+    	font-size: 20px;
+	    padding-top: 34px;
+    }
+
+    .detail {
+    	font-size: 14px;
+	    padding-top: 10px;
+    }
+	}
 }

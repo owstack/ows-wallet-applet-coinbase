@@ -1,0 +1,35 @@
+<ion-view id="account" show-tabs>
+  <ion-nav-bar class="bar bar-coinbase">
+    <ion-nav-title ng-style="{'opacity': titleOpacity}">{{account.currency.code}}</ion-nav-title>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content scroll="false">
+    <div class="header">
+	    <div class="amount-group">
+		    <div class="amount">
+	        {{format(account.balance.amount)}}
+		    </div>
+		  </div>
+	    <div class="button-group row">
+	    	<span class="col col-50">
+		      <button class="button button-block button-primary" ng-click="openDepositModal()" translate>
+		        Deposit
+		      </button>
+		    </span>
+	    	<span class="col">
+		      <button class="button button-block button-primary" ng-click="openWithdrawModal()" translate>
+		        Withdraw
+		      </button>
+		    </span>
+	    </div>
+	  </div>
+    <ion-scroll class="tx-group">
+      <div class="list" ng-repeat="tx in transactions track by $index">
+        <div class="item">
+
+        </div>
+      </div>
+    </ion-scroll>
+  </ion-content>
+</ion-view>

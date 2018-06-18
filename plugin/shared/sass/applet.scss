@@ -1,0 +1,110 @@
+/**
+ * SASS shared across applet
+ */
+
+body,
+body button {
+	font-family: $v-font-family;
+}
+
+.assertive {
+  color: $v-assertive-color !important;
+}
+
+/* Header bar */
+
+.bar.bar-coinbase {
+  background-color: $v-primary-color !important;
+  border-color: $v-primary-color;
+  color: $v-white-color;
+	background-size: 0;
+}
+
+.back-button {
+  color: $v-white-color !important;
+}
+
+/* View */
+
+ion-content {
+  background: $v-hint-gray;
+}
+
+/* Buttons */
+
+button {
+  &.activated {
+  	border: none;
+  }
+
+  &.button-primary {
+    background: $v-button-primary-bg;
+    color: $v-button-primary-color !important;
+  }
+
+  &.button-secondary {
+    background: $v-button-primary-bg;
+    color: $v-button-primary-color !important;
+  }
+
+  &.button-clear {
+    background: transparent;
+    color: $v-white-color !important;
+  }
+}
+
+/* List item */
+
+svg {
+  width: 30px !important;
+}
+
+// Allows svg tag to appear as an img tag in an item.
+.item-icon-left svg,
+.item-icon-right svg {
+  position: absolute;
+  top: 0;
+  left: 15px !important;
+  display: flex;
+  height: 100%;
+  align-items: center;
+ }
+
+.item {
+  color: $v-text-color;
+  min-height: 65px;
+
+  h2 {
+    color: $v-text-color;
+  }
+
+ 	&.item-icon-left {
+  	padding-left: 57px;
+ 	}
+
+ 	>h2 {
+    float: left;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+ 	}
+
+ 	>.item-note {
+  	text-align: right;
+    line-height: 22px;
+		color: $v-light-gray;
+    position: relative;
+    top: 12px;
+
+    &.two-lines {
+      top: 0;
+    }
+ 	}
+}
+
+.ion-ios-arrow-right:before {
+	content: "\f125";
+	font-family: Ionicons;
+	font-size: 20px;
+	color: $v-subtle-gray;
+}

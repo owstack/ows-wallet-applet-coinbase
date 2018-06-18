@@ -1,14 +1,12 @@
 'use strict';
 
-angular.module('owsWalletPlugin.services').factory('coinbaseService', function($log, $timeout, lodash, gettextCatalog, popupService, Coinbase, Settings) {
+angular.module('owsWalletPlugin.services').factory('coinbaseService', function($log, $timeout, lodash, gettextCatalog, popupService, Coinbase) {
 
   var root = {};
   var isAvailable = false;
   var availableCallbacks = [];
 
   root.coinbase;
-  root.currencyOrder = ['BTC', 'BCH', 'ETH', 'LTC'];
-  root.settings;
 
   root.whenAvailable = function(cb) {
     // Can't do this when service loads since Coinbase servlet may not yet be ready.
@@ -39,15 +37,7 @@ angular.module('owsWalletPlugin.services').factory('coinbaseService', function($
     if (err) {
       return root.showError(err);
     }
-
-    // Get host app settings.
-    Settings.get().then(function(settingsObj) {
-      root.settings = settingsObj;
-      available();
-
-    }).catch(function(err) {
-      return root.showError(err);
-    });
+    available();
   };
 
   function available() {

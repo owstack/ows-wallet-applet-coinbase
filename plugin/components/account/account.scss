@@ -1,0 +1,33 @@
+#account {
+	.header {
+    width: 100%;
+    color: $v-white-color;
+    text-align: center;
+ 	}
+
+	.amount-group {
+		background: $v-primary-color;
+		height: 132px;
+
+		.amount {
+	    width: 100%;
+	    position: absolute;
+	    top: 35px;
+	    font-size: 32px;
+	    text-align: center;
+		}
+  }
+
+  .button-group {
+  	button {
+  		margin-top: 6px;
+  		margin-bottom: 6px;
+  	}
+
+  	.col {
+			padding-left: 5px;
+    	padding-right: 5px;
+  	}
+  }
+
+}

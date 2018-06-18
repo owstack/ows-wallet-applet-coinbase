@@ -1,0 +1,17 @@
+<ion-tabs id="tabs" class="tabs-icon-top ion-tabs-transparent {{$root.hideTabs}}">
+  <ion-tab title="{{'Prices'|translate}}" icon-off="icon-prices" icon-on="icon-prices-selected" ui-sref="tabs.prices">
+    <ion-nav-view name="tab-prices"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="{{'Accounts'|translate}}" icon-off="icon-accounts" icon-on="icon-accounts-selected" ui-sref="tabs.accounts">
+    <ion-nav-view name="tab-accounts"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="{{'Alerts'|translate}}" icon-off="icon-alerts" icon-on="icon-alerts-selected" ui-sref="tabs.alerts">
+    <ion-nav-view name="tab-alerts"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="{{'Settings'|translate}}" icon-off="icon-settings" icon-on="icon-settings-selected" ui-sref="tabs.settings">
+    <ion-nav-view name="tab-settings"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>

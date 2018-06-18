@@ -1,14 +1,14 @@
-<ion-view id="home">
+<ion-view id="prices" show-tabs>
   <ion-nav-bar class="bar bar-coinbase">
-    <ion-nav-title ng-style="{'opacity': titleOpacity}">{{accountBalance}}</ion-nav-title>
+    <ion-nav-title ng-style="{'opacity': titleOpacity}">{{totalBalance}}</ion-nav-title>
   </ion-nav-bar>
   <ion-content scroll="false">
     <div class="header" ng-style="{'top': headerTop}"></div>
     <div class="amount-group" ng-style="{'opacity': amountGroupOpacity}">
       <div class="amount">
-        {{accountBalance}}
+        {{totalBalance}}
       </div>
-      <button class="button button-clear icon-right ion-chevron-right" ng-click="">
+      <button class="button button-clear icon-right ion-chevron-right" ui-sref="tabs.accounts">
         Your Accounts
       </button>
     </div>
@@ -25,9 +25,9 @@
           </div>
           <div class="row">
             <div class="currency-base col col-50">
-              <div class="circle {{c.base.toLowerCase()}}" ng-class="{{c.base.toLowerCase()}}"></div>{{c.base}}
+              <div class="circle" ng-style="{'background': c.color}"></div>{{c.base}}
             </div>
-            <div class="currency-change col">
+            <div class="currency-change col" ng-class="c.amountChange < 0 ? 'down' : 'up'">
               <span ng-show="c.amountChange < 0">-</span>
               {{c.symbol}}{{format(c.amountChange, c)}} ({{format(c.percentChange, c)}}%)
             </div>

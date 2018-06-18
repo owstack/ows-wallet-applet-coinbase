@@ -3,14 +3,13 @@
 angular.module('owsWalletPlugin.controllers').controller('SignInCtrl', function($scope, $log, $timeout, $state, $ionicModal, $ionicHistory, gettextCatalog, popupService, externalLinkService, coinbaseService) {
 
   var isNodeWebKit = owswallet.Plugin.isNodeWebKit();
-  var coinbase;
+  var coinbase = coinbaseService.coinbase;
 
   $scope.formData = {
     oauthCode: ''
   };
 
   $scope.$on("$ionicView.enter", function(event, data) {
-    coinbase = coinbaseService.coinbase;
     openModal();
     openAuthenticateWindow();
   });
@@ -44,7 +43,7 @@ angular.module('owsWalletPlugin.controllers').controller('SignInCtrl', function(
 
               closeModal();
               $timeout(function() {
-                $state.go('home');
+                $state.go('tabs.prices');
               }, 200);
             });
           }
@@ -91,7 +90,7 @@ angular.module('owsWalletPlugin.controllers').controller('SignInCtrl', function(
 
         $scope.signInModal.remove();
         $timeout(function() {
-          $state.go('home');
+          $state.go('tabs.prices');
         }, 200);
       });
     };    
