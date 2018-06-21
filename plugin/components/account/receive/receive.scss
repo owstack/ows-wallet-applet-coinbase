@@ -1,0 +1,150 @@
+.popup-account-receive {
+
+	.popup {
+	  width: 310px;
+		border-radius: 5px;
+		background: $v-white-color;
+		overflow: hidden;
+
+	  .popup-head {
+	  	display: none;
+	  }
+	}
+
+  .header {
+		color: $v-light-gray;
+    border-bottom: 1px solid $v-subtle-gray;
+    height: 30px;
+    font-size: 16px;
+
+    .title {
+	    color: $v-dark-gray;
+			font-weight: 500;
+    }
+
+    .button {
+	    color: $v-light-gray;
+	    position: absolute;
+	    right: 2px;
+	    top: -4px;
+
+	    &:before {
+		    font-size: 30px;
+	    }
+    }
+  }
+
+  .popup-body {
+    padding: 10px 20px;
+    color: $v-dark-gray;
+		text-align: center;
+
+		svg {
+	    width: 55px !important;
+	    margin-top: 10px;
+	 	}
+
+		.message {
+	    font-size: 16px;
+	    font-weight: 600;
+	    width: 75%;
+	    position: relative;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    margin-top: 5px;
+ 		}
+
+		.detail {
+	    font-size: 17px;
+	    margin-top: 20px;
+	    margin-bottom: 25px;
+	    position: relative;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    font-weight: 500;
+	    line-height: 1.4em;
+	 	}
+
+	 	.qr-code-container {
+	    height: 185px;
+	    width: 185px;
+	    margin-top: 25px;
+	    margin-bottom: 15px;
+ 	    position: relative;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    border: 1px solid $v-subtle-gray;
+	    border-radius: 5px;
+
+		 	qrcode {
+				position: absolute;
+		    top: 50%;
+		    transform: translate(-50%, -50%);
+		    margin-top: 5px;
+		  }
+	 	}
+
+	 	.address {
+			font-size: 14px;
+	    color: $v-dark-gray;
+	    font-weight: 500;
+	    height: 55px;
+	    border-top: 1px solid $v-subtle-gray;
+	    padding-top: 18px;
+ 	 	}
+  }
+
+  .warning {
+	  .buttons >.button.button-primary {
+			font-size: 16px;
+	    font-weight: 600;
+	    width: 50%;
+	    height: 40px;
+	    min-height: 35px;
+	    position: relative;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    margin-bottom: 20px;
+
+	    >span {
+				position: relative;
+	    	top: -1px;
+	    }
+	  }
+	}
+
+  .info {
+	  .buttons {
+			height: 36px;
+	    border-top: 1px solid #d0d0d0;
+	    padding: 0;
+
+		  >.button.button-clear {
+				color: $v-text-color !important;
+		    font-size: 14px;
+		    font-weight: 500;
+
+		    >span {
+			    position: relative;
+			    top: -5px;
+		    }
+
+		    svg {
+			    width: 15px !important;
+			    height: 15px;
+			    margin-right: 5px;
+			    position: relative;
+			    top: -3px;
+
+			    * {
+				    fill: $v-text-color;
+			    }
+		    }
+
+		    &.left {
+			    border-right: 1px solid $v-subtle-gray;
+		    }
+	 	  }
+	  }
+	}
+}

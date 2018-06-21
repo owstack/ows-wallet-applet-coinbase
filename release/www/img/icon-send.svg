@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>img/icon-send</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Applet-images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img/icon-send" fill="#FFFFFF">
+            <g id="icon-send">
+                <g id="send">
+                    <path d="M78.5324899,1.46207765 C77.1659655,0.0974066399 75.1360009,-0.358156798 73.3176316,0.291762301 L3.31953338,25.2985006 C1.433054,25.9703737 0.130069901,27.7042968 0.00915960544,29.7037223 C-0.11175069,31.7031477 0.972787829,33.5815361 2.76454846,34.4759736 L25.6939255,45.9390624 L54.9981293,25.0034211 L34.0636981,54.3213211 L45.5233867,77.2575015 C46.4303387,79.0387576 48.3071333,80.1122415 50.3018211,79.9906575 C52.2965089,79.8690736 54.0291127,78.5755828 54.713137,76.6973505 L79.7124578,6.67848326 C80.3574403,4.86299406 79.8974528,2.82744556 78.5324899,1.46207765 Z" id="Shape" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

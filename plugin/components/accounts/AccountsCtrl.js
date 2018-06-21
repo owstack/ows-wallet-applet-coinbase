@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('AccountsCtrl', function($scope, coinbaseService, settingsService, Constants) {
+angular.module('owsWalletPlugin.controllers').controller('AccountsCtrl', function($scope, $timeout, coinbaseService, settingsService, Constants) {
 
   var coinbase = coinbaseService.coinbase;
   var language = settingsService.language;
@@ -9,7 +9,11 @@ angular.module('owsWalletPlugin.controllers').controller('AccountsCtrl', functio
     $scope.accounts = coinbase.accounts;
     $scope.currency = 'USD';
 
-    coinbase.updateAccountBalances($scope.currency);
+    coinbase.updateAccountBalances($scope.currency).then(function() {
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
   });
 
   $scope.format = function(num, currency, opts) {

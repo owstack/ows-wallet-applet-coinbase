@@ -1,33 +1,85 @@
 #account {
-	.header {
-    width: 100%;
+
+  ion-content {
+    margin-top: calc(213px - 44px); // ion-content gets has-subheader, need to negate its effect
+  }
+
+  ion-header-bar.bar-subheader {
+    padding: 0;
     color: $v-white-color;
     text-align: center;
- 	}
+    display: inline-table;
+
+    >span {
+      width: 100%;
+      display: inherit;
+    }
+  }
+
+  .button-receive {
+    background-image: url('../img/icon-receive.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+    margin-right: 10px;
+    margin-left: 15px;
+  }
+
+  .button-send {
+    background-image: url('../img/icon-send.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+    margin-right: 10px;
+    margin-left: 15px;
+  }
 
 	.amount-group {
 		background: $v-primary-color;
 		height: 132px;
 
 		.amount {
-	    width: 100%;
-	    position: absolute;
-	    top: 35px;
+      padding-top: 32px;
 	    font-size: 32px;
-	    text-align: center;
-		}
+  	}
+
+    .altAmount {
+      padding-top: 19px;
+      font-size: 18px;
+      color: $v-white-transparent-mid;
+      font-weight: 500;
+    }
   }
 
   .button-group {
+    background: $v-white-color;
+    border-bottom: 1px solid $v-subtle-gray;
+    width: 100%;
+
   	button {
-  		margin-top: 6px;
-  		margin-bottom: 6px;
+  		margin-top: 5px;
+  		margin-bottom: 5px;
+      height: 50px;
+      font-size: 16px;
+      font-weight: 600;
   	}
 
   	.col {
-			padding-left: 5px;
-    	padding-right: 5px;
+			padding-left: 8px;
+    	padding-right: 8px;
   	}
   }
 
+  div.item {
+    height: 75px;
+    border-top: none;
+  }
+
+  h2.received {
+    color: $v-up-color;
+  }
 }
+
+@import "receive/receive";

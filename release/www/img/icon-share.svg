@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>img/icon-share</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M0,27.5 L30.153791,27.5 L65.9282964,27.5 L65.9282964,63.3774875 L65.9282964,93.0616112 L0,93.0616112 L0,27.5 Z M30.4301758,31.0229933 L3.60377815,31.0229933 L3.60377815,89.5038046 L62.1958902,89.5038046 L62.1958902,63.4252241 L62.1958902,63.3592186 L65.9282964,63.3592186 L65.9282964,27.5 L30.4301758,27.5 L30.4301758,31.0229933 Z" id="path-1"></path>
+    </defs>
+    <g id="Applet-images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img/icon-share">
+            <g id="icon-share">
+                <g id="share" transform="translate(0.000000, -13.000000)">
+                    <path d="M55.7116073,59.8661861 L55.7116073,3.75679877 L59.4166073,3.75679877 L59.4166073,59.9896842 L72.4967457,46.9095458 L75.1165763,49.5293765 L57.6510388,66.994914 L57.6258564,66.9697315 L57.6006739,66.994914 L40.1351364,49.5293765 L42.754967,46.9095458 L55.7116073,59.8661861 Z" id="Combined-Shape" fill="#FFFFFF" transform="translate(57.625856, 35.375856) scale(1, -1) rotate(-45.000000) translate(-57.625856, -35.375856) "></path>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Combined-Shape" fill="#FFFFFF" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

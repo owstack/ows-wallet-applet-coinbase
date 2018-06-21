@@ -74,32 +74,53 @@ svg {
   color: $v-text-color;
   min-height: 65px;
 
-  h2 {
+ 	&.item-icon-left {
+  	padding-left: 62px;
+ 	}
+
+  >h2,
+  >span >h2 {
     color: $v-text-color;
+    padding-top: 1px;
   }
 
- 	&.item-icon-left {
-  	padding-left: 57px;
+  &:not(.has-detail) {
+    >h2,
+    >span:not(.item-note) >h2 {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
  	}
 
- 	>h2 {
-    float: left;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
- 	}
+  &.has-detail {
+    >p,
+    >span:not(.item-note) >p {
+      color: $v-mid-gray;
+      font-size: 14px;
+      font-weight: 500;
+      padding-top: 2px;
+    }
+  }
 
  	>.item-note {
+    position: absolute;
+    top: 30px;
+    right: 16px;
   	text-align: right;
     line-height: 22px;
 		color: $v-light-gray;
-    position: relative;
-    top: 12px;
 
     &.two-lines {
-      top: 0;
+      top: 18px;
     }
  	}
+
+  &.item-icon-right {
+    >.item-note {
+      right: 48px;
+    }  
+  }
 }
 
 .ion-ios-arrow-right:before {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>img/icon-tx-exchange</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Applet-images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img/icon-tx-exchange" fill="#FFFFFF">
+            <g id="icon-sell">
+                <g id="side">
+                    <path d="M40,80 C17.90861,80 0,62.09139 0,40 C0,17.90861 17.90861,0 40,0 C62.09139,0 80,17.90861 80,40 C80,62.09139 62.09139,80 40,80 Z M40,77 C60.4345357,77 77,60.4345357 77,40 C77,19.5654643 60.4345357,3 40,3 C19.5654643,3 3,19.5654643 3,40 C3,60.4345357 19.5654643,77 40,77 Z" id="Combined-Shape"></path>
+                    <path d="M23.4874199,47.125 L61,47.125 L61,44.125 L19,44.125 L19,45.8802208 L18.5,46.3802208 L19,46.8802208 L19,47.125 L19.2447792,47.125 L33.3492424,61.2294632 L35.4705627,59.1081428 L23.4874199,47.125 Z M61,33.6375801 L61,33.125 L60.4874199,33.125 L46.6213203,19.2589004 L44.5,21.3802208 L56.2447792,33.125 L19,33.125 L19,36.125 L59.2447792,36.125 L59.3492424,36.2294632 L59.4537056,36.125 L61,36.125 L61,34.5787056 L61.4705627,34.1081428 L61,33.6375801 Z" id="Combined-Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

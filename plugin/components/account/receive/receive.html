@@ -1,0 +1,34 @@
+<div class="header">
+	<span class="title">{{account.currency.name}} Address</span>
+	<button class="button button-icon icon ion-android-close" ng-click="closeReceive()"></button>
+</div>
+<div class="warning" ng-show="!addressVisible">
+	<img svg="fill: {{account.currency.color}}" ng-src="img/icon-{{account.currency.code.toLowerCase()}}.svg">
+	<div class="message">
+		{{address.warning.title}}
+	</div>
+	<div class="detail">
+		{{address.warning.details}}
+	</div>
+	<div class="buttons">
+		<button class="button button-block button-primary" ng-click="showAddress()" translate>
+		  Show Address
+		</button>
+	</div>
+</div>
+<div class="info" ng-show="addressVisible">
+	<div class="qr-code-container">
+		<qrcode version="11" error-correction-level="M" data="{{address.uri}}" size="155" color="#444455"></qrcode>
+	</div>
+	<div class="address ellipsis">{{address.address}}</div>
+	<div class="buttons row">
+		<button class="button button-clear col col-50 left" ng-if="isCordova" ng-click="shareAddress()" translate>
+			<img svg src="img/icon-share.svg">
+		  Share
+		</button>
+		<button class="button button-clear col right" ng-click="copyAddress()" translate>
+			<img svg src="img/icon-copy.svg">
+		  Copy address
+		</button>
+	</div>
+</div>

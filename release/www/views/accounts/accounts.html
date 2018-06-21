@@ -8,11 +8,10 @@
         <img svg="fill: {{account.currency.color}}" ng-src="img/icon-{{account.currency.code.toLowerCase()}}.svg">
         <h2>{{account.name}}</h2>
         <span class="item-note" ng-class="{'two-lines': account.balance.altCurrency != account.balance.currency}">
-          {{format(account.balance.altAmount, currency)}}
-          <span ng-if="account.balance.altCurrency != account.balance.currency">
-            <br/>
+          <h2>{{format(account.balance.altAmount, currency)}}</h2>
+          <p ng-if="account.balance.altCurrency != account.balance.currency">
             {{format(account.balance.amount, currency, {symbol: false})}} {{account.balance.currency}}
-          </span>
+          </p>
         </span>
         <i class="icon ion-ios-arrow-right"></i>
       </a>

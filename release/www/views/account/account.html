@@ -1,35 +1,53 @@
 <ion-view id="account" show-tabs>
   <ion-nav-bar class="bar bar-coinbase">
-    <ion-nav-title ng-style="{'opacity': titleOpacity}">{{account.currency.code}}</ion-nav-title>
+    <ion-nav-title>{{account.isCryptoCurrency ? account.currency.name : account.currency.code}}</ion-nav-title>
     <ion-nav-back-button>
     </ion-nav-back-button>
+    <ion-nav-buttons side="secondary">
+    	<span ng-if="account.isCryptoCurrency">
+	      <button class="button button-nav-bar button-receive" ng-click="openReceive()"></button>
+	      <button class="button button-nav-bar button-send" ng-click="openSend()"></button>
+	    </span>
+    </ion-nav-buttons>
   </ion-nav-bar>
-  <ion-content scroll="false">
-    <div class="header">
+  <ion-header-bar class="bar-subheader has-header">
+  	<span>
 	    <div class="amount-group">
 		    <div class="amount">
-	        {{format(account.balance.amount)}}
+	        {{format(account.balance.amount, account.balance.currency)}}
+		    </div>
+		    <div class="altAmount" ng-if="account.isCryptoCurrency">
+	        {{format(account.balance.altAmount, account.balance.altCurrency)}}
 		    </div>
 		  </div>
 	    <div class="button-group row">
 	    	<span class="col col-50">
-		      <button class="button button-block button-primary" ng-click="openDepositModal()" translate>
-		        Deposit
+		      <button class="button button-block button-primary" ng-click="openDepositModal()">
+		        {{account.isCryptoCurrency ? ('Buy' | translate) : ('Deposit' | translate)}}
 		      </button>
 		    </span>
 	    	<span class="col">
-		      <button class="button button-block button-primary" ng-click="openWithdrawModal()" translate>
-		        Withdraw
+		      <button class="button button-block button-primary" ng-click="openWithdrawModal()">
+		      	{{account.isCryptoCurrency ? ('Sell' | translate) : ('Withdraw' | translate)}}
 		      </button>
 		    </span>
 	    </div>
-	  </div>
-    <ion-scroll class="tx-group">
-      <div class="list" ng-repeat="tx in transactions track by $index">
-        <div class="item">
-
-        </div>
+	  </span>
+  </ion-header-bar>
+  <ion-content>
+  	<ion-list ng-repeat="tx in transactions track by $index">
+      <div class="item item-icon-left has-detail">
+      	<i src="none"></i>
+        <img svg="fill: {{account.currency.color}}" ng-src="img/icon-tx-{{tx.type}}.svg">
+				<span>
+	        <h2>{{tx.title}}</h2>
+	        <p>{{trim(tx.subtitle)}}</p>
+	      </span>
+        <span class="item-note two-lines">
+          <h2 ng-class="{'received': tx.amount > 0}">{{format(tx.amount, tx.currency)}}</h2>
+          <p>{{format(tx.altAmount, tx.altCurrency)}}</p>
+        </span>
       </div>
-    </ion-scroll>
+    </ion-list>
   </ion-content>
 </ion-view>

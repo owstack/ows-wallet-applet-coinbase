@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('SettingsCtrl', function($scope, $timeout, $log, $state, $ionicHistory, gettextCatalog, Session, popupService, externalLinkService, coinbaseService) {
+angular.module('owsWalletPlugin.controllers').controller('SettingsCtrl', function($scope, $timeout, $state, $ionicHistory, gettextCatalog, Session, popupService, externalLinkService, coinbaseService) {
 
   var coinbase = coinbaseService.coinbase;
   var session = Session.getInstance();

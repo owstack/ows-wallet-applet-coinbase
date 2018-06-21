@@ -1,6 +1,10 @@
 #accounts {
 
 	a.item {
-		min-height: 78px;
-	}
+		height: 81px;
+	
+		&.item-icon-left {
+	    padding-left: 57px;
+		}
+	}	
 }

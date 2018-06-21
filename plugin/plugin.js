@@ -4,6 +4,7 @@ angular.module('owsWalletPlugin', [
 	'angularMoment',
 	'gettext',
 	'ionic',
+  'monospaced.qrcode',
 	'ngLodash',
 	'owsWalletPluginClient',
   'owsWalletPlugin.api',

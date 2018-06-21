@@ -80,23 +80,34 @@ svg {
 .item {
   color: #124763;
   min-height: 65px; }
-  .item h2 {
-    color: #124763; }
   .item.item-icon-left {
-    padding-left: 57px; }
-  .item > h2 {
-    float: left;
+    padding-left: 62px; }
+  .item > h2,
+  .item > span > h2 {
+    color: #124763;
+    padding-top: 1px; }
+  .item:not(.has-detail) > h2,
+  .item:not(.has-detail) > span:not(.item-note) > h2 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%); }
+  .item.has-detail > p,
+  .item.has-detail > span:not(.item-note) > p {
+    color: #666677;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 2px; }
   .item > .item-note {
+    position: absolute;
+    top: 30px;
+    right: 16px;
     text-align: right;
     line-height: 22px;
-    color: #9b9bab;
-    position: relative;
-    top: 12px; }
+    color: #9b9bab; }
     .item > .item-note.two-lines {
-      top: 0; }
+      top: 18px; }
+  .item.item-icon-right > .item-note {
+    right: 48px; }
 
 .ion-ios-arrow-right:before {
   content: "\f125";
@@ -166,31 +177,180 @@ svg {
 .modal-backdrop.active {
   background: rgba(0, 0, 0, 0.7); }
 
-#account .header {
-  width: 100%;
+#account ion-content {
+  margin-top: calc(213px - 44px); }
+
+#account ion-header-bar.bar-subheader {
+  padding: 0;
   color: #ffffff;
-  text-align: center; }
+  text-align: center;
+  display: inline-table; }
+  #account ion-header-bar.bar-subheader > span {
+    width: 100%;
+    display: inherit; }
+
+#account .button-receive {
+  background-image: url("../img/icon-receive.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin-right: 10px;
+  margin-left: 15px; }
+
+#account .button-send {
+  background-image: url("../img/icon-send.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin-right: 10px;
+  margin-left: 15px; }
 
 #account .amount-group {
   background: #0867d0;
   height: 132px; }
   #account .amount-group .amount {
-    width: 100%;
+    padding-top: 32px;
+    font-size: 32px; }
+  #account .amount-group .altAmount {
+    padding-top: 19px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500; }
+
+#account .button-group {
+  background: #ffffff;
+  border-bottom: 1px solid #d0d0d0;
+  width: 100%; }
+  #account .button-group button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600; }
+  #account .button-group .col {
+    padding-left: 8px;
+    padding-right: 8px; }
+
+#account div.item {
+  height: 75px;
+  border-top: none; }
+
+#account h2.received {
+  color: #00c365; }
+
+.popup-account-receive .popup {
+  width: 310px;
+  border-radius: 5px;
+  background: #ffffff;
+  overflow: hidden; }
+  .popup-account-receive .popup .popup-head {
+    display: none; }
+
+.popup-account-receive .header {
+  color: #9b9bab;
+  border-bottom: 1px solid #d0d0d0;
+  height: 30px;
+  font-size: 16px; }
+  .popup-account-receive .header .title {
+    color: #444455;
+    font-weight: 500; }
+  .popup-account-receive .header .button {
+    color: #9b9bab;
     position: absolute;
-    top: 35px;
-    font-size: 32px;
-    text-align: center; }
+    right: 2px;
+    top: -4px; }
+    .popup-account-receive .header .button:before {
+      font-size: 30px; }
 
-#account .button-group button {
-  margin-top: 6px;
-  margin-bottom: 6px; }
+.popup-account-receive .popup-body {
+  padding: 10px 20px;
+  color: #444455;
+  text-align: center; }
+  .popup-account-receive .popup-body svg {
+    width: 55px !important;
+    margin-top: 10px; }
+  .popup-account-receive .popup-body .message {
+    font-size: 16px;
+    font-weight: 600;
+    width: 75%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5px; }
+  .popup-account-receive .popup-body .detail {
+    font-size: 17px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+    line-height: 1.4em; }
+  .popup-account-receive .popup-body .qr-code-container {
+    height: 185px;
+    width: 185px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #d0d0d0;
+    border-radius: 5px; }
+    .popup-account-receive .popup-body .qr-code-container qrcode {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: 5px; }
+  .popup-account-receive .popup-body .address {
+    font-size: 14px;
+    color: #444455;
+    font-weight: 500;
+    height: 55px;
+    border-top: 1px solid #d0d0d0;
+    padding-top: 18px; }
 
-#account .button-group .col {
-  padding-left: 5px;
-  padding-right: 5px; }
+.popup-account-receive .warning .buttons > .button.button-primary {
+  font-size: 16px;
+  font-weight: 600;
+  width: 50%;
+  height: 40px;
+  min-height: 35px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 20px; }
+  .popup-account-receive .warning .buttons > .button.button-primary > span {
+    position: relative;
+    top: -1px; }
+
+.popup-account-receive .info .buttons {
+  height: 36px;
+  border-top: 1px solid #d0d0d0;
+  padding: 0; }
+  .popup-account-receive .info .buttons > .button.button-clear {
+    color: #124763 !important;
+    font-size: 14px;
+    font-weight: 500; }
+    .popup-account-receive .info .buttons > .button.button-clear > span {
+      position: relative;
+      top: -5px; }
+    .popup-account-receive .info .buttons > .button.button-clear svg {
+      width: 15px !important;
+      height: 15px;
+      margin-right: 5px;
+      position: relative;
+      top: -3px; }
+      .popup-account-receive .info .buttons > .button.button-clear svg * {
+        fill: #124763; }
+    .popup-account-receive .info .buttons > .button.button-clear.left {
+      border-right: 1px solid #d0d0d0; }
 
 #accounts a.item {
-  min-height: 78px; }
+  height: 81px; }
+  #accounts a.item.item-icon-left {
+    padding-left: 57px; }
 
 #tabs .tabs {
   background: #ffffff;

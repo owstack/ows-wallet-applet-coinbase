@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>img/icon-copy</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Applet-images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img/icon-copy" fill="#FFFFFF">
+            <g id="icon-copy">
+                <g id="copy">
+                    <path d="M5.59940871e-16,0 L58.6879883,0 L58.6879883,58.3913574 L0,58.3913574 L5.59940871e-16,0 Z M3.20800781,3.13769531 L3.20800781,55.2226562 L55.3654785,55.2226562 L55.3654785,3.13769531 L3.20800781,3.13769531 Z" id="Combined-Shape"></path>
+                    <path d="M58.1874504,58.2076664 L58.1874504,21.6000004 L79.9879875,21.6000004 L79.9879875,79.9913578 L21.2999992,79.9913578 L21.2999992,58.2076664 L58.1874504,58.2076664 Z M58.8336906,59.1349125 L24.508007,59.1349125 L24.508007,76.8226566 L76.6654778,76.8226566 L76.6654778,24.7376957 L58.8336906,24.7376957 L58.8336906,59.1349125 Z" id="Combined-Shape-Copy"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
