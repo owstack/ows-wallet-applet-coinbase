@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('owsWalletPlugin.services').factory('coinbaseService', function($log, $timeout, lodash, gettextCatalog, popupService, Coinbase) {
+angular.module('owsWalletPlugin.services').factory('coinbaseService', function($log, $timeout, lodash, gettextCatalog, popupService,
+  /* @namespace owsWalletPlugin.api.coinbase */ Coinbase) {
 
   var root = {};
   var isAvailable = false;

@@ -92,9 +92,21 @@ module.exports = function(grunt) {
       },
       plugin_api_js: {
         src: [
-          'plugin/api/*.js'
+          'plugin/api/api.module.js',
+          'plugin/api/public/**/*.js'
         ],
         dest: 'api/api.js'
+      },
+    },
+    ngAnnotate: {
+      options: {
+        singleQuotes: true
+      },
+      api: {
+        files: {
+          'www/js/plugin.js': 'www/js/plugin.js',
+          'api/api.js': 'api/api.js'
+        },
       },
     },
     nggettext_extract: {
@@ -212,6 +224,7 @@ module.exports = function(grunt) {
     'concat:plugin_js',
     'concat:plugin_api_js',
     'concat:plugin_css',
+    'ngAnnotate',
     'exec:build',
     'copy:plugin_index',
     'copy:plugin_views',

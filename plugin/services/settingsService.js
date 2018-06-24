@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('owsWalletPlugin.services').factory('settingsService', function($log, lodash, Settings) {
+angular.module('owsWalletPlugin.services').factory('settingsService', function($log, lodash,
+  /* @namespace owsWalletPluginClient.api */ Settings) {
 
   var root = {};
 

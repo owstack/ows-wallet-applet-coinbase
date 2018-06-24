@@ -113,7 +113,8 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
       templateUrl: 'views/sell/sell.html'
     });
 */
-}).run(function($rootScope, $state, $log, CoinbaseServlet, coinbaseService, $ionicConfig) {
+}).run(function($rootScope, $state, $log, coinbaseService, $ionicConfig,
+  /* @namespace owsWalletPlugin.api.coinbase */ CoinbaseServlet) {
 
   // Ionic platform defaults.
   $ionicConfig.backButton.icon('icon ion-arrow-left-c').text('');

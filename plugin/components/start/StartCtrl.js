@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($scope, $timeout, $log, $state, lodash, gettextCatalog, popupService, externalLinkService, utils, coinbaseService, settingsService, Constants) {
+angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($scope, $timeout, $log, $state, lodash, gettextCatalog, popupService, externalLinkService, utils, coinbaseService, settingsService,
+  /* @namespace owsWalletPluginClient.api */ Constants) {
 
   var coinbase = coinbaseService.coinbase;
   var language = settingsService.language;

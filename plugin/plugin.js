@@ -7,13 +7,12 @@ angular.module('owsWalletPlugin', [
   'monospaced.qrcode',
 	'ngLodash',
 	'owsWalletPluginClient',
-  'owsWalletPlugin.api',
+  'owsWalletPlugin.api.coinbase',
   'owsWalletPlugin.controllers',
   'owsWalletPlugin.directives',
   'owsWalletPlugin.services'
 ]);
 
-angular.module('owsWalletPlugin.api', []);
 angular.module('owsWalletPlugin.controllers', []);
 angular.module('owsWalletPlugin.directives', []);
 angular.module('owsWalletPlugin.services', []);

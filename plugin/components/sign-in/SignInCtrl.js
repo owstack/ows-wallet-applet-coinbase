@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('owsWalletPlugin.controllers').controller('SignInCtrl', function($scope, $log, $timeout, $state, $ionicModal, $ionicHistory, gettextCatalog, popupService, externalLinkService, coinbaseService) {
-
+  
   var isNodeWebKit = owswallet.Plugin.isNodeWebKit();
   var coinbase = coinbaseService.coinbase;
 
