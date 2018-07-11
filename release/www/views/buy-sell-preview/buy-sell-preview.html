@@ -1,0 +1,61 @@
+<ion-view id="buy-sell-preview" hide-tabs>
+  <ion-nav-bar class="bar bar-coinbase">
+    <ion-nav-title>{{title}}</ion-nav-title>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content scroll="false">
+    <div class="amount-group">
+      <div class="amount">
+        {{format(order.amount.amount, order.amount.currency).localized_u}}
+      </div>
+    </div>
+    <ion-list>
+      <div class="item">
+        <h2>
+          {{order.currency}} Price
+        </h2>
+        <span class="item-note">
+          {{format(order.amount.amount, order.amount.currency).localized_u}}
+        </span>
+      </div>
+      <div class="item">
+        <h2>
+          {{'Available' | translate}}
+        </h2>
+        <span class="item-note">
+          {{order.payoutDate | amDateFormat:'dddd, MMMM Do YYYY'}}
+        </span>
+      </div>
+      <div class="item">
+        <h2>
+          {{'Payment method' | translate}}
+        </h2>
+        <span class="item-note smaller">
+          <img svg ng-src="img/icon-{{tx.paymentMethod.type.toLowerCase()}}.svg">
+          {{trim(order.paymentMethod.name)}}
+        </span>
+      </div>
+      <div class="item fee">
+        <div>
+          <p class="left">{{'Coinbase fee' | translate}}</p>
+          <h2 class="right">{{format(order.fee.amount, order.fee.currency).localized_u}}</h2>
+        </div>
+      </div>
+      <div class="item append fee">
+        <div>
+          <h2 class="left smaller">{{'Total' | translate}}</h2>
+          <h2 class="right">{{format(order.total.amount, order.total.currency).localized_u}}</h2>
+        </div>
+      </div>
+      <div class="item info">
+        <h2>
+          Funds will be debited today or withing 3 business days via ACH.
+        </h2>
+      </div>
+    </ion-list>
+    <button class="button button-block button-secondary confirm" ng-click="confirm()">
+      {{button}}
+    </button>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>img/icon-currency-toggle</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Applet-images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img/icon-currency-toggle" fill="#FFFFFF">
+            <g id="icon-arrows-up-down">
+                <path d="M21,5.77224925 L21,58.5947266 L24,58.5947266 L24,5.67225078 L34.5912052,16.263456 L36.7125255,14.1421356 L22.5703899,-7.10542736e-15 L22.5499992,0.0203906711 L22.5296086,-4.4408921e-15 L8.38747294,14.1421356 L10.5087933,16.263456 L21,5.77224925 Z" id="Combined-Shape"></path>
+                <path d="M60,27.2722493 L60,80.0947266 L63,80.0947266 L63,27.1722508 L73.5912052,37.763456 L75.7125255,35.6421356 L61.5703899,21.5 L61.5499992,21.5203907 L61.5296086,21.5 L47.3874729,35.6421356 L49.5087933,37.763456 L60,27.2722493 Z" id="Combined-Shape" transform="translate(61.549999, 50.797363) scale(1, -1) translate(-61.549999, -50.797363) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

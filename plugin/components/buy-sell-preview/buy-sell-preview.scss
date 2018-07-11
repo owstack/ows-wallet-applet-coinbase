@@ -1,0 +1,79 @@
+#buy-sell-preview {
+
+	ion-content {
+		background: $v-white-color;
+	}
+
+	.bar.bar-coinbase {
+		background-color: $v-white-color !important;
+
+		.title {
+			color: $v-dark-gray;
+			font-weight: 600;
+		}
+
+		.back-button {
+			color: $v-dark-gray !important;
+		}
+	}
+
+	.amount-group {
+		height: 132px;
+    text-align: center;
+
+		.amount {
+			color: $v-primary-color;
+			font-size: 32px;
+	    position: relative;
+	    top: 50%;
+	    transform: translateY(-50%);
+		}
+	}
+
+	div.item {
+    height: 60px;
+    min-height: 0;
+
+    &.has-detail {
+	    padding-top: 8px;
+	    padding-bottom: 0;
+	  }
+
+    .item-note {
+	    top: 18px;
+	  }
+
+  	span >h2 {
+  		width: 80%;
+  	}
+
+  	svg {
+	    width: 20px;
+	    height: 20px;
+	    position: absolute;
+	    top: 50%;
+	    left: -30px;
+	    transform: translateY(-50%);
+
+  		* {
+				fill: $v-primary-color;
+  		}
+  	}
+
+		&.fee {
+			height: 40px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+  }
+
+	button.confirm {
+    font-weight: 600;
+    width: 90%;
+    height: 60px;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+	}
+}

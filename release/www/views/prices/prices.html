@@ -20,7 +20,7 @@
               {{c.label}}
             </div>
             <div class="currency-amount col">
-              {{c.symbol}}{{format(c.amount, c)}}
+              {{format(c.amount, currency, {decimals: c.decimals}).localized_u}}
             </div>
           </div>
           <div class="row">
@@ -28,8 +28,7 @@
               <div class="circle" ng-style="{'background': c.color}"></div>{{c.base}}
             </div>
             <div class="currency-change col" ng-class="c.amountChange < 0 ? 'down' : 'up'">
-              <span ng-show="c.amountChange < 0">-</span>
-              {{c.symbol}}{{format(c.amountChange, c)}} ({{format(c.percentChange, c)}}%)
+              {{format(c.amountChange, currency, {decimals: c.decimals}).localized_u}} ({{format(c.percentChange, null, {kind: 'percent', decimals: 2}).localized_u}})
             </div>
           </div>
           <div class="row">

@@ -75,6 +75,12 @@ module.exports = function(grunt) {
         sourceMap: false,
         sourceMapStyle: 'link' // embed, link, inline
       },
+      lib_js: {
+        src: [
+          'bower_components/ngFitText/dist/ng-FitText.min.js'
+        ],
+        dest: 'www/lib/components.js'
+      },
       plugin_js: {
         src: [
           'plugin/plugin.js',
@@ -221,6 +227,7 @@ module.exports = function(grunt) {
     'clean:api',
     'clean:www',
     'sass',
+    'concat:lib_js',
     'concat:plugin_js',
     'concat:plugin_api_js',
     'concat:plugin_css',

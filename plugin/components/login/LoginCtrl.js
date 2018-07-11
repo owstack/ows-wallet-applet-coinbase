@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('SignInCtrl', function($scope, $log, $timeout, $state, $ionicModal, $ionicHistory, gettextCatalog, popupService, externalLinkService, coinbaseService) {
+angular.module('owsWalletPlugin.controllers').controller('LoginCtrl', function($scope, $log, $timeout, $state, $ionicModal, $ionicHistory, gettextCatalog, popupService, externalLinkService, coinbaseService) {
   
   var isNodeWebKit = owswallet.Plugin.isNodeWebKit();
   var coinbase = coinbaseService.coinbase;
@@ -30,15 +30,15 @@ angular.module('owsWalletPlugin.controllers').controller('SignInCtrl', function(
         position: 'center'
       }, function(authenticateWindow) {
         authenticateWindow.on('loaded', function() {
-          // Get the oauth code from the window location. If we get the code then close the window and connect.
+          // Get the oauth code from the window location. If we get the code then close the window and authenticate.
           var oauthCode = code(authenticateWindow.window.location.search);
           if (oauthCode) {
             authenticateWindow.window.close();
 
-            // Connect to Coinbase using the oauth code.
-            coinbase.connect(oauthCode, function(err) {
+            // Authenticate with Coinbase using the oauth code.
+            coinbase.login(oauthCode, function(err) {
               if (err) {
-                coinbaseService.showError(err);
+                return showError(err);
               }
 
               closeModal();
@@ -67,28 +67,30 @@ angular.module('owsWalletPlugin.controllers').controller('SignInCtrl', function(
   };
 
   function openModal() {
-    $ionicModal.fromTemplateUrl('views/sign-in/form/form.html', {
+    $ionicModal.fromTemplateUrl('views/login/form/form.html', {
       scope: $scope,
     }).then(function(modal) {
-      $scope.signInModal = modal;
-      $scope.signInModal.show();
+      // Initialize with no code.
+      $scope.formData.oauthCode = '';
+
+      $scope.loginModal = modal;
+      $scope.loginModal.show();
     });
 
     $scope.cancel = function() {
-      $scope.signInModal.remove();
+      $scope.loginModal.remove();
       $timeout(function() {
-        $ionicHistory.goBack();
+        $state.go('onboarding.start');
       }, 200);
     };
 
     $scope.submit = function() {
-      coinbase.connect($scope.formData.oauthCode, function(err) {
+      coinbase.login($scope.formData.oauthCode, function(err) {
         if (err) {
-          $log.error('Could not connect to Coinbase: ' + err.message + ', ' + err.detail);
-          return showError();
+          return showError(err);
         }
 
-        $scope.signInModal.remove();
+        $scope.loginModal.remove();
         $timeout(function() {
           $state.go('tabs.prices');
         }, 200);
@@ -97,17 +99,18 @@ angular.module('owsWalletPlugin.controllers').controller('SignInCtrl', function(
   };
 
   function closeModal() {
-    $scope.signInModal.remove();
+    $scope.loginModal.remove();
   };
 
-  function showError() {
-    var title = gettextCatalog.getString('Could not connect to Coinbase');
-    var message = gettextCatalog.getString('Please try again.');
-    popupService.showAlert(title, message, function() {
-      $timeout(function() {
-        $ionicHistory.goBack();
-      }, 200);
-    });
+  function showError(err) {
+    $log.error('Could not authenticate with Coinbase: ' + err.message);
+    return popupService.showAlert(
+      gettextCatalog.getString('Could not login to Coinbase'),
+      gettextCatalog.getString('An error occurred while trying to authenticate with Coinbase. Please try again.'),
+      function() {
+        $scope.formData.oauthCode = '';
+      }
+    );
   };
 
 });

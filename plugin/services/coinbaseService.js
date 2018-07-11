@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.services').factory('coinbaseService', function($log, $timeout, lodash, gettextCatalog, popupService,
+angular.module('owsWalletPlugin.services').factory('coinbaseService', function($log, $state, $timeout, lodash, gettextCatalog, popupService,
   /* @namespace owsWalletPlugin.api.coinbase */ Coinbase) {
 
   var root = {};
@@ -9,13 +9,27 @@ angular.module('owsWalletPlugin.services').factory('coinbaseService', function($
 
   root.coinbase;
 
+  // The Coinbase servlet may notify us that it has logged out (e.g., when token is not useful).
+  owswallet.Plugin.onEvent('coinbase.logout', function(event) {
+    $state.go('onboarding.start');
+
+    if (event.data.reason != 'USER_REQUESTED' && event.data.reason != 'UNAUTHORIZED_INVALID') {
+      $timeout(function() {
+        popupService.showAlert(
+          gettextCatalog.getString('Logged Out'),
+          gettextCatalog.getString('Your account was logged out. Please login again.')
+        );
+      });
+    }
+  });
+
   root.whenAvailable = function(cb) {
     // Can't do this when service loads since Coinbase servlet may not yet be ready.
     // Coinbase object is created only once.
     if (!root.coinbase) {
       // Create our connection to the Coinbase service (via the Coinbase servlet).
       // Use the 'default' plugin configuration for setup.
-      root.coinbase = new Coinbase('default', onCoinbaseConnect);
+      root.coinbase = new Coinbase('default', onCoinbaseLogin);
     }
 
     if (!isAvailable) {
@@ -25,20 +39,11 @@ angular.module('owsWalletPlugin.services').factory('coinbaseService', function($
     return cb(root.coinbase);
   };
 
-  root.showError =function(err) {
-    $log.error('Could not connect to Coinbase: ' + err.message + ', ' + err.detail);
-
-    var title = gettextCatalog.getString('Could not connect to Coinbase');
-    var message = gettextCatalog.getString('An error occurred while trying to connect to Coinbase. Please try again.');
-    return popupService.showAlert(title, message);
-  };
-
   // Called when we have at least and initial connection to Coinbase (may not have been paired or have access to an account).
-  function onCoinbaseConnect(err) {
-    if (err) {
-      return root.showError(err);
+  function onCoinbaseLogin(err) {
+    if (!err) {
+      available();
     }
-    available();
   };
 
   function available() {

@@ -5,7 +5,7 @@
     </ion-nav-back-button>
     <ion-nav-buttons side="secondary">
     	<span ng-if="account.isCryptoCurrency">
-	      <button class="button button-nav-bar button-receive" ng-click="openReceive()"></button>
+	      <button class="button button-nav-bar button-receive" ng-click="openAddress()"></button>
 	      <button class="button button-nav-bar button-send" ng-click="openSend()"></button>
 	    </span>
     </ion-nav-buttons>
@@ -14,20 +14,20 @@
   	<span>
 	    <div class="amount-group">
 		    <div class="amount">
-	        {{format(account.balance.amount, account.balance.currency)}}
+	        {{format(account.balance.amount, account.balance.currency).localized_u}}
 		    </div>
 		    <div class="altAmount" ng-if="account.isCryptoCurrency">
-	        {{format(account.balance.altAmount, account.balance.altCurrency)}}
+	        {{format(account.balance.altAmount, account.balance.altCurrency).localized_u}}
 		    </div>
 		  </div>
 	    <div class="button-group row">
 	    	<span class="col col-50">
-		      <button class="button button-block button-primary" ng-click="openDepositModal()">
+		      <button class="button button-block button-primary" ui-sref="tabs.buy-sell-amount({action: 'buy', accountId: account.id})">
 		        {{account.isCryptoCurrency ? ('Buy' | translate) : ('Deposit' | translate)}}
 		      </button>
 		    </span>
 	    	<span class="col">
-		      <button class="button button-block button-primary" ng-click="openWithdrawModal()">
+		      <button class="button button-block button-primary" ui-sref="tabs.buy-sell-amount({action: 'sell', accountId: account.id})">
 		      	{{account.isCryptoCurrency ? ('Sell' | translate) : ('Withdraw' | translate)}}
 		      </button>
 		    </span>
@@ -38,14 +38,14 @@
   	<ion-list ng-repeat="tx in transactions track by $index">
       <div class="item item-icon-left has-detail">
       	<i src="none"></i>
-        <img svg="fill: {{account.currency.color}}" ng-src="img/icon-tx-{{tx.type}}.svg">
+        <img svg="fill: {{account.currency.color}}" ng-src="img/icon-tx-{{tx.type || 'default'}}.svg">
 				<span>
 	        <h2>{{tx.title}}</h2>
 	        <p>{{trim(tx.subtitle)}}</p>
 	      </span>
         <span class="item-note two-lines">
-          <h2 ng-class="{'received': tx.amount > 0}">{{format(tx.amount, tx.currency)}}</h2>
-          <p>{{format(tx.altAmount, tx.altCurrency)}}</p>
+          <h2 ng-class="{'received': tx.amount > 0}">{{format(tx.amount, tx.currency).localized_u}}</h2>
+          <p>{{format(tx.altAmount, tx.altCurrency).localized_u}}</p>
         </span>
       </div>
     </ion-list>

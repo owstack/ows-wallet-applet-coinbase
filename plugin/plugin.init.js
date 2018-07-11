@@ -23,12 +23,12 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
         }
       }
     })
-    .state('onboarding.sign-in', {
-      url: '/sign-in',
+    .state('onboarding.login', {
+      url: '/login',
       views: {
         'onboarding': {
-          controller: 'SignInCtrl',
-          templateUrl: 'views/sign-in/sign-in.html'
+          controller: 'LoginCtrl',
+          templateUrl: 'views/login/login.html'
         }
       }
     })
@@ -92,8 +92,34 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
           templateUrl: 'views/account/account.html'
         }
       }
+    })
+    .state('tabs.buy-sell-amount', {
+      url: '/buy-sell-amount/:action/:accountId',
+      views: {
+        'tab-accounts@tabs': {
+          controller: 'BuySellAmountCtrl',
+          templateUrl: 'views/buy-sell-amount/buy-sell-amount.html'
+        }
+      }
+    })
+    .state('tabs.linked-accounts', {
+      url: '/linked-accounts/:action/:accountId/:paymentMethodId',
+      views: {
+        'tab-accounts@tabs': {
+          controller: 'LinkedAccountsCtrl',
+          templateUrl: 'views/linked-accounts/linked-accounts.html'
+        }
+      }
+    })
+    .state('tabs.buy-sell-preview', {
+      url: '/buy-sell-preview/:accountId/:orderId',
+      views: {
+        'tab-accounts@tabs': {
+          controller: 'BuySellPreviewCtrl',
+          templateUrl: 'views/buy-sell-preview/buy-sell-preview.html'
+        }
+      }
     });
-
 
 /*
     .state('coinbase.amount', {

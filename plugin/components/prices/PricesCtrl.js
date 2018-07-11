@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function($scope, $timeout, $log, $ionicScrollDelegate, lodash, utils, coinbaseService, settingsService,
+angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function($scope, $timeout, $log, $ionicScrollDelegate, lodash, stringUtils, coinbaseService, settingsService,
   /* @namespace owsWalletPluginClient.api */ Constants) {
 
   var coinbase = coinbaseService.coinbase;
@@ -34,11 +34,10 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
     $scope.$apply();
   };
 
-  $scope.format = function(num, currency) {
-    return Math.abs(num).toLocaleString(language, {minimumFractionDigits: currency.decimals, maximumFractionDigits: currency.decimals});
-  };
+  $scope.format = stringUtils.format;
 
   function init() {
+    $scope.currency = currency;
     $scope.period = 'day';
     $scope.amountGroupOpacity = 1;
     $scope.titleOpacity = 0;
@@ -57,7 +56,7 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
       account.getBalance(currency).then(function(balance) {
 
         totalBalance += balance;
-        $scope.totalBalance = symbol + $scope.format(totalBalance, {decimals: decimals});
+        $scope.totalBalance = $scope.format(totalBalance, currency, {decimals: decimals}).localized_u;
 
       }).catch(function(error) {
         $log.error(error);
@@ -97,16 +96,15 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
           var decimals = Constants.currencyMap(spotPrice[k].currency, 'decimals');
 
           spotPrice[k].pair = spotPrice[k].base + '-' + spotPrice[k].currency;
-          spotPrice[k].amount = utils.float(spotPrice[k].amount); // Convert to number
+          spotPrice[k].amount = stringUtils.float(spotPrice[k].amount); // Convert to number
           spotPrice[k].symbol = Constants.currencyMap(spotPrice[k].currency, 'symbol');
           spotPrice[k].decimals = decimals;
           spotPrice[k].color = coinbase.getAccountByCurrencyCode(spotPrice[k].base).currency.color;
 
           // Set a sort order.
-          spotPrice[k].sort = lodash.findIndex(coinbase.currencySortOrder, function(c) {
+          spotPrice[k].sort = lodash.find(coinbase.currencies, function(c) {
             return c.code == spotPrice[k].base;
-          });
-          spotPrice[k].sort = (spotPrice[k].sort < 0 ? 99 : spotPrice[k].sort); // Move items not found to end of sort.
+          }).sort;
 
           return spotPrice[k];
         });
@@ -134,7 +132,7 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
             //   }]
             // }
 
-            var periodPrice = utils.float(data.prices[data.prices.length-1].price); // Convert to number
+            var periodPrice = stringUtils.float(data.prices[data.prices.length-1].price); // Convert to number
             currency.amountChange = currency.amount - periodPrice;
             currency.percentChange = Math.abs(100 * currency.amountChange / currency.amount);
 

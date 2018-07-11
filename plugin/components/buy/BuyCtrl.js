@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($scope, $log, $state, $timeout, $ionicHistory, $ionicScrollDelegate, $ionicConfig, lodash, coinbaseService, popupService, profileService, ongoingProcess, walletService, txFormatService, externalLinkService) {
+angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($scope, $log, $state, $timeout, $ionicModal, lodash, coinbaseService, popupService, externalLinkService) {
 
   var coin = 'btc';
   var amount;
@@ -11,7 +11,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
     $log.error(err);
     err = err.errors ? err.errors[0].message : err;
     popupService.showAlert('Error', err, function() {
-      $ionicHistory.goBack();
+//      $ionicHistory.goBack();
     });
   };
 
@@ -35,11 +35,11 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
   };
 
   var processPaymentInfo = function() {
-    ongoingProcess.set('connectingCoinbase', true);
+//    ongoingProcess.set('connectingCoinbase', true);
 
     coinbaseService.init(function(err, res) {
       if (err) {
-        ongoingProcess.set('connectingCoinbase', false);
+//        ongoingProcess.set('connectingCoinbase', false);
         showErrorAndBack(err);
         return;
       }
@@ -53,7 +53,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
       $scope.selectedPaymentMethodId = { value : null };
       coinbaseService.getPaymentMethods(function(err, p) {
         if (err) {
-          ongoingProcess.set('connectingCoinbase', false);
+//          ongoingProcess.set('connectingCoinbase', false);
           showErrorAndBack(err);
           return;
         }
@@ -71,13 +71,13 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
           }
         }
         if (lodash.isEmpty($scope.paymentMethods)) {
-          ongoingProcess.set('connectingCoinbase', false);
+//          ongoingProcess.set('connectingCoinbase', false);
           var url = 'https://support.coinbase.com/customer/portal/articles/1148716-payment-methods-for-us-customers';
           var msg = 'No payment method available to buy';
           var okText = 'More info';
           var cancelText = 'Go Back';
           externalLinkService.open(url, true, null, msg, okText, cancelText, function() {
-            $ionicHistory.goBack(-2);
+//            $ionicHistory.goBack(-2);
           });
           return;
         }
@@ -88,11 +88,11 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
   };
 
   $scope.$on("$ionicView.beforeLeave", function(event, data) {
-    $ionicConfig.views.swipeBackEnabled(true);
+//    $ionicConfig.views.swipeBackEnabled(true);
   });
 
   $scope.$on("$ionicView.enter", function(event, data) {
-    $ionicConfig.views.swipeBackEnabled(false);
+//    $ionicConfig.views.swipeBackEnabled(false);
   });
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
@@ -101,12 +101,13 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
     currency = data.stateParams.currency;
 
     $scope.network = coinbaseService.getNetwork();
+/*
     $scope.wallets = profileService.getWallets({
       onlyComplete: true,
       network: $scope.network,
       coin: coin
     });
-
+*/
     if (lodash.isEmpty($scope.wallets)) {
       showErrorAndBack('No wallets available');
       return;
@@ -115,11 +116,11 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
   });
 
   $scope.buyRequest = function() {
-    ongoingProcess.set('connectingCoinbase', true);
+//    ongoingProcess.set('connectingCoinbase', true);
 
     coinbaseService.init(function(err, res) {
       if (err) {
-        ongoingProcess.set('connectingCoinbase', false);
+//        ongoingProcess.set('connectingCoinbase', false);
         showErrorAndBack(err);
         return;
       }
@@ -132,7 +133,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
         quote: true
       };
       coinbaseService.buyRequest(accountId, dataSrc, function(err, data) {
-        ongoingProcess.set('connectingCoinbase', false);
+//        ongoingProcess.set('connectingCoinbase', false);
         if (err) {
           showErrorAndBack(err);
           return;
@@ -156,7 +157,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
 
       coinbaseService.init(function(err, res) {
         if (err) {
-          ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
+//          ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
           showError(err);
           return;
         }
@@ -170,27 +171,28 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
         };
         coinbaseService.buyRequest(accountId, dataSrc, function(err, b) {
           if (err) {
-            ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
+//            ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
             showError(err);
             return;
           }
 
           var processBuyTx = function (tx) {
             if (!tx) {
-              ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
+//              ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
               showError('Transaction not found');
               return;
             }
 
             coinbaseService.getTransaction(accountId, tx.id, function(err, updatedTx) {
               if (err) {
-                ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
+//                ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
                 showError(err);
                 return;
               }
+/*
               walletService.getAddress($scope.wallet, false, function(err, walletAddr) {
                 if (err) {
-                  ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
+//                  ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
                   showError(err);
                   return;
                 }
@@ -199,17 +201,18 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
 
                 $log.debug('Saving transaction to process later...');
                 coinbaseService.savePendingTransaction(updatedTx.data, {}, function(err) {
-                  ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
+//                  ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
                   if (err) $log.debug(err);
                 });
               });
+*/
             });
           };
 
           var _processBuyOrder = function() {
             coinbaseService.getBuyOrder(accountId, b.data.id, function (err, buyResp) {
               if (err) {
-                ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
+//                ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
                 showError(err);
                 return;
               }
@@ -245,19 +248,20 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
 
   $scope.onWalletSelect = function(wallet) {
     $scope.wallet = wallet;
+/*
     var parsedAmount = txFormatService.parseAmount(
       coin,
       amount,
       currency);
-
+*/
     // Buy always in BTC
     amount = (parsedAmount.amountSat / 100000000).toFixed(8);
     currency = 'BTC';
 
     $scope.amountUnitStr = parsedAmount.amountUnitStr;
-    ongoingProcess.set('calculatingFee', true);
+//    ongoingProcess.set('calculatingFee', true);
     coinbaseService.checkEnoughFundsForFee(amount, function(err) {
-      ongoingProcess.set('calculatingFee', false);
+//      ongoingProcess.set('calculatingFee', false);
       if (err) {
         showErrorAndBack(err);
         return;
@@ -268,11 +272,13 @@ angular.module('owsWalletPlugin.controllers').controller('BuyCtrl', function($sc
 
   $scope.goBackHome = function() {
     $scope.sendStatus = '';
+/*
     $ionicHistory.nextViewOptions({
       disableAnimate: true,
       historyRoot: true
     });
     $ionicHistory.clearHistory();
+*/
     $state.go('tabs.home').then(function() {
       $state.transitionTo('tabs.buyandsell.coinbase');
     });

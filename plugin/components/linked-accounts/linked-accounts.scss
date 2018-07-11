@@ -1,0 +1,48 @@
+#linked-accounts {
+
+	ion-content {
+		background: $v-white-color;
+	}
+
+	.bar.bar-coinbase {
+		background-color: $v-white-color !important;
+
+		.title {
+			color: $v-dark-gray;
+			font-weight: 600;
+		}
+
+		.button {
+			color: $v-dark-gray !important;
+		}
+	}
+
+  a.item {
+    height: 60px;
+    min-height: 0;
+
+    &.has-detail {
+	    padding-top: 8px;
+	    padding-bottom: 0;
+	  }
+
+    .item-note {
+	    top: 18px;
+	  }
+
+  	span >h2 {
+  		width: 80%;
+  	}
+
+  	i.icon {
+  		font-size: 16px;
+  		color: $v-primary-color;
+  	}
+
+  	svg {
+  		* {
+				fill: $v-primary-color;
+  		}
+  	}
+  }
+}

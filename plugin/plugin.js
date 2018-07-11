@@ -5,6 +5,7 @@ angular.module('owsWalletPlugin', [
 	'gettext',
 	'ionic',
   'monospaced.qrcode',
+	'ngFitText',
 	'ngLodash',
 	'owsWalletPluginClient',
   'owsWalletPlugin.api.coinbase',

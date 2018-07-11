@@ -1,0 +1,23 @@
+<ion-view id="linked-accounts" hide-tabs>
+  <ion-nav-bar class="bar bar-coinbase">
+    <ion-nav-title>{{'Linked Accounts' | translate}}</ion-nav-title>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <ion-list>
+      <a class="item item-icon-left item-icon-right" ng-class="{'has-detail': method.limit}" ng-click="select(method)"
+        ng-repeat="method in methods track by $index">
+        <img svg ng-src="img/icon-{{method.type + '-' + method.currency.toLowerCase()}}.svg">
+        <span>
+          <h2>{{method.name}}</h2>
+          <p>{{method.limit}}</p>
+        </span>
+        <span class="item-note" ng-if="method.type == 'bank'">
+          {{method.name.slice(-8)}}
+        </span>
+        <i class="icon ion-checkmark" ng-if="method.id == selectedId"></i>
+      </a>
+    </ion-list>
+  </ion-content>
+</ion-view>

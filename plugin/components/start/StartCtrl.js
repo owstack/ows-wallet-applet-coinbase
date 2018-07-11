@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($scope, $timeout, $log, $state, lodash, gettextCatalog, popupService, externalLinkService, utils, coinbaseService, settingsService,
+angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($scope, $ionicHistory, $log, $state, $timeout, lodash, gettextCatalog, popupService, externalLinkService, stringUtils, coinbaseService, settingsService,
   /* @namespace owsWalletPluginClient.api */ Constants) {
 
   var coinbase = coinbaseService.coinbase;
@@ -38,6 +38,9 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
 
   // If we're here then we don't have a Coinbase account yet.
   $scope.$on("$ionicView.beforeEnter", function(event) {
+    $ionicHistory.clearHistory();
+    $ionicHistory.clearCache();
+
     $scope.selectedCurrency = 0;  // Default to first entry.
     $scope.selectedTimeFrame = lodash.findIndex($scope.timeFrames, ['period', 'year']);
 
@@ -49,8 +52,8 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
     $timeout.cancel(dataUpdater);
   });
 
-  $scope.signIn = function() {
-    $state.go('onboarding.sign-in');
+  $scope.login = function() {
+    $state.go('onboarding.login');
   };
 
   $scope.openSignupWindow = function() {
@@ -73,10 +76,6 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
     updateFeatureCurrency();
   };
 
-  function format(num, currency) {
-    return Math.abs(num).toLocaleString(language, {minimumFractionDigits: currency.decimals, maximumFractionDigits: currency.decimals});
-  };
-
   function updateFeatureCurrency() {
     getData().then(function(data) {
       if (!data.currencies) {
@@ -87,8 +86,7 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
       var currency = $scope.currencies[$scope.selectedCurrency];
 
       $scope.featureLeft = {
-        value: format(currency.amount, currency),
-        symbol: currency.symbol,
+        value: stringUtils.format(currency.amount, currency.currency).localized_u,
         label: currency.label + ' price'
       };
 
@@ -100,12 +98,10 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
           periodPrice = 0;
         }
 
-        var amountChange = utils.float(currency.amount) - utils.float(periodPrice);
+        var amountChange = stringUtils.float(currency.amount) - stringUtils.float(periodPrice);
 
         $scope.featureRight = {
-          direction: (amountChange >= 0 ? 0 : -1),
-          value: format(Math.abs(amountChange) + '', {decimals: 2}),
-          symbol: currency.symbol,
+          value: stringUtils.format(Math.abs(amountChange), currency.currency).localized_u,
           label: $scope.timeFrames[$scope.selectedTimeFrame].label
         };
 
@@ -135,15 +131,14 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
       // Convert to an array and map in some derived info.
       var currencies = lodash.map(Object.keys(spotPrice), function(k) {
         spotPrice[k].pair = spotPrice[k].base + '-' + spotPrice[k].currency;
-        spotPrice[k].amount = utils.float(spotPrice[k].amount); // Convert to number
+        spotPrice[k].amount = stringUtils.float(spotPrice[k].amount); // Convert to number
         spotPrice[k].symbol = Constants.currencyMap(spotPrice[k].currency, 'symbol');
         spotPrice[k].decimals = Constants.currencyMap(spotPrice[k].currency, 'decimals');
 
         // Set a sort order.
-        spotPrice[k].sort = lodash.findIndex(coinbase.currencySortOrder, function(c) {
+        spotPrice[k].sort = lodash.find(coinbase.currencies, function(c) {
           return c.code == spotPrice[k].base;
-        });
-        spotPrice[k].sort = (spotPrice[k].sort < 0 ? 99 : spotPrice[k].sort); // Move items not found to end of sort.
+        }).sort;
 
         return spotPrice[k];
       });

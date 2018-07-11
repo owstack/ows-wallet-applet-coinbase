@@ -1,15 +1,14 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('AccountCtrl', function($scope, $timeout, $ionicPopup, lodash, coinbaseService, settingsService,
+angular.module('owsWalletPlugin.controllers').controller('AccountCtrl', function($scope, $timeout, $ionicPopup, $ionicModal, lodash, coinbaseService, gettextCatalog, popupService, stringUtils,
   /* @namespace owsWalletPluginClient.api */ Constants,
   /* @namespace owsWalletPluginClient.api */ Device) {
 
   var account;
   var coinbase = coinbaseService.coinbase;
-  var language = settingsService.language;
 
   $scope.isCordova = owswallet.Plugin.isCordova();
-  var receivePopup;
+  var addressPopup;
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
   	if (data.stateParams && data.stateParams.id) {
@@ -20,50 +19,28 @@ angular.module('owsWalletPlugin.controllers').controller('AccountCtrl', function
   	}
   });
 
-  $scope.trim = function(str) {
-    if (str.length > 25) {
-      str = str.slice(0, 10) + '...' + str.slice(-11);
-    }
-    return str;
-  };
+  $scope.format = stringUtils.format;
+  $scope.trim = stringUtils.trim;
 
-  $scope.format = function(num, currency, opts) {
-    var decimals = Constants.currencyMap(currency, 'decimals');
-    var symbol = Constants.currencyMap(currency, 'symbol');
-    var isCrypto = coinbase.isCryptoCurrency(currency);
-
-    opts = opts || {};
-    opts.symbol = opts.symbol || !isCrypto;
-
-    var value;
-    if (isCrypto) {
-      value = Math.abs(num).toString();
-    } else {
-      value = Math.abs(num).toLocaleString(language, {minimumFractionDigits: decimals, maximumFractionDigits: decimals});
-    }
-
-    return (num < 0 ? '-' : '') + (opts.symbol ? symbol : '') + value + (isCrypto && !opts.symbol ? ' ' + currency : '');
-  };
-
-  $scope.openReceive = function() {
+  $scope.openAddress = function() {
     account.createAddress().then(function(address) {
       $scope.address = address;
-      $scope.addressVisible = false;
+      $scope.popupState = 'warning';
 
-      receivePopup = $ionicPopup.show({
-        cssClass: 'popup-account-receive',
+      addressPopup = $ionicPopup.show({
+        cssClass: 'popup-account-address',
         scope: $scope,
-        templateUrl: 'views/account/receive/receive.html'
+        templateUrl: 'views/account/address/address.html'
       });
     });
   };
 
-  $scope.closeReceive = function() {
-    receivePopup.close();
+  $scope.closeAddress = function() {
+    addressPopup.close();
   };
 
   $scope.showAddress = function() {
-    $scope.addressVisible = true;
+    $scope.popupState = 'qrcode';
   };
 
   $scope.shareAddress = function() {
@@ -71,7 +48,12 @@ angular.module('owsWalletPlugin.controllers').controller('AccountCtrl', function
   };
 
   $scope.copyAddress = function() {
+    $scope.popupState = 'copied';
     Device.copyToClipboard($scope.address.address);
+
+    $timeout(function() {
+      addressPopup.close();
+    }, 1500);
   };
 
   $scope.openSend = function() {
@@ -80,8 +62,12 @@ angular.module('owsWalletPlugin.controllers').controller('AccountCtrl', function
   function getTransactions() {
     account.getTransactions().then(function(transactions) {
       $scope.transactions = transactions;
-
       $scope.$apply();
+    }).catch(function(error) {
+      popupService.showAlert(
+        gettextCatalog.getString('Uh oh!'),
+        gettextCatalog.getString('Could not get account transactions. Please try again.')
+      );
     });
   };
 

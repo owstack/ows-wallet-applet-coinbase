@@ -1,8 +1,9 @@
-<div class="header">
+<div class="head" ng-show="popupState != 'copied'">
 	<span class="title">{{account.currency.name}} Address</span>
-	<button class="button button-icon icon ion-android-close" ng-click="closeReceive()"></button>
+	<button class="button button-icon icon ion-android-close" ng-click="closeAddress()"></button>
 </div>
-<div class="warning" ng-show="!addressVisible">
+<!-- show address warning -->
+<div class="warning" ng-show="popupState == 'warning'">
 	<img svg="fill: {{account.currency.color}}" ng-src="img/icon-{{account.currency.code.toLowerCase()}}.svg">
 	<div class="message">
 		{{address.warning.title}}
@@ -16,7 +17,8 @@
 		</button>
 	</div>
 </div>
-<div class="info" ng-show="addressVisible">
+<!-- address qr code -->
+<div class="qrcode" ng-show="popupState == 'qrcode'">
 	<div class="qr-code-container">
 		<qrcode version="11" error-correction-level="M" data="{{address.uri}}" size="155" color="#444455"></qrcode>
 	</div>
@@ -30,5 +32,15 @@
 			<img svg src="img/icon-copy.svg">
 		  Copy address
 		</button>
+	</div>
+</div>
+<!-- copy completed -->
+<div class="copied" ng-show="popupState == 'copied'">
+	<img svg src="img/icon-complete.svg">
+	<div class="message" translate>
+		Copied!
+	</div>
+	<div class="detail">
+		Your {{account.currency.name}} Address has been copied to your clipboard
 	</div>
 </div>

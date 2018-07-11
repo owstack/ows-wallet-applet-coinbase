@@ -14,7 +14,7 @@
     <div class="feature-group row">
       <div class="feature-left-group col col-50">
         <div class="feature-value">
-          {{featureLeft.symbol}}{{featureLeft.value}}
+          {{featureLeft.value}}
         </div>
         <div class="feature-label">
           {{featureLeft.label}}
@@ -23,7 +23,7 @@
       <div class="feature-right-group col">
         <div class="feature-value">
           <span ng-show="featureRight.direction < 0">-</span>
-          {{featureRight.symbol}}{{featureRight.value}}
+          {{featureRight.value}}
           <span ng-class="{'triangle up': featureRight.direction >= 0}"></span>
           <span ng-class="{'triangle down': featureRight.direction < 0}"></span>
         </div>
@@ -45,7 +45,7 @@
       <button class="button button-block button-secondary" ng-click="openSignupWindow()" translate>
         Sign Up
       </button>
-      <button class="button button-block button-clear" ng-click="signIn()" translate>
+      <button class="button button-block button-clear" ng-click="login()" translate>
         Log In
       </button>
     </div>

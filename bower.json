@@ -7,6 +7,7 @@
     "plugin"
   ],
   "dependencies": {
-    "ionic": "https://github.com/owstack/ionic-v1.git#ows-release"
+    "ionic": "https://github.com/owstack/ionic-v1.git#ows-release",
+    "ngFitText": "https://github.com/owstack/ng-FitText.git#ows-release"
   }
 }

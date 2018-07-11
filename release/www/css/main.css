@@ -34,10 +34,19 @@ body button {
 .assertive {
   color: #a00000 !important; }
 
+.left {
+  float: left; }
+
+.right {
+  float: right; }
+
+.smaller {
+  font-size: smaller; }
+
 /* Header bar */
 .bar.bar-coinbase {
   background-color: #0867d0 !important;
-  border-color: #0867d0;
+  border: none;
   color: #ffffff;
   background-size: 0; }
 
@@ -49,16 +58,21 @@ ion-content {
   background: #f6f9fc; }
 
 /* Buttons */
-button.activated {
-  border: none; }
-
 button.button-primary {
   background: #0867d0;
   color: #ffffff !important; }
+  button.button-primary.activated {
+    border: none;
+    background: #103762;
+    color: gray !important; }
 
 button.button-secondary {
-  background: #0867d0;
+  background: #4B84FF;
   color: #ffffff !important; }
+  button.button-secondary.activated {
+    border: none;
+    background: #1751cd;
+    color: gray !important; }
 
 button.button-clear {
   background: transparent;
@@ -82,10 +96,11 @@ svg {
   min-height: 65px; }
   .item.item-icon-left {
     padding-left: 62px; }
-  .item > h2,
-  .item > span > h2 {
+  .item h2 {
     color: #124763;
-    padding-top: 1px; }
+    padding-top: 1px;
+    font-family: "Avenir Next", sans-serif;
+    font-weight: 500; }
   .item:not(.has-detail) > h2,
   .item:not(.has-detail) > span:not(.item-note) > h2 {
     position: absolute;
@@ -103,11 +118,20 @@ svg {
     right: 16px;
     text-align: right;
     line-height: 22px;
-    color: #9b9bab; }
+    color: #444455; }
     .item > .item-note.two-lines {
       top: 18px; }
   .item.item-icon-right > .item-note {
     right: 48px; }
+  .item.append {
+    border-top: none; }
+  .item.info,
+  .item.info > h2,
+  .item.info > p {
+    word-wrap: break-word;
+    white-space: normal;
+    background: #f6f9fc;
+    color: #0867d0; }
 
 .ion-ios-arrow-right:before {
   content: "\f125";
@@ -132,7 +156,7 @@ svg {
     border-radius: 10px 10px 0 0;
     min-height: 120px; }
     .popup-modal-header-success {
-      background: #00c365; }
+      background: #61ca01; }
     .popup-modal-header-warning {
       background: #ffa500; }
     .popup-modal-header-img {
@@ -170,7 +194,7 @@ svg {
   .popup-modal .button {
     margin-top: 1rem; }
   .popup-modal-content-success .button {
-    color: #00c365 !important; }
+    color: #61ca01 !important; }
   .popup-modal-content-warning .button:not(.button-secondary) {
     color: #ffa500 !important; }
 
@@ -240,38 +264,39 @@ svg {
 #account h2.received {
   color: #00c365; }
 
-.popup-account-receive .popup {
+.popup-account-address .popup {
   width: 310px;
   border-radius: 5px;
-  background: #ffffff;
-  overflow: hidden; }
-  .popup-account-receive .popup .popup-head {
+  background: #ffffff; }
+  .popup-account-address .popup .popup-head {
     display: none; }
 
-.popup-account-receive .header {
+.popup-account-address .head {
   color: #9b9bab;
   border-bottom: 1px solid #d0d0d0;
-  height: 30px;
-  font-size: 16px; }
-  .popup-account-receive .header .title {
+  height: 40px;
+  font-size: 16px;
+  padding-top: 10px; }
+  .popup-account-address .head .title {
     color: #444455;
     font-weight: 500; }
-  .popup-account-receive .header .button {
+  .popup-account-address .head .button {
     color: #9b9bab;
     position: absolute;
     right: 2px;
-    top: -4px; }
-    .popup-account-receive .header .button:before {
+    top: -2px; }
+    .popup-account-address .head .button:before {
       font-size: 30px; }
 
-.popup-account-receive .popup-body {
-  padding: 10px 20px;
+.popup-account-address .popup-body {
+  padding: 0;
   color: #444455;
-  text-align: center; }
-  .popup-account-receive .popup-body svg {
+  text-align: center;
+  overflow: hidden; }
+  .popup-account-address .popup-body svg {
     width: 55px !important;
     margin-top: 10px; }
-  .popup-account-receive .popup-body .message {
+  .popup-account-address .popup-body .message {
     font-size: 16px;
     font-weight: 600;
     width: 75%;
@@ -279,16 +304,15 @@ svg {
     left: 50%;
     transform: translateX(-50%);
     margin-top: 5px; }
-  .popup-account-receive .popup-body .detail {
-    font-size: 17px;
-    margin-top: 20px;
-    margin-bottom: 25px;
+  .popup-account-address .popup-body .detail {
+    font-size: 16px;
+    padding: 20px 20px 25px 20px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
     font-weight: 500;
     line-height: 1.4em; }
-  .popup-account-receive .popup-body .qr-code-container {
+  .popup-account-address .popup-body .qr-code-container {
     height: 185px;
     width: 185px;
     margin-top: 25px;
@@ -298,59 +322,299 @@ svg {
     transform: translateX(-50%);
     border: 1px solid #d0d0d0;
     border-radius: 5px; }
-    .popup-account-receive .popup-body .qr-code-container qrcode {
+    .popup-account-address .popup-body .qr-code-container qrcode {
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%);
       margin-top: 5px; }
-  .popup-account-receive .popup-body .address {
-    font-size: 14px;
+  .popup-account-address .popup-body .address {
+    font-size: 13px;
     color: #444455;
     font-weight: 500;
     height: 55px;
     border-top: 1px solid #d0d0d0;
-    padding-top: 18px; }
+    padding-top: 18px;
+    padding-left: 10px;
+    padding-right: 10px; }
+  .popup-account-address .popup-body .copied svg {
+    margin-top: 25px;
+    margin-bottom: 10px; }
+    .popup-account-address .popup-body .copied svg * {
+      fill: #61ca01; }
+  .popup-account-address .popup-body .copied .message {
+    font-size: 32px;
+    font-weight: 500; }
+  .popup-account-address .popup-body .copied .detail {
+    font-size: 12px;
+    color: #9b9bab;
+    width: 80%;
+    padding-top: 15px;
+    padding-bottom: 25px; }
 
-.popup-account-receive .warning .buttons > .button.button-primary {
+.popup-account-address .warning .buttons > .button.button-primary {
   font-size: 16px;
   font-weight: 600;
-  width: 50%;
+  width: 45%;
   height: 40px;
   min-height: 35px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 20px; }
-  .popup-account-receive .warning .buttons > .button.button-primary > span {
+  margin-bottom: 25px; }
+  .popup-account-address .warning .buttons > .button.button-primary > span {
     position: relative;
     top: -1px; }
 
-.popup-account-receive .info .buttons {
-  height: 36px;
+.popup-account-address .qrcode .buttons {
+  height: 46px;
   border-top: 1px solid #d0d0d0;
   padding: 0; }
-  .popup-account-receive .info .buttons > .button.button-clear {
+  .popup-account-address .qrcode .buttons > .button.button-clear {
     color: #124763 !important;
     font-size: 14px;
     font-weight: 500; }
-    .popup-account-receive .info .buttons > .button.button-clear > span {
+    .popup-account-address .qrcode .buttons > .button.button-clear > span {
       position: relative;
       top: -5px; }
-    .popup-account-receive .info .buttons > .button.button-clear svg {
+    .popup-account-address .qrcode .buttons > .button.button-clear svg {
       width: 15px !important;
       height: 15px;
       margin-right: 5px;
       position: relative;
       top: -3px; }
-      .popup-account-receive .info .buttons > .button.button-clear svg * {
+      .popup-account-address .qrcode .buttons > .button.button-clear svg * {
         fill: #124763; }
-    .popup-account-receive .info .buttons > .button.button-clear.left {
+    .popup-account-address .qrcode .buttons > .button.button-clear.left {
       border-right: 1px solid #d0d0d0; }
 
 #accounts a.item {
   height: 81px; }
   #accounts a.item.item-icon-left {
     padding-left: 57px; }
+  #accounts a.item > .item-note {
+    color: #9b9bab; }
+
+#buy-sell-amount ion-content {
+  background: #ffffff; }
+
+#buy-sell-amount .bar.bar-coinbase {
+  background-color: #ffffff !important; }
+  #buy-sell-amount .bar.bar-coinbase .title {
+    color: #444455;
+    font-weight: 600; }
+
+#buy-sell-amount .available {
+  text-align: center;
+  color: #444455;
+  font-weight: 500; }
+
+#buy-sell-amount .amount-container {
+  width: 100%;
+  position: absolute;
+  top: 100px;
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px; }
+  #buy-sell-amount .amount-container .amount {
+    font-size: 48px;
+    font-weight: 500;
+    color: #0867d0; }
+    #buy-sell-amount .amount-container .amount .placeholder {
+      opacity: 0.5; }
+
+#buy-sell-amount .currency-toggle {
+  position: absolute;
+  top: 90px;
+  right: 10px; }
+  #buy-sell-amount .currency-toggle svg {
+    height: 25px; }
+    #buy-sell-amount .currency-toggle svg * {
+      fill: #444455; }
+  #buy-sell-amount .currency-toggle .label {
+    color: #444455;
+    font-size: 12px;
+    font-weight: 500;
+    position: relative;
+    top: -5px;
+    left: 4px; }
+
+#buy-sell-amount .keypad-group {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  bottom: calc(constant(safe-area-inset-bottom));
+  bottom: calc(env(safe-area-inset-bottom)); }
+  #buy-sell-amount .keypad-group .easy-button-group {
+    text-align: center;
+    padding: 20px; }
+    #buy-sell-amount .keypad-group .easy-button-group a {
+      border: 1px solid #d0d0d0;
+      padding: 5px 7px;
+      margin: 0 5px;
+      border-radius: 3px;
+      color: #444455; }
+      #buy-sell-amount .keypad-group .easy-button-group a.activated {
+        background: rgba(0, 0, 0, 0.3); }
+  #buy-sell-amount .keypad-group a.item {
+    height: 60px;
+    min-height: 0; }
+    #buy-sell-amount .keypad-group a.item.has-detail {
+      padding-top: 8px;
+      padding-bottom: 0; }
+    #buy-sell-amount .keypad-group a.item .item-note {
+      top: 50%;
+      transform: translateY(-50%); }
+    #buy-sell-amount .keypad-group a.item.has-detail span > h2 {
+      width: 80%; }
+    #buy-sell-amount .keypad-group a.item:not(.has-detail) span > h2 {
+      width: calc(100% - 175px); }
+    #buy-sell-amount .keypad-group a.item svg * {
+      fill: #0867d0; }
+  #buy-sell-amount .keypad-group button {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60px;
+    font-weight: 600; }
+
+#buy-sell-preview ion-content {
+  background: #ffffff; }
+
+#buy-sell-preview .bar.bar-coinbase {
+  background-color: #ffffff !important; }
+  #buy-sell-preview .bar.bar-coinbase .title {
+    color: #444455;
+    font-weight: 600; }
+  #buy-sell-preview .bar.bar-coinbase .back-button {
+    color: #444455 !important; }
+
+#buy-sell-preview .amount-group {
+  height: 132px;
+  text-align: center; }
+  #buy-sell-preview .amount-group .amount {
+    color: #0867d0;
+    font-size: 32px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+
+#buy-sell-preview div.item {
+  height: 60px;
+  min-height: 0; }
+  #buy-sell-preview div.item.has-detail {
+    padding-top: 8px;
+    padding-bottom: 0; }
+  #buy-sell-preview div.item .item-note {
+    top: 18px; }
+  #buy-sell-preview div.item span > h2 {
+    width: 80%; }
+  #buy-sell-preview div.item svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    transform: translateY(-50%); }
+    #buy-sell-preview div.item svg * {
+      fill: #0867d0; }
+  #buy-sell-preview div.item.fee {
+    height: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px; }
+
+#buy-sell-preview button.confirm {
+  font-weight: 600;
+  width: 90%;
+  height: 60px;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%); }
+
+#linked-accounts ion-content {
+  background: #ffffff; }
+
+#linked-accounts .bar.bar-coinbase {
+  background-color: #ffffff !important; }
+  #linked-accounts .bar.bar-coinbase .title {
+    color: #444455;
+    font-weight: 600; }
+  #linked-accounts .bar.bar-coinbase .button {
+    color: #444455 !important; }
+
+#linked-accounts a.item {
+  height: 60px;
+  min-height: 0; }
+  #linked-accounts a.item.has-detail {
+    padding-top: 8px;
+    padding-bottom: 0; }
+  #linked-accounts a.item .item-note {
+    top: 18px; }
+  #linked-accounts a.item span > h2 {
+    width: 80%; }
+  #linked-accounts a.item i.icon {
+    font-size: 16px;
+    color: #0867d0; }
+  #linked-accounts a.item svg * {
+    fill: #0867d0; }
+
+#login ion-content {
+  background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }
+
+#login-form ion-content {
+  background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }
+
+#login-form .container {
+  background: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  width: 90%;
+  max-width: 350px;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px; }
+  #login-form .container .item:not(.item-input) {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    margin: 1px; }
+    #login-form .container .item:not(.item-input).title {
+      font-weight: 600; }
+    #login-form .container .item:not(.item-input) > div {
+      border: none;
+      font-size: 12px;
+      margin-top: 5px; }
+  #login-form .container .item.item-input {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    min-height: 53px; }
+    #login-form .container .item.item-input input {
+      text-align: center; }
+  #login-form .container .row {
+    padding: 0;
+    min-height: 53px; }
+    #login-form .container .row .col {
+      padding: 0; }
+      #login-form .container .row .col.col-50 {
+        border-right: 1px solid rgba(0, 0, 0, 0.1); }
+    #login-form .container .row button {
+      font-size: 14px;
+      padding: 8px;
+      font-weight: 600; }
+      #login-form .container .row button.cancel {
+        color: #9b9bab !important; }
+      #login-form .container .row button.submit {
+        color: #124763 !important; }
+
+#login-form .help {
+  text-align: center;
+  color: #ffffff;
+  font-size: 15px;
+  position: relative;
+  top: 80px; }
 
 #tabs .tabs {
   background: #ffffff;
@@ -489,64 +753,6 @@ svg {
   #settings .header .detail {
     font-size: 14px;
     padding-top: 10px; }
-
-#sign-in ion-content {
-  background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }
-
-#sign-in-form ion-content {
-  background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }
-
-#sign-in-form .container {
-  background: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 10;
-  width: 90%;
-  max-width: 350px;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
-  text-align: center;
-  padding: 5px; }
-  #sign-in-form .container .item:not(.item-input) {
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    margin: 1px; }
-    #sign-in-form .container .item:not(.item-input).title {
-      font-weight: 600; }
-    #sign-in-form .container .item:not(.item-input) > div {
-      border: none;
-      font-size: 12px;
-      margin-top: 5px; }
-  #sign-in-form .container .item.item-input {
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    min-height: 53px; }
-    #sign-in-form .container .item.item-input input {
-      text-align: center; }
-  #sign-in-form .container .row {
-    padding: 0;
-    min-height: 53px; }
-    #sign-in-form .container .row .col {
-      padding: 0; }
-      #sign-in-form .container .row .col.col-50 {
-        border-right: 1px solid rgba(0, 0, 0, 0.1); }
-    #sign-in-form .container .row button {
-      font-size: 14px;
-      padding: 8px;
-      font-weight: 600; }
-      #sign-in-form .container .row button.cancel {
-        color: #9b9bab !important; }
-      #sign-in-form .container .row button.submit {
-        color: #124763 !important; }
-
-#sign-in-form .help {
-  text-align: center;
-  color: #ffffff;
-  font-size: 15px;
-  position: relative;
-  top: 80px; }
 
 #start ion-content {
   background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }

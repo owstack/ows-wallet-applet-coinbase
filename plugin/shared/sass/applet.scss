@@ -11,11 +11,23 @@ body button {
   color: $v-assertive-color !important;
 }
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+ .smaller {
+  font-size: smaller;
+ }
+
 /* Header bar */
 
 .bar.bar-coinbase {
   background-color: $v-primary-color !important;
-  border-color: $v-primary-color;
+  border: none;
   color: $v-white-color;
 	background-size: 0;
 }
@@ -33,18 +45,26 @@ ion-content {
 /* Buttons */
 
 button {
-  &.activated {
-  	border: none;
-  }
-
   &.button-primary {
     background: $v-button-primary-bg;
     color: $v-button-primary-color !important;
+
+    &.activated {
+      border: none;
+      background: adjust-color($v-button-primary-bg, $saturation: -20, $lightness: -20);
+      color: adjust-color($v-button-primary-color, $lightness: -50) !important;
+    }
   }
 
   &.button-secondary {
-    background: $v-button-primary-bg;
-    color: $v-button-primary-color !important;
+    background: $v-button-secondary-bg;
+    color: $v-button-secondary-color !important;
+
+    &.activated {
+      border: none;
+      background: adjust-color($v-button-secondary-bg, $saturation: -20, $lightness: -20);
+      color: adjust-color($v-button-secondary-color, $lightness: -50) !important;
+    }
   }
 
   &.button-clear {
@@ -78,10 +98,11 @@ svg {
   	padding-left: 62px;
  	}
 
-  >h2,
-  >span >h2 {
+  h2 {
     color: $v-text-color;
     padding-top: 1px;
+    font-family: $v-font-family;
+    font-weight: 500;
   }
 
   &:not(.has-detail) {
@@ -109,7 +130,7 @@ svg {
     right: 16px;
   	text-align: right;
     line-height: 22px;
-		color: $v-light-gray;
+		color: $v-dark-gray;
 
     &.two-lines {
       top: 18px;
@@ -120,6 +141,19 @@ svg {
     >.item-note {
       right: 48px;
     }  
+  }
+
+  &.append {
+    border-top: none;
+  }
+
+  &.info,
+  &.info >h2,
+  &.info >p {
+    word-wrap: break-word;
+    white-space: normal;
+    background: $v-hint-gray;
+    color: $v-primary-color;
   }
 }
 

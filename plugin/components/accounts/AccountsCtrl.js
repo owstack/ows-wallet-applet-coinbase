@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('AccountsCtrl', function($scope, $timeout, coinbaseService, settingsService,
+angular.module('owsWalletPlugin.controllers').controller('AccountsCtrl', function($scope, $timeout, coinbaseService, settingsService, stringUtils,
   /* @namespace owsWalletPluginClient.api */ Constants) {
 
   var coinbase = coinbaseService.coinbase;
@@ -17,12 +17,6 @@ angular.module('owsWalletPlugin.controllers').controller('AccountsCtrl', functio
     });
   });
 
-  $scope.format = function(num, currency, opts) {
-    opts = opts || {};
-    var decimals = Constants.currencyMap(currency, 'decimals');
-    var symbol = (opts.symbol == false ? '' : Constants.currencyMap(currency, 'symbol'));
-
-    return symbol + num.toLocaleString(language, {minimumFractionDigits: decimals, maximumFractionDigits: decimals});
-  };
+  $scope.format = stringUtils.format;
 
 });

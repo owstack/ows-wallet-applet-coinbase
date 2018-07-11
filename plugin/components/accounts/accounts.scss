@@ -6,5 +6,9 @@
 		&.item-icon-left {
 	    padding-left: 57px;
 		}
+
+	 	>.item-note {
+			color: $v-light-gray;
+		}
 	}	
 }
