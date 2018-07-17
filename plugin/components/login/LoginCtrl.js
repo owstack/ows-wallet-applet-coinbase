@@ -1,7 +1,20 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('LoginCtrl', function($scope, $log, $timeout, $state, $ionicModal, $ionicHistory, gettextCatalog, popupService, externalLinkService, coinbaseService) {
-  
+angular.module('owsWalletPlugin.controllers').controller('LoginCtrl', function($scope, $log, $timeout, $state, $ionicModal, $ionicHistory, gettextCatalog, popupService, externalLinkService, coinbaseService,
+  /* @namespace owsWalletPluginClient.api */ Utils) {
+
+  /**
+   * Processing flow for accessing a Coinbase account.
+   *
+   * Typically, the Coinbase applet guides the user to the Coinbase authorization URL. A browser page will load which
+   * explains that the user is providing this app access to their Coinbase account. When the user authorizes access Coinbase
+   * responds using a special URL that is handled by the host app. Since the host app does not have a direct responder for this
+   * Coinbase event it will forward the event on to all running plugins. The event is identified as an 'incoming-data' event,
+   * We receive the event here and check that the event data identifies the event as coming from Coinbase wuthorization. When
+   * a proper event is received we immediately attempt to decode the event to read the oAuth code and exchange the code for
+   * a Coinbase API access token.
+   */
+
   var isNodeWebKit = owswallet.Plugin.isNodeWebKit();
   var coinbase = coinbaseService.coinbase;
 
@@ -12,6 +25,18 @@ angular.module('owsWalletPlugin.controllers').controller('LoginCtrl', function($
   $scope.$on("$ionicView.enter", function(event, data) {
     openModal();
     openAuthenticateWindow();
+  });
+
+  // Listen for account pairing events (incoming oauth code from Coinbase authorization by user).
+  owswallet.Plugin.onEvent('incoming-data', function(event) {
+    if (event.data && event.data.indexOf('://coinbase') < 0) {
+      return;
+    }
+
+    var oauthCode = Utils.getUrlParameterByName(event.data, 'code');
+    if (oauthCode && oauthCode.length > 0) {
+      login(oauthCode);
+    }
   });
 
   function openAuthenticateWindow() {
@@ -34,18 +59,7 @@ angular.module('owsWalletPlugin.controllers').controller('LoginCtrl', function($
           var oauthCode = code(authenticateWindow.window.location.search);
           if (oauthCode) {
             authenticateWindow.window.close();
-
-            // Authenticate with Coinbase using the oauth code.
-            coinbase.login(oauthCode, function(err) {
-              if (err) {
-                return showError(err);
-              }
-
-              closeModal();
-              $timeout(function() {
-                $state.go('tabs.prices');
-              }, 200);
-            });
+            login(oauthCode);
           }
         });
       });
@@ -100,6 +114,20 @@ angular.module('owsWalletPlugin.controllers').controller('LoginCtrl', function($
 
   function closeModal() {
     $scope.loginModal.remove();
+  };
+
+  // Authenticate with Coinbase using the oauth code.
+  function login(oauthCode) {
+    coinbase.login(oauthCode, function(err) {
+      if (err) {
+        return showError(err);
+      }
+
+      closeModal();
+      $timeout(function() {
+        $state.go('tabs.prices');
+      }, 200);
+    });
   };
 
   function showError(err) {
