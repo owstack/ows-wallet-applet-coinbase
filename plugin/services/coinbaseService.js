@@ -28,8 +28,7 @@ angular.module('owsWalletPlugin.services').factory('coinbaseService', function($
     // Coinbase object is created only once.
     if (!root.coinbase) {
       // Create our connection to the Coinbase service (via the Coinbase servlet).
-      // Use the 'default' plugin configuration for setup.
-      root.coinbase = new Coinbase('default', onCoinbaseLogin);
+      root.coinbase = new Coinbase(onCoinbaseLogin);
     }
 
     if (!isAvailable) {
