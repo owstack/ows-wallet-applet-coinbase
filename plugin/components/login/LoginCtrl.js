@@ -15,9 +15,11 @@ angular.module('owsWalletPlugin.controllers').controller('LoginCtrl', function($
    * a Coinbase API access token.
    */
 
+  var isCordova = owswallet.Plugin.isCordova();
   var isNodeWebKit = owswallet.Plugin.isNodeWebKit();
   var coinbase = coinbaseService.coinbase;
 
+  $scope.allowCodeEntry = !isCordova;
   $scope.formData = {
     oauthCode: ''
   };
@@ -109,7 +111,7 @@ angular.module('owsWalletPlugin.controllers').controller('LoginCtrl', function($
           $state.go('tabs.prices');
         }, 200);
       });
-    };    
+    };
   };
 
   function closeModal() {

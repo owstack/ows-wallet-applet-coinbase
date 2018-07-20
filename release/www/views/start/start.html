@@ -22,10 +22,8 @@
       </div>
       <div class="feature-right-group col">
         <div class="feature-value">
-          <span ng-show="featureRight.direction < 0">-</span>
           {{featureRight.value}}
-          <span ng-class="{'triangle up': featureRight.direction >= 0}"></span>
-          <span ng-class="{'triangle down': featureRight.direction < 0}"></span>
+          <span class="triangle" ng-class="featureRight.up ? 'up' : 'down'"></span>
         </div>
         <div class="feature-label">
           {{featureRight.label}}

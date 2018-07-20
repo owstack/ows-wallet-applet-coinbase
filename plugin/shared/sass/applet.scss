@@ -92,7 +92,10 @@ svg {
 
 .item {
   color: $v-text-color;
-  min-height: 65px;
+
+  &:not(.item-divider) {
+    min-height: 65px;
+  }
 
  	&.item-icon-left {
   	padding-left: 62px;

@@ -22,8 +22,16 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
   $scope.onScroll = function() {
     var position = $ionicScrollDelegate.$getByHandle('cards').getScrollPosition().top;
 
-    $scope.headerTop = -1.5 * position + 'px';
     $scope.amountGroupOpacity = 1 - (position * 0.01);
+
+    // As the scroll is pulled down the content background is revealed; this ensures the content background is not revealed.
+    if (position <= 0) {
+      $scope.headerHeight =  216 + Math.abs(position) + 'px';
+      $scope.headerTop = '0px';
+    } else {
+      $scope.headerHeight = '216px';
+      $scope.headerTop = -1.5 * position + 'px';
+    }
 
     if (position < 130) {
       $scope.titleOpacity = 0;

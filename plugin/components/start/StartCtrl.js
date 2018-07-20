@@ -101,7 +101,8 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
         var amountChange = stringUtils.float(currency.amount) - stringUtils.float(periodPrice);
 
         $scope.featureRight = {
-          value: stringUtils.format(Math.abs(amountChange), currency.currency).localized_u,
+          up: amountChange >= 0,
+          value: stringUtils.format(amountChange, currency.currency).localized_u,
           label: $scope.timeFrames[$scope.selectedTimeFrame].label
         };
 

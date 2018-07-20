@@ -13,19 +13,27 @@
         {{user.email}}
       </div>
     </div>
-    <ul class="list">
+    <div class="list">
       <div class="item item-divider"></div>
-      <li class="item item-icon-right" ng-click="openExternalLink(link)" ng-repeat="link in externalLinks">
+      <div class="item item-icon-right" ng-click="openExternalLink(link)" ng-repeat="link in externalLinks">
         <h2 translate>
           {{link.itemName}}
         </h2>
         <i class="icon ion-ios-arrow-right"></i>
-      </li>
-      <li class="item" ng-click="logout()">
+      </div>
+      <div class="item item-divider"></div>
+      <div class="item item-icon-right" ui-sref="tabs.session-log" translate>
+        <h2 translate>
+          Session Log
+        </h2>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <div class="item item-divider"></div>
+      <div class="item" ng-click="logout()">
         <h2 class="assertive" translate>
           Sign out
         </h2>
-      </li>
-    </ul>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

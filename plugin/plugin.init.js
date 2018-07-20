@@ -119,6 +119,19 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
           templateUrl: 'views/buy-sell-preview/buy-sell-preview.html'
         }
       }
+    })
+
+    /**
+     * Settings tab
+     */
+
+    .state('tabs.session-log', {
+      url: '/session-log',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/settings/session-log/session-log.html'
+        }
+      }
     });
 
 /*

@@ -92,8 +92,9 @@ svg {
   align-items: center; }
 
 .item {
-  color: #124763;
-  min-height: 65px; }
+  color: #124763; }
+  .item:not(.item-divider) {
+    min-height: 65px; }
   .item.item-icon-left {
     padding-left: 62px; }
   .item h2 {
@@ -565,56 +566,56 @@ svg {
   background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }
 
 #login-form .container {
-  background: #ffffff;
   position: absolute;
   top: 50%;
   left: 50%;
   z-index: 10;
   width: 90%;
   max-width: 350px;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
-  text-align: center;
-  padding: 5px; }
-  #login-form .container .item:not(.item-input) {
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    margin: 1px; }
-    #login-form .container .item:not(.item-input).title {
-      font-weight: 600; }
-    #login-form .container .item:not(.item-input) > div {
+  transform: translate(-50%, -50%); }
+  #login-form .container .dialog {
+    background: #ffffff;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px; }
+    #login-form .container .dialog .item:not(.item-input) {
       border: none;
-      font-size: 12px;
-      margin-top: 5px; }
-  #login-form .container .item.item-input {
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    min-height: 53px; }
-    #login-form .container .item.item-input input {
-      text-align: center; }
-  #login-form .container .row {
-    padding: 0;
-    min-height: 53px; }
-    #login-form .container .row .col {
-      padding: 0; }
-      #login-form .container .row .col.col-50 {
-        border-right: 1px solid rgba(0, 0, 0, 0.1); }
-    #login-form .container .row button {
-      font-size: 14px;
-      padding: 8px;
-      font-weight: 600; }
-      #login-form .container .row button.cancel {
-        color: #9b9bab !important; }
-      #login-form .container .row button.submit {
-        color: #124763 !important; }
-
-#login-form .help {
-  text-align: center;
-  color: #ffffff;
-  font-size: 15px;
-  position: relative;
-  top: 80px; }
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      margin: 1px; }
+      #login-form .container .dialog .item:not(.item-input).title {
+        font-weight: 600;
+        min-height: 0; }
+      #login-form .container .dialog .item:not(.item-input) > div {
+        border: none;
+        font-size: 12px;
+        margin-top: 5px; }
+    #login-form .container .dialog .item.item-input {
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      min-height: 53px; }
+      #login-form .container .dialog .item.item-input input {
+        text-align: center; }
+    #login-form .container .dialog .row {
+      padding: 0;
+      min-height: 53px; }
+      #login-form .container .dialog .row .col {
+        padding: 0; }
+        #login-form .container .dialog .row .col.col-50 {
+          border-right: 1px solid rgba(0, 0, 0, 0.1); }
+      #login-form .container .dialog .row button {
+        font-size: 14px;
+        padding: 8px;
+        font-weight: 600; }
+        #login-form .container .dialog .row button.cancel {
+          color: #9b9bab !important; }
+        #login-form .container .dialog .row button.submit {
+          color: #124763 !important; }
+  #login-form .container .help {
+    text-align: center;
+    color: #ffffff;
+    font-size: 15px;
+    margin-top: 20px; }
 
 #tabs .tabs {
   background: #ffffff;

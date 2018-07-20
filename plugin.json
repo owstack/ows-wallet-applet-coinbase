@@ -13,7 +13,7 @@
       "terms": "https://openwalletstack.org/terms",
       "git": "https://github.com/owstack/ows-wallet-applet-coinbase/"
     },
-    "commitHash": "7095495"
+    "commitHash": "91eb749"
   },
   "permissions": {
     "delete": false
