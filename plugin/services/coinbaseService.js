@@ -38,18 +38,17 @@ angular.module('owsWalletPlugin.services').factory('coinbaseService', function($
     return cb(root.coinbase);
   };
 
-  // Called when we have at least and initial connection to Coinbase (may not have been paired or have access to an account).
-  function onCoinbaseLogin(err) {
-    if (!err) {
-      available();
-    }
+  // Called when we have completed attempts to connect to Coinbase.
+  // If an error occurred then the user should re-initiate a connection (errors here are fatal).
+  function onCoinbaseLogin(error) {
+    available(error);
   };
 
-  function available() {
+  function available(error) {
     isAvailable = true;
     lodash.each(availableCallbacks, function(x) {
       $timeout(function() {
-        return x(root.coinbase);
+        return x(error, root.coinbase);
       }, 1);
     });
     availableCallbacks = [];

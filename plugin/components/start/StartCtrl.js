@@ -37,7 +37,15 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
   }];
 
   // If we're here then we don't have a Coinbase account yet.
-  $scope.$on("$ionicView.beforeEnter", function(event) {
+  $scope.$on("$ionicView.beforeEnter", function(event, data) {
+    // We may have tried to connect and failed; show the failure.
+    if (data.stateParams && data.stateParams.error) {
+      popupService.showAlert(
+        gettextCatalog.getString('Uh oh!'),
+        gettextCatalog.getString('Could not login to Coinbase. {{error}} Please try again.', {error: data.stateParams.error})
+      );
+    };
+
     $ionicHistory.clearHistory();
     $ionicHistory.clearCache();
 

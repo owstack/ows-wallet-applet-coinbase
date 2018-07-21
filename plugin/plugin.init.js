@@ -15,7 +15,7 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
       template: '<ion-nav-view name="onboarding"></ion-nav-view>'
     })
     .state('onboarding.start', {
-      url: '/start',
+      url: '/start/:error',
       views: {
         'onboarding': {
           controller: 'StartCtrl',
@@ -162,11 +162,11 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
   owswallet.Plugin.openForBusiness(CoinbaseServlet.id, function() {
 
     // Wait for initial Coinbase service connection.
-    coinbaseService.whenAvailable(function(coinbase) {
-      if (coinbase.accounts) {
+    coinbaseService.whenAvailable(function(error, coinbase) {
+      if (!error && coinbase.accounts) {
         $state.go('tabs.prices');
       } else {
-        $state.go('onboarding.start');
+        $state.go('onboarding.start', error);
       }
     });
 
