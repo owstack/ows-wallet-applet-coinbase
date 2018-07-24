@@ -31,11 +31,18 @@ angular.module('owsWalletPlugin.services').factory('coinbaseService', function($
       root.coinbase = new Coinbase(onCoinbaseLogin);
     }
 
-    if (!isAvailable) {
-      availableCallbacks.push(cb);
-      return;
+    if (cb) {
+      if (!isAvailable) {
+        availableCallbacks.push(cb);
+        return;
+      }
+      return cb(root.coinbase);
     }
-    return cb(root.coinbase);
+  };
+
+  root.retry = function() {
+    root.coinbase = undefined;
+    root.whenAvailable();
   };
 
   // Called when we have completed attempts to connect to Coinbase.

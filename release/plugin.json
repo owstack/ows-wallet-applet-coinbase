@@ -13,15 +13,22 @@
       "terms": "https://openwalletstack.org/terms",
       "git": "https://github.com/owstack/ows-wallet-applet-coinbase/"
     },
-    "commitHash": "403b81b"
+    "commitHash": "857d8d8"
   },
   "permissions": {
     "delete": false
   },
-  "galleryImage": "<plugin-path>/img/gallery.png",
-  "previewImage": "<plugin-path>/img/preview.png",
-  "iconImage": "<plugin-path>/img/icon.png",
-  "splashImage": "<plugin-path>/img/splash.png",
+  "galleryImage": "img/gallery.png",
+  "previewImage": "img/preview.png",
+  "iconImage": "img/icon.png",
+  "launch": {
+    "options": {},
+    "splash": {
+      "image": "img/splash.png",
+      "autoHide": false,
+      "delay": 0
+    }
+  },
   "store": {
     "id": "0",
     "rating": "4+",

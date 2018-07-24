@@ -132,7 +132,8 @@ svg {
     word-wrap: break-word;
     white-space: normal;
     background: #f6f9fc;
-    color: #0867d0; }
+    color: #0867d0;
+    padding-right: 16px; }
 
 .ion-ios-arrow-right:before {
   content: "\f125";
@@ -758,12 +759,12 @@ svg {
 #start ion-content {
   background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }
 
-#start .logo {
+#start .title {
   position: absolute;
   top: 38px;
   left: 50%;
   transform: translateX(-50%); }
-  #start .logo > img {
+  #start .title > img {
     height: 38px; }
 
 #start .feature-button-group {

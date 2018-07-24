@@ -44,7 +44,10 @@ angular.module('owsWalletPlugin.controllers').controller('AccountCtrl', function
   };
 
   $scope.shareAddress = function() {
-    Device.socialShare($scope.address.address);
+    Device.socialShare({
+      message: $scope.address.address,
+      subject: gettextCatalog.getString('My {{currencyName}} address at Coinbase', {currencyName: account.currency.name})
+    });
   };
 
   $scope.copyAddress = function() {

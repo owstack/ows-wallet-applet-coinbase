@@ -52,7 +52,9 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
     $scope.selectedCurrency = 0;  // Default to first entry.
     $scope.selectedTimeFrame = lodash.findIndex($scope.timeFrames, ['period', 'year']);
 
-    updateFeatureCurrency();
+    updateFeatureCurrency().then(function() {
+      owswallet.Plugin.hideSplash();
+    });
   });
 
   $scope.$on("$ionicView.beforeLeave", function(event) {
@@ -85,7 +87,7 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
   };
 
   function updateFeatureCurrency() {
-    getData().then(function(data) {
+    return getData().then(function(data) {
       if (!data.currencies) {
         return;
       }

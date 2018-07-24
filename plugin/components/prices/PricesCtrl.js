@@ -50,25 +50,40 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
     $scope.amountGroupOpacity = 1;
     $scope.titleOpacity = 0;
 
-    getAccountsTotalBalance();
-    updateData();
+    getAccountsTotalBalance().then(function() {
+      return updateData();
+
+    }).then(function() {
+      owswallet.Plugin.hideSplash();
+
+    });
   };
 
   function getAccountsTotalBalance() {
-    // Get our total balance for all accounts.
-    var decimals = Constants.currencyMap(currency, 'decimals');
-    var symbol = Constants.currencyMap(currency, 'symbol');
+    return new Promise(function(resolve, reject) {
+      // Get our total balance for all accounts.
+      var decimals = Constants.currencyMap(currency, 'decimals');
+      var symbol = Constants.currencyMap(currency, 'symbol');
 
-    var totalBalance = 0;
-    lodash.forEach(coinbase.accounts, function(account) {
-      account.getBalance(currency).then(function(balance) {
+      var count = coinbase.accounts.length;
+      var totalBalance = 0;
+      lodash.forEach(coinbase.accounts, function(account) {
+        account.getBalance(currency).then(function(balance) {
 
-        totalBalance += balance;
-        $scope.totalBalance = $scope.format(totalBalance, currency, {decimals: decimals}).localized_u;
+          totalBalance += balance;
+          $scope.totalBalance = $scope.format(totalBalance, currency, {decimals: decimals}).localized_u;
 
-      }).catch(function(error) {
-        $log.error(error);
+          count--;
 
+          if (count == 0) {
+            return resolve ();
+          }
+
+        }).catch(function(error) {
+          // No reject(), just log error.
+          $log.error(error);
+
+        });
       });
     });
   };

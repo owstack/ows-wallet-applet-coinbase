@@ -2,7 +2,6 @@
 
 angular.module('owsWalletPlugin').config(function($stateProvider) {
 
-  // Routing.
 	$stateProvider
 
     /**
@@ -152,21 +151,43 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
       templateUrl: 'views/sell/sell.html'
     });
 */
-}).run(function($rootScope, $state, $log, coinbaseService, $ionicConfig,
+}).run(function($rootScope, $state, $log, $ionicConfig, coinbaseService, gettextCatalog,
   /* @namespace owsWalletPlugin.api.coinbase */ CoinbaseServlet) {
 
   // Ionic platform defaults.
   $ionicConfig.backButton.icon('icon ion-arrow-left-c').text('');
 
   // Wait for this plugin and its dependents to become ready.
-  owswallet.Plugin.openForBusiness(CoinbaseServlet.id, function() {
+  owswallet.Plugin.openForBusiness([CoinbaseServlet.id], function() {
 
     // Wait for initial Coinbase service connection.
     coinbaseService.whenAvailable(function(error, coinbase) {
       if (!error && coinbase.accounts) {
         $state.go('tabs.prices');
+
       } else {
-        $state.go('onboarding.start', error);
+        // If the error is a request timeout the login credentials (token) may still be valid.
+        // Allow the user to retry (without having to re-login).
+        if (error.message == 'REQUEST_TIMED_OUT') {
+
+          var title = gettextCatalog.getString('Request Timeout');
+          var message = gettextCatalog.getString('Coinbase did not respond in time. You can retry or close the applet.');
+          var okText = gettextCatalog.getString('Retry');
+          var cancelText = gettextCatalog.getString('Close');
+
+          popupService.showConfirm(title, message, okText, cancelText, function(retry) {
+            if (retry) {
+              coinbaseService.retry();
+
+            } else {
+              owswallet.Plugin.close({confirm: false});
+            }
+
+          });
+   
+        } else {
+          $state.go('onboarding.start', {error: error.detail});
+        }
       }
     });
 
