@@ -151,7 +151,7 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
       templateUrl: 'views/sell/sell.html'
     });
 */
-}).run(function($rootScope, $state, $log, $ionicConfig, coinbaseService, gettextCatalog, popupService,
+}).run(function($rootScope, $state, $log, $ionicConfig, coinbaseService, lodash, gettextCatalog, popupService,
   /* @namespace owsWalletPlugin.api.coinbase */ CoinbaseServlet) {
 
   // Ionic platform defaults.
@@ -162,8 +162,13 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
 
     // Wait for initial Coinbase service connection.
     coinbaseService.whenAvailable(function(error, coinbase) {
-      if (!error && coinbase.accounts) {
-        $state.go('tabs.prices');
+      if (!error) {
+
+        if (!lodash.isEmpty(coinbase.accounts)) {
+          $state.go('tabs.prices');
+        } else {
+          $state.go('onboarding.start');
+        }
 
       } else {
         // If the error is a request timeout the login credentials (token) may still be valid.
@@ -184,7 +189,7 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
           });
    
         } else {
-          $state.go('onboarding.start', {error: error.detail});
+          $state.go('onboarding.start', {error: gettextCatalog.getString('An error occurred.')});
         }
       }
     });
