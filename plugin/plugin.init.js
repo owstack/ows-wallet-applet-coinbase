@@ -151,7 +151,7 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
       templateUrl: 'views/sell/sell.html'
     });
 */
-}).run(function($rootScope, $state, $log, $ionicConfig, coinbaseService, gettextCatalog,
+}).run(function($rootScope, $state, $log, $ionicConfig, coinbaseService, gettextCatalog, popupService,
   /* @namespace owsWalletPlugin.api.coinbase */ CoinbaseServlet) {
 
   // Ionic platform defaults.
@@ -178,11 +178,9 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
           popupService.showConfirm(title, message, okText, cancelText, function(retry) {
             if (retry) {
               coinbaseService.retry();
-
             } else {
               owswallet.Plugin.close({confirm: false});
             }
-
           });
    
         } else {
