@@ -13,7 +13,7 @@
       "terms": "https://openwalletstack.org/terms",
       "git": "https://github.com/owstack/ows-wallet-applet-coinbase/"
     },
-    "commitHash": "a1ea99a"
+    "commitHash": "4c477fd"
   },
   "permissions": {
     "delete": false
@@ -22,7 +22,9 @@
   "previewImage": "img/preview.png",
   "iconImage": "img/icon.png",
   "launch": {
-    "options": {},
+    "options": {
+      "entrance": "zoomIn"
+    },
     "splash": {
       "image": "img/splash.png",
       "autoHide": false,
