@@ -80,6 +80,14 @@
   h2.received {
     color: $v-up-color;
   }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    display: inline-block;
+    margin-bottom: 1px;
+  }
 }
 
 @import "address/address";

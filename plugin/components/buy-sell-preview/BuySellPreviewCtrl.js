@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('owsWalletPlugin.controllers').controller('BuySellPreviewCtrl', function($rootScope, $scope, $state, coinbaseService, gettextCatalog, popupService, settingsService, stringUtils) {
+angular.module('owsWalletPlugin.controllers').controller('BuySellPreviewCtrl', function($scope, $state, coinbaseService, popupService, gettextCatalog, stringUtils,
+  /* @namespace owsWalletPluginClient.api */ Constants) {
 
   var coinbase = coinbaseService.coinbase;
-  var language = settingsService.language;
+  var account;
 
   var actionMap = {
     buy: {
@@ -17,11 +18,11 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellPreviewCtrl', f
   };
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
-    var accountId = data.stateParams.accountId; // crypto account
-    var orderId = data.stateParams.orderId;
+    $scope.accountId = data.stateParams.accountId; // crypto account
+    $scope.orderId = data.stateParams.orderId;
 
-    var account = coinbase.getAccountById(accountId);
-    $scope.order = account.getOrderById(orderId);
+    account = coinbase.getAccountById($scope.accountId);
+    $scope.order = account.getOrderById($scope.orderId);
 
     $scope.order.getPaymentMethod().then(function(paymentMethod) {
       $scope.paymentMethod = paymentMethod;
@@ -37,7 +38,19 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellPreviewCtrl', f
   $scope.trim = stringUtils.trim;
 
   $scope.confirm = function() {
-    $state.go('tabs.buy-sell-confirm', $scope.order);
+    $scope.order.confirm().then(function(order) {
+      $state.go('tabs.buy-sell-confirm', {
+        accountId: order.account.id,
+        orderId: order.id,
+      });
+
+    }).catch(function(error) {
+      popupService.showAlert(
+        gettextCatalog.getString('Could not confirm {{action}} order', {action: $scope.action}),
+        gettextCatalog.getString(error.detail)
+      );
+
+    });
   };
 
 });

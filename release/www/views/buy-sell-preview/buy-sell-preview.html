@@ -13,10 +13,10 @@
     <ion-list>
       <div class="item">
         <h2>
-          {{order.currency}} Price
+          {{order.amount.currency}} Price
         </h2>
         <span class="item-note">
-          {{format(order.amount.amount, order.amount.currency).localized_u}}
+          {{format(order.calculatedExchangeRate.amount, order.calculatedExchangeRate.currency).localized_u}}
         </span>
       </div>
       <div class="item">

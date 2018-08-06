@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owsWalletPlugin.services').factory('settingsService', function($log, lodash,
+angular.module('owsWalletPlugin.services').factory('settingsService', function(lodash,
   /* @namespace owsWalletPluginClient.api */ Settings) {
 
   var root = {};
@@ -11,7 +11,8 @@ angular.module('owsWalletPlugin.services').factory('settingsService', function($
     	lodash.assign(root, settingsObj);
 
     }).catch(function(error) {
-      $log.error('Could not get host app information: ' + error);
+      // Error logged
+
     });
 
   });

@@ -1,0 +1,18 @@
+<ion-view id="buy-sell-confirm" hide-tabs>
+  <ion-content scroll="false">
+    <div class="content-group">
+      <img src="img/success.svg"/>
+      <h4>
+        {{title}}
+      </h4>
+      <div class="amount-group">
+        <div class="amount">
+          {{format(order.amount.amount, order.amount.currency).localized_u}}
+        </div>
+      </div>
+    </div>
+    <button class="button button-block button-secondary done" ui-sref="tabs.accounts">
+      {{button}}
+    </button>
+  </ion-content>
+</ion-view>

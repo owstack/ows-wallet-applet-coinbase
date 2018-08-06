@@ -80,8 +80,7 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
           }
 
         }).catch(function(error) {
-          // No reject(), just log error.
-          $log.error(error);
+          // No reject()
 
         });
       });
@@ -171,7 +170,7 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
         });
 
       }).catch(function(error) {
-        $log.error('Could not get Coinbase data: ' + error);
+        // Error logged
 
       });
     }); // Promise

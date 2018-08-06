@@ -130,11 +130,21 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
   };
 
   $scope.goPreview = function() {
-    $scope.account.buyRequest({
+    var createOrder;
+    switch ($scope.action) {
+      case 'buy':
+        createOrder = $scope.account.createBuyOrder;
+        break;
+
+      case 'sell':
+        createOrder = $scope.account.createSellOrder;
+        break;
+    };
+
+    createOrder({
       amount: $scope.keypad.amount,
       currency: $scope.keypad.currency,
-      paymentMethodId: $scope.paymentMethod.id,
-      commit: false
+      paymentMethodId: $scope.paymentMethod.id
     }).then(function(order) {
       $state.go('tabs.buy-sell-preview', {
         accountId: $scope.accountId,
@@ -142,10 +152,9 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
       });
 
     }).catch(function(error) {
-
       popupService.showAlert(
         gettextCatalog.getString('Could not create ' + $scope.action + ' order'),
-        gettextCatalog.getString(error.message)
+        gettextCatalog.getString(error.detail)
       );
 
     });

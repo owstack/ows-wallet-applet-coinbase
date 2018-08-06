@@ -119,6 +119,15 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
         }
       }
     })
+    .state('tabs.buy-sell-confirm', {
+      url: '/buy-sell-confirm/:accountId/:orderId',
+      views: {
+        'tab-accounts@tabs': {
+          controller: 'BuySellConfirmCtrl',
+          templateUrl: 'views/buy-sell-confirm/buy-sell-confirm.html'
+        }
+      }
+    })
 
     /**
      * Settings tab
@@ -189,7 +198,7 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
           });
    
         } else {
-          $state.go('onboarding.start', {error: gettextCatalog.getString('An error occurred.')});
+          $state.go('onboarding.start', {error: error.message});
         }
       }
     });

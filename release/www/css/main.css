@@ -43,9 +43,12 @@ body button {
 .smaller {
   font-size: smaller; }
 
+h4 {
+  font-size: 20px; }
+
 /* Header bar */
 .bar.bar-coinbase {
-  background-color: #0867d0 !important;
+  background-color: #0160D0 !important;
   border: none;
   color: #ffffff;
   background-size: 0; }
@@ -59,11 +62,11 @@ ion-content {
 
 /* Buttons */
 button.button-primary {
-  background: #0867d0;
+  background: #0160D0;
   color: #ffffff !important; }
   button.button-primary.activated {
     border: none;
-    background: #103762;
+    background: #0b3260;
     color: gray !important; }
 
 button.button-secondary {
@@ -132,7 +135,7 @@ svg {
     word-wrap: break-word;
     white-space: normal;
     background: #f6f9fc;
-    color: #0867d0;
+    color: #0160D0;
     padding-right: 16px; }
 
 .ion-ios-arrow-right:before {
@@ -234,7 +237,7 @@ svg {
   margin-left: 15px; }
 
 #account .amount-group {
-  background: #0867d0;
+  background: #0160D0;
   height: 132px; }
   #account .amount-group .amount {
     padding-top: 32px;
@@ -265,6 +268,13 @@ svg {
 
 #account h2.received {
   color: #00c365; }
+
+#account .status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  display: inline-block;
+  margin-bottom: 1px; }
 
 .popup-account-address .popup {
   width: 310px;
@@ -420,7 +430,7 @@ svg {
   #buy-sell-amount .amount-container .amount {
     font-size: 48px;
     font-weight: 500;
-    color: #0867d0; }
+    color: #0160D0; }
     #buy-sell-amount .amount-container .amount .placeholder {
       opacity: 0.5; }
 
@@ -471,13 +481,49 @@ svg {
     #buy-sell-amount .keypad-group a.item:not(.has-detail) span > h2 {
       width: calc(100% - 175px); }
     #buy-sell-amount .keypad-group a.item svg * {
-      fill: #0867d0; }
+      fill: #0160D0; }
   #buy-sell-amount .keypad-group button {
     width: 90%;
     left: 50%;
     transform: translateX(-50%);
     height: 60px;
     font-weight: 600; }
+
+#buy-sell-confirm ion-content {
+  background: #0160D0; }
+
+#buy-sell-confirm .content-group {
+  position: absolute;
+  top: 20%;
+  text-align: center;
+  width: 100%; }
+  #buy-sell-confirm .content-group h4 {
+    color: #ffffff;
+    margin-top: 20px; }
+  #buy-sell-confirm .content-group img {
+    width: 140px; }
+
+#buy-sell-confirm .amount-group {
+  height: 132px;
+  text-align: center; }
+  #buy-sell-confirm .amount-group .amount {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 500;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+
+#buy-sell-confirm button.done {
+  background: #ffffff;
+  color: #0160D0 !important;
+  font-weight: 600;
+  width: 90%;
+  height: 60px;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%); }
 
 #buy-sell-preview ion-content {
   background: #ffffff; }
@@ -494,7 +540,7 @@ svg {
   height: 132px;
   text-align: center; }
   #buy-sell-preview .amount-group .amount {
-    color: #0867d0;
+    color: #0160D0;
     font-size: 32px;
     position: relative;
     top: 50%;
@@ -518,7 +564,7 @@ svg {
     left: -30px;
     transform: translateY(-50%); }
     #buy-sell-preview div.item svg * {
-      fill: #0867d0; }
+      fill: #0160D0; }
   #buy-sell-preview div.item.fee {
     height: 40px;
     padding-top: 10px;
@@ -556,9 +602,9 @@ svg {
     width: 80%; }
   #linked-accounts a.item i.icon {
     font-size: 16px;
-    color: #0867d0; }
+    color: #0160D0; }
   #linked-accounts a.item svg * {
-    fill: #0867d0; }
+    fill: #0160D0; }
 
 #login ion-content {
   background: linear-gradient(to bottom, #0966d0 0%, #0854ab 100%); }
@@ -640,7 +686,7 @@ svg {
   opacity: 1.0; }
   #tabs .tabs .tab-item.tab-item-active {
     background: #ffffff;
-    color: #0867d0; }
+    color: #0160D0; }
   #tabs .tabs .tab-item .icon {
     background-repeat: no-repeat;
     background-position: center;
@@ -668,7 +714,7 @@ svg {
   background: #f5f7fa; }
 
 #prices .header {
-  background: #0867d0;
+  background: #0160D0;
   width: 100%;
   height: 216px;
   position: absolute;
@@ -744,7 +790,7 @@ svg {
         margin-right: 5px; }
 
 #settings .header {
-  background: #0867d0;
+  background: #0160D0;
   width: 100%;
   height: 125px;
   color: #ffffff;
@@ -842,7 +888,7 @@ svg {
     height: 64px;
     font-weight: 600; }
     #start .main-button-group .button.button-primary {
-      background: #0867d0;
+      background: #0160D0;
       color: #ffffff !important; }
     #start .main-button-group .button.button-secondary {
       background: #4B84FF;

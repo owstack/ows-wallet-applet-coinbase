@@ -40,11 +40,19 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
     // We may have tried to connect and failed; show the failure.
     if (data.stateParams && data.stateParams.error) {
-      popupService.showAlert(
-        gettextCatalog.getString('Uh oh!'),
-        gettextCatalog.getString('Could not login to Coinbase. {{error}} Please try again.', {error: data.stateParams.error})
-      );
-    };
+      var title;
+      var message;
+
+      if (data.stateParams.error.includes('UNAUTHORIZED')) {
+        title = gettextCatalog.getString('Logged Out');
+        message = gettextCatalog.getString('Your account was logged out. Please login again.');
+      } else {
+        title = gettextCatalog.getString('Uh oh!');
+        message = gettextCatalog.getString('Could not login to Coinbase. Please try again.');
+      }
+
+      popupService.showAlert(title, message);
+    }
 
     $ionicHistory.clearHistory();
     $ionicHistory.clearCache();
@@ -183,7 +191,7 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
       });
 
     }).catch(function(error) {
-      $log.error('Could not get Coinbase data: ' + error);
+      // Error logged
 
     });
   };

@@ -45,7 +45,14 @@
 	      </span>
         <span class="item-note two-lines">
           <h2 ng-class="{'received': tx.amount > 0}">{{format(tx.amount, tx.currency).localized_u}}</h2>
-          <p>{{format(tx.altAmount, tx.altCurrency).localized_u}}</p>
+          <span ng-if="tx.status != 'pending'">
+          	<p>{{format(tx.altAmount, tx.altCurrency).localized_u}}</p>
+          </span>
+          <span ng-if="tx.status == 'pending'">
+          	<p>
+	          	<div class="status-dot" ng-style="{'background': account.currency.color}"></div> Pending
+          	</p>
+          </span>
         </span>
       </div>
     </ion-list>
