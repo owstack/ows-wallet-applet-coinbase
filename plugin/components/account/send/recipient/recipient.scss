@@ -28,5 +28,15 @@
  		  color: $v-primary-color;
    		font-weight: 500;
  		}
+
+ 		i.icon {
+ 			right: 40px;
+
+ 			svg {
+	 			* {
+	 				fill: $v-mid-gray;
+	 			}
+ 			}
+ 		}
 	}
 }

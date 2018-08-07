@@ -489,6 +489,11 @@ svg {
   color: #0160D0;
   font-weight: 500; }
 
+#account-send-recipient .item i.icon {
+  right: 40px; }
+  #account-send-recipient .item i.icon svg * {
+    fill: #444455; }
+
 #accounts a.item {
   height: 81px; }
   #accounts a.item.item-icon-left {
