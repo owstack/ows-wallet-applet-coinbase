@@ -1,0 +1,27 @@
+<ion-view id="account-send" ng-controller="SendCtrl">
+  <ion-header-bar class="bar bar-coinbase">
+    <button class="button button-icon ion-android-close" ng-click="close()"></button>
+    <div class="title">Send</div>
+  </ion-header-bar>
+  <ion-content scroll="false">
+    <div class="available">
+      {{format(account.balance.amount, account.balance.currency).localized_u}} Available
+    </div>
+    <div class="amount-container">
+      <span class="amount" data-fittext data-fittext-min="24" data-fittext-max="48" ng-bind-html="keypad.amountHtml"></span>
+    </div>
+    <a class="currency-toggle" ng-click="toggleCurrency()">
+      <img svg ng-src="img/icon-currency-toggle.svg">
+      <div class="label">{{keypad.nextCurrency}}</div>
+    </a>
+    <div class="keypad-group">
+      <div class="easy-button-group" ng-if="action == 'sell'">
+        <a ng-click="setAmountOfAvailable(1)">{{ 'Use Max' | translate}}</a>
+      </div>
+      <ows-keypad config="{{keypadConfig}}" button-del-src="img/icon-back.svg"></ows-keypad>
+      <button class="button button-block button-secondary" ng-class="{'disabled': keypad.amount == 0}" ng-click="goRecipient()">
+        Next
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

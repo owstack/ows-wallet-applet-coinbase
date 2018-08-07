@@ -4,7 +4,8 @@
   </ion-nav-bar>
   <ion-content>
     <ion-list>
-      <a class="item item-icon-left item-icon-right" ui-sref="tabs.account({id: account.id})" ng-repeat="account in accounts track by account.id">
+      <a class="item item-icon-left item-icon-right" ui-sref="tabs.account({accountId: account.id})"
+        ng-repeat="account in accounts track by account.id">
         <img svg="fill: {{account.currency.color}}" ng-src="img/icon-{{account.currency.code.toLowerCase()}}.svg">
         <h2>{{account.name}}</h2>
         <span class="item-note" ng-class="{'two-lines': account.balance.altCurrency != account.balance.currency}">

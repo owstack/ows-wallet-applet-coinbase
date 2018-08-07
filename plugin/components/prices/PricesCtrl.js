@@ -80,7 +80,9 @@ angular.module('owsWalletPlugin.controllers').controller('PricesCtrl', function(
           }
 
         }).catch(function(error) {
-          // No reject()
+          // Do not display the balance if any error occurs.
+          $totalBalance = '...';
+          resolve (); // Just continue to render other data.
 
         });
       });

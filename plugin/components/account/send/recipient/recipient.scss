@@ -1,0 +1,32 @@
+#account-send-recipient {
+
+	.bar.bar-coinbase {
+		background-color: $v-white-color !important;
+
+		.amount {
+			color: $v-primary-color;
+			font-weight: 600;
+	    font-size: 12px;
+	    line-height: 26px;
+		}
+
+		.total {
+			color: $v-primary-color;
+			font-weight: 600;
+	    line-height: 10px;
+		}
+	
+		.button {
+			color: $v-primary-color !important;
+			font-weight: 600;
+		}
+	}
+
+	.item {
+		.input-label {
+	    width: 35px;
+ 		  color: $v-primary-color;
+   		font-weight: 500;
+ 		}
+	}
+}

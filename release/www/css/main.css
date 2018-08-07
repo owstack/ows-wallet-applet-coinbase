@@ -125,8 +125,10 @@ svg {
     color: #444455; }
     .item > .item-note.two-lines {
       top: 18px; }
-  .item.item-icon-right > .item-note {
-    right: 48px; }
+  .item.item-icon-right {
+    padding-right: 50px; }
+    .item.item-icon-right > .item-note {
+      right: 48px; }
   .item.append {
     border-top: none; }
   .item.info,
@@ -276,39 +278,39 @@ svg {
   display: inline-block;
   margin-bottom: 1px; }
 
-.popup-account-address .popup {
+.popup-account-receive .popup {
   width: 310px;
   border-radius: 5px;
   background: #ffffff; }
-  .popup-account-address .popup .popup-head {
+  .popup-account-receive .popup .popup-head {
     display: none; }
 
-.popup-account-address .head {
+.popup-account-receive .head {
   color: #9b9bab;
   border-bottom: 1px solid #d0d0d0;
   height: 40px;
   font-size: 16px;
   padding-top: 10px; }
-  .popup-account-address .head .title {
+  .popup-account-receive .head .title {
     color: #444455;
     font-weight: 500; }
-  .popup-account-address .head .button {
+  .popup-account-receive .head .button {
     color: #9b9bab;
     position: absolute;
     right: 2px;
     top: -2px; }
-    .popup-account-address .head .button:before {
+    .popup-account-receive .head .button:before {
       font-size: 30px; }
 
-.popup-account-address .popup-body {
+.popup-account-receive .popup-body {
   padding: 0;
   color: #444455;
   text-align: center;
   overflow: hidden; }
-  .popup-account-address .popup-body svg {
+  .popup-account-receive .popup-body svg {
     width: 55px !important;
     margin-top: 10px; }
-  .popup-account-address .popup-body .message {
+  .popup-account-receive .popup-body .message {
     font-size: 16px;
     font-weight: 600;
     width: 75%;
@@ -316,7 +318,7 @@ svg {
     left: 50%;
     transform: translateX(-50%);
     margin-top: 5px; }
-  .popup-account-address .popup-body .detail {
+  .popup-account-receive .popup-body .detail {
     font-size: 16px;
     padding: 20px 20px 25px 20px;
     position: relative;
@@ -324,7 +326,7 @@ svg {
     transform: translateX(-50%);
     font-weight: 500;
     line-height: 1.4em; }
-  .popup-account-address .popup-body .qr-code-container {
+  .popup-account-receive .popup-body .qr-code-container {
     height: 185px;
     width: 185px;
     margin-top: 25px;
@@ -334,12 +336,12 @@ svg {
     transform: translateX(-50%);
     border: 1px solid #d0d0d0;
     border-radius: 5px; }
-    .popup-account-address .popup-body .qr-code-container qrcode {
+    .popup-account-receive .popup-body .qr-code-container qrcode {
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%);
       margin-top: 5px; }
-  .popup-account-address .popup-body .address {
+  .popup-account-receive .popup-body .address {
     font-size: 13px;
     color: #444455;
     font-weight: 500;
@@ -348,22 +350,22 @@ svg {
     padding-top: 18px;
     padding-left: 10px;
     padding-right: 10px; }
-  .popup-account-address .popup-body .copied svg {
+  .popup-account-receive .popup-body .copied svg {
     margin-top: 25px;
     margin-bottom: 10px; }
-    .popup-account-address .popup-body .copied svg * {
+    .popup-account-receive .popup-body .copied svg * {
       fill: #61ca01; }
-  .popup-account-address .popup-body .copied .message {
+  .popup-account-receive .popup-body .copied .message {
     font-size: 32px;
     font-weight: 500; }
-  .popup-account-address .popup-body .copied .detail {
+  .popup-account-receive .popup-body .copied .detail {
     font-size: 12px;
     color: #9b9bab;
     width: 80%;
     padding-top: 15px;
     padding-bottom: 25px; }
 
-.popup-account-address .warning .buttons > .button.button-primary {
+.popup-account-receive .warning .buttons > .button.button-primary {
   font-size: 16px;
   font-weight: 600;
   width: 45%;
@@ -373,31 +375,119 @@ svg {
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 25px; }
-  .popup-account-address .warning .buttons > .button.button-primary > span {
+  .popup-account-receive .warning .buttons > .button.button-primary > span {
     position: relative;
     top: -1px; }
 
-.popup-account-address .qrcode .buttons {
+.popup-account-receive .qrcode .buttons {
   height: 46px;
   border-top: 1px solid #d0d0d0;
   padding: 0; }
-  .popup-account-address .qrcode .buttons > .button.button-clear {
+  .popup-account-receive .qrcode .buttons > .button.button-clear {
     color: #124763 !important;
     font-size: 14px;
     font-weight: 500; }
-    .popup-account-address .qrcode .buttons > .button.button-clear > span {
+    .popup-account-receive .qrcode .buttons > .button.button-clear > span {
       position: relative;
       top: -5px; }
-    .popup-account-address .qrcode .buttons > .button.button-clear svg {
+    .popup-account-receive .qrcode .buttons > .button.button-clear svg {
       width: 15px !important;
       height: 15px;
       margin-right: 5px;
       position: relative;
       top: -3px; }
-      .popup-account-address .qrcode .buttons > .button.button-clear svg * {
+      .popup-account-receive .qrcode .buttons > .button.button-clear svg * {
         fill: #124763; }
-    .popup-account-address .qrcode .buttons > .button.button-clear.left {
+    .popup-account-receive .qrcode .buttons > .button.button-clear.left {
       border-right: 1px solid #d0d0d0; }
+
+#account-send ion-content {
+  background: #ffffff; }
+
+#account-send .bar.bar-coinbase {
+  background-color: #ffffff !important; }
+  #account-send .bar.bar-coinbase .title {
+    color: #444455;
+    font-weight: 600; }
+
+#account-send .available {
+  text-align: center;
+  color: #444455;
+  font-weight: 500; }
+
+#account-send .amount-container {
+  width: 100%;
+  position: absolute;
+  top: 100px;
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px; }
+  #account-send .amount-container .amount {
+    font-size: 48px;
+    font-weight: 500;
+    color: #0160D0; }
+    #account-send .amount-container .amount .placeholder {
+      opacity: 0.5; }
+
+#account-send .currency-toggle {
+  position: absolute;
+  top: 90px;
+  right: 10px; }
+  #account-send .currency-toggle svg {
+    height: 25px; }
+    #account-send .currency-toggle svg * {
+      fill: #444455; }
+  #account-send .currency-toggle .label {
+    color: #444455;
+    font-size: 12px;
+    font-weight: 500;
+    position: relative;
+    top: -5px;
+    left: 4px; }
+
+#account-send .keypad-group {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  bottom: calc(constant(safe-area-inset-bottom));
+  bottom: calc(env(safe-area-inset-bottom)); }
+  #account-send .keypad-group .easy-button-group {
+    text-align: center;
+    padding: 20px; }
+    #account-send .keypad-group .easy-button-group a {
+      border: 1px solid #d0d0d0;
+      padding: 5px 7px;
+      margin: 0 5px;
+      border-radius: 3px;
+      color: #444455; }
+      #account-send .keypad-group .easy-button-group a.activated {
+        background: rgba(0, 0, 0, 0.3); }
+  #account-send .keypad-group button {
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60px;
+    font-weight: 600; }
+
+#account-send-recipient .bar.bar-coinbase {
+  background-color: #ffffff !important; }
+  #account-send-recipient .bar.bar-coinbase .amount {
+    color: #0160D0;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 26px; }
+  #account-send-recipient .bar.bar-coinbase .total {
+    color: #0160D0;
+    font-weight: 600;
+    line-height: 10px; }
+  #account-send-recipient .bar.bar-coinbase .button {
+    color: #0160D0 !important;
+    font-weight: 600; }
+
+#account-send-recipient .item .input-label {
+  width: 35px;
+  color: #0160D0;
+  font-weight: 500; }
 
 #accounts a.item {
   height: 81px; }

@@ -1,0 +1,39 @@
+<ion-view id="account-send-recipient" hide-tabs>
+  <ion-nav-bar class="bar bar-coinbase">
+    <ion-nav-title>
+    	<div class="amount">
+    		{{'Amount' | translate}}: {{format(amount, currency).localized_u}}
+    	</div>
+    	<div class="total">
+    		{{'Total' | translate}}: {{format(amount, currency).localized_u}}
+    	</div>
+    </ion-nav-title>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+    <ion-nav-buttons side="secondary">
+      <button class="button button-nav-bar button-clear" ng-click="send()" ng-disabled="!formData.address" translate>
+      	Send
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content>
+    <form name="sendForm" novalidate>
+	    <ion-list>
+				<div class="item item-input item-icon-right">
+			    <span class="input-label" translate>
+			    	To
+			    </span>
+			    <input type="text" class="ellipsis" placeholder="email or {{account.currency.name}} address" ng-model="formData.address"
+			    	ng-required="true" required>
+	        <i class="icon ion-qr-scanner" ng-click="scan()"></i>
+			  </div>
+				<div class="item item-input">
+			    <span class="input-label" translate>
+			    	Notes
+			    </span>
+			    <input type="text" placeholder="notes" ng-model="formData.notes">
+			  </div>
+	    </ion-list>
+		</form>
+  </ion-content>
+</ion-view>

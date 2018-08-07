@@ -26,7 +26,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
     // Allows us to get the selected id on goBack() from the linked-accounts view.
     $scope.action = $ionicHistory.currentView().stateParams.action; //buy|sell
     $scope.accountId = $ionicHistory.currentView().stateParams.accountId; // crypto account
-    var selectedId = $ionicHistory.currentView().stateParams.paymentMethodId; // User selected, if undefined choose default
+    var selectedPaymentMethodId = $ionicHistory.currentView().stateParams.paymentMethodId; // User selected, if undefined choose default
 
     $scope.account = coinbase.getAccountById($scope.accountId);
     var currency = $scope.account.currency.code;
@@ -38,7 +38,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
     coinbase.getPaymentMethods().then(function(paymentMethods) {
 
       var paymentMethod;
-      if (!selectedId) {
+      if (!selectedPaymentMethodId) {
         // Choose first payment method that matches the default type, or index 0.
         paymentMethod = lodash.find(paymentMethods, function(m) {
           return m.type == actionMap[$scope.action].defaultPayMethodType;
@@ -47,7 +47,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
       } else {
         // Choose the user selected payment method.
         paymentMethod = lodash.find(paymentMethods, function(m) {
-          return m.id == selectedId;
+          return m.id == selectedPaymentMethodId;
         });
       }
 
