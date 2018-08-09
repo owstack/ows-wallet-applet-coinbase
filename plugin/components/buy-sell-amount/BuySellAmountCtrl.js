@@ -2,6 +2,7 @@
 
 angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', function($rootScope, $scope, $ionicHistory, $state, lodash, coinbaseService, gettextCatalog, popupService, settingsService, stringUtils,
   /* @namespace owsWalletPluginClient.api */ BN,
+  /* @namespace owsWalletPluginClient.api */ Session,
   /* @namespace owsWalletPluginClient.api */ Constants) {
 
   var coinbase = coinbaseService.coinbase;
@@ -24,13 +25,24 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
     // Read state params from the currentView object instead of data param.
     // Allows us to get the selected id on goBack() from the linked-accounts view.
+
     $scope.action = $ionicHistory.currentView().stateParams.action; //buy|sell
-    $scope.accountId = $ionicHistory.currentView().stateParams.accountId; // crypto account
+
+    // If a wallet is specfied then it is the destination or source for buy/sell.
+    // The coinbase account is selected using the wallet currency type.
+    var walletId = $ionicHistory.currentView().stateParams.walletId;
+
+    if (walletId) {
+      var wallet = Session.getInstance().getWalletById(walletId);
+      $scope.account = coinbase.getAccountByCurrencyCode(wallet.currency);
+      $scope.accountId = $scope.account.id;
+    } else {
+      $scope.accountId = $ionicHistory.currentView().stateParams.accountId; // crypto account
+      $scope.account = coinbase.getAccountById($scope.accountId);
+    }
+
     var selectedPaymentMethodId = $ionicHistory.currentView().stateParams.paymentMethodId; // User selected, if undefined choose default
-
-    $scope.account = coinbase.getAccountById($scope.accountId);
     var currency = $scope.account.currency.code;
-
     $scope.title = actionMap[$scope.action].title + ' ' + coinbase.getCurrencyByCode(currency).name;
     $scope.button = actionMap[$scope.action].button;
 

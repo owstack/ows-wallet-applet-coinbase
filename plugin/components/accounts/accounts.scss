@@ -10,5 +10,10 @@
 	 	>.item-note {
 			color: $v-light-gray;
 		}
+
+		.error {
+	    color: $v-error-color;
+	    font-weight: 500;
+	  }
 	}	
 }

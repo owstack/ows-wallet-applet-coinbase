@@ -4,8 +4,6 @@ angular.module('owsWalletPlugin.controllers').controller('AccountCtrl', function
 
   var coinbase = coinbaseService.coinbase;
 
-  $scope.isCordova = owswallet.Plugin.isCordova();
-
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
     $scope.account = coinbase.getAccountById(data.stateParams.accountId);
 

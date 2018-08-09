@@ -1,0 +1,42 @@
+<ion-view id="wallet" show-tabs>
+  <ion-nav-bar class="bar-coinbase" ng-style="{'background-color': wallet.color}">
+    <ion-nav-title>{{wallet.name}}</ion-nav-title>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-header-bar class="bar-subheader has-header">
+  	<span>
+	    <div class="header-group" ng-style="{'background-color': wallet.color}">
+		    <div class="amount">
+	        {{wallet.format().balance}}
+		    </div>
+		    <div class="altAmount">
+	        {{wallet.format().balanceAlternative}}
+		    </div>
+		    <div class="error" ng-if="wallet.error">
+	        {{wallet.error}}
+		    </div>
+		  </div>
+	    <div class="button-group row">
+	    	<span class="col col-50">
+		      <button class="button button-block button-primary" ui-sref="tabs.buy-sell-amount({action: 'buy', walletId: wallet.id})"
+		      	ng-style="{'background-color': wallet.color}" translate>
+		        Buy
+		      </button>
+		    </span>
+	    	<span class="col">
+		      <button class="button button-block button-primary" ui-sref="tabs.buy-sell-amount({action: 'sell', walletId: wallet.id})"
+		      	ng-style="{'background-color': wallet.color}" translate>
+		      	Sell
+		      </button>
+		    </span>
+	    </div>
+	  </span>
+  </ion-header-bar>
+  <ion-content>
+		<ows-wallet-transactions transactions="wallet.transactions" on-click="openTxDetail" style-icon-confirming="background: {{wallet.color}}"
+			style-icon-received="background: {{wallet.color}}" style-icon-sent="background: {{wallet.color}}"
+			style-icon-moved="background: {{wallet.color}}">
+		<ows-wallet-transactions>
+  </ion-content>
+</ion-view>

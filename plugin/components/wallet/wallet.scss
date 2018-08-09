@@ -1,0 +1,127 @@
+#wallet {
+  // Allows the nav bar to be ng-style'd with background-color
+  // See https://codepen.io/brandyscarney/pen/ZGQmYP
+  .nav-bar-block, .bar {
+    background-color: inherit !important;
+  }
+
+  ion-content {
+    margin-top: calc(213px - 44px); // ion-content gets has-subheader, need to negate its effect
+  }
+
+  ion-header-bar.bar-subheader {
+    padding: 0;
+    color: $v-white-color;
+    text-align: center;
+    display: inline-table;
+
+    >span {
+      width: 100%;
+      display: inherit;
+    }
+  }
+
+	.header-group {
+		background: $v-primary-color;
+		height: 132px;
+    position: relative;
+
+		.amount {
+      padding-top: 32px;
+	    font-size: 32px;
+  	}
+
+    .altAmount {
+      padding-top: 19px;
+      font-size: 18px;
+      color: $v-white-transparent-mid;
+      font-weight: 500;
+    }
+
+    .error {
+      font-size: 16px;
+      text-align: center;
+      color: $v-error-color;
+      background: $v-white-transparent-mid;
+      width: 100%;
+      height: 24px;
+      padding-top: 3px;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+  .button-group {
+    background: $v-white-color;
+    border-bottom: 1px solid $v-subtle-gray;
+    width: 100%;
+
+    button {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 50px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .col {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+
+  #ows-wallet-transactions {
+    .tx {
+      &-icon {
+        width: 30px;
+        height: 30px;
+        -webkit-mask-size: contain;
+
+        &.confirming {
+          -webkit-mask-image: url(../img/icon-tx-confirming.svg);
+        }
+
+        &.moved {
+          -webkit-mask-image: url(../img/icon-tx-exchange.svg);
+        }
+
+        &.sent {
+          -webkit-mask-image: url(../img/icon-tx-out.svg);
+        }
+
+        &.received {
+          -webkit-mask-image: url(../img/icon-tx-in.svg);
+        }
+      }
+
+      &-description {
+        color: $v-text-color;
+      }
+
+      &-amount {
+        font-size: 16px;
+        font-weight: 500;
+
+        &.moved {
+          color: $v-text-color;
+        }
+
+        &.sent {
+          color: $v-tx-sent-color;
+        }
+
+        &.received {
+          color: $v-tx-received-color;
+        }
+
+        &.recent {
+          color: $v-text-color;
+        }
+      }
+
+      &-time {
+        color: $v-text-color;
+      }
+    }
+  }
+}

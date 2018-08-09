@@ -1,15 +1,20 @@
 <ion-view id="accounts" show-tabs>
-  <ion-nav-bar class="bar bar-coinbase">
-    <ion-nav-title>{{'Accounts' | translate}}</ion-nav-title>
+  <ion-nav-bar class="bar-coinbase">
+    <ion-nav-title>{{'Portfolio' | translate}}</ion-nav-title>
   </ion-nav-bar>
   <ion-content>
     <ion-list>
+      <div class="item item-divider">
+        Accounts
+      </div>
       <a class="item item-icon-left item-icon-right" ui-sref="tabs.account({accountId: account.id})"
         ng-repeat="account in accounts track by account.id">
         <img svg="fill: {{account.currency.color}}" ng-src="img/icon-{{account.currency.code.toLowerCase()}}.svg">
         <h2>{{account.name}}</h2>
         <span class="item-note" ng-class="{'two-lines': account.balance.altCurrency != account.balance.currency}">
-          <h2>{{format(account.balance.altAmount, currency).localized_u}}</h2>
+          <h2>
+            {{format(account.balance.altAmount, account.balance.altCurrency).localized_u}}
+          </h2>
           <p ng-if="account.balance.altCurrency != account.balance.currency">
             {{format(account.balance.amount, account.currency.code, {symbol: false}).localized_u}}
           </p>
@@ -17,5 +22,6 @@
         <i class="icon ion-ios-arrow-right"></i>
       </a>
     </ion-list>
-  </ion-content>
+    <ows-wallets wallets="wallets" title="{{walletSectionTitle}}" on-click="onWallet"></ows-wallets>
+   </ion-content>
 </ion-view>

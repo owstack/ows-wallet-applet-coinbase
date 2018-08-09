@@ -29,8 +29,8 @@ h4 {
 
 /* Header bar */
 
-.bar.bar-coinbase {
-  background-color: $v-primary-color !important;
+.bar-coinbase {
+  background-color: $v-primary-color;
   border: none;
   color: $v-white-color;
 	background-size: 0;
@@ -122,6 +122,8 @@ svg {
  	}
 
   &.has-detail {
+    padding-top: 18px;
+    
     >p,
     >span:not(.item-note) >p {
       color: $v-mid-gray;

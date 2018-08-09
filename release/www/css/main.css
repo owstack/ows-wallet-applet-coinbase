@@ -47,8 +47,8 @@ h4 {
   font-size: 20px; }
 
 /* Header bar */
-.bar.bar-coinbase {
-  background-color: #0160D0 !important;
+.bar-coinbase {
+  background-color: #0160D0;
   border: none;
   color: #ffffff;
   background-size: 0; }
@@ -110,12 +110,14 @@ svg {
     position: absolute;
     top: 50%;
     transform: translateY(-50%); }
-  .item.has-detail > p,
-  .item.has-detail > span:not(.item-note) > p {
-    color: #666677;
-    font-size: 14px;
-    font-weight: 500;
-    padding-top: 2px; }
+  .item.has-detail {
+    padding-top: 18px; }
+    .item.has-detail > p,
+    .item.has-detail > span:not(.item-note) > p {
+      color: #666677;
+      font-size: 14px;
+      font-weight: 500;
+      padding-top: 2px; }
   .item > .item-note {
     position: absolute;
     top: 30px;
@@ -500,6 +502,9 @@ svg {
     padding-left: 57px; }
   #accounts a.item > .item-note {
     color: #9b9bab; }
+  #accounts a.item .error {
+    color: #ff0000;
+    font-weight: 500; }
 
 #buy-sell-amount ion-content {
   background: #ffffff; }
@@ -988,3 +993,86 @@ svg {
     #start .main-button-group .button.button-secondary {
       background: #4B84FF;
       color: #ffffff !important; }
+
+#wallet .nav-bar-block, #wallet .bar {
+  background-color: inherit !important; }
+
+#wallet ion-content {
+  margin-top: calc(213px - 44px); }
+
+#wallet ion-header-bar.bar-subheader {
+  padding: 0;
+  color: #ffffff;
+  text-align: center;
+  display: inline-table; }
+  #wallet ion-header-bar.bar-subheader > span {
+    width: 100%;
+    display: inherit; }
+
+#wallet .header-group {
+  background: #0160D0;
+  height: 132px;
+  position: relative; }
+  #wallet .header-group .amount {
+    padding-top: 32px;
+    font-size: 32px; }
+  #wallet .header-group .altAmount {
+    padding-top: 19px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500; }
+  #wallet .header-group .error {
+    font-size: 16px;
+    text-align: center;
+    color: #ff0000;
+    background: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    height: 24px;
+    padding-top: 3px;
+    position: absolute;
+    bottom: 0; }
+
+#wallet .button-group {
+  background: #ffffff;
+  border-bottom: 1px solid #d0d0d0;
+  width: 100%; }
+  #wallet .button-group button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600; }
+  #wallet .button-group .col {
+    padding-left: 8px;
+    padding-right: 8px; }
+
+#wallet #ows-wallet-transactions .tx-icon {
+  width: 30px;
+  height: 30px;
+  -webkit-mask-size: contain; }
+  #wallet #ows-wallet-transactions .tx-icon.confirming {
+    -webkit-mask-image: url(../img/icon-tx-confirming.svg); }
+  #wallet #ows-wallet-transactions .tx-icon.moved {
+    -webkit-mask-image: url(../img/icon-tx-exchange.svg); }
+  #wallet #ows-wallet-transactions .tx-icon.sent {
+    -webkit-mask-image: url(../img/icon-tx-out.svg); }
+  #wallet #ows-wallet-transactions .tx-icon.received {
+    -webkit-mask-image: url(../img/icon-tx-in.svg); }
+
+#wallet #ows-wallet-transactions .tx-description {
+  color: #124763; }
+
+#wallet #ows-wallet-transactions .tx-amount {
+  font-size: 16px;
+  font-weight: 500; }
+  #wallet #ows-wallet-transactions .tx-amount.moved {
+    color: #124763; }
+  #wallet #ows-wallet-transactions .tx-amount.sent {
+    color: #124763; }
+  #wallet #ows-wallet-transactions .tx-amount.received {
+    color: #00c365; }
+  #wallet #ows-wallet-transactions .tx-amount.recent {
+    color: #124763; }
+
+#wallet #ows-wallet-transactions .tx-time {
+  color: #124763; }

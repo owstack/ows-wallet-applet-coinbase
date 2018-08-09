@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>img/icon-tx-confirming</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img/icon-tx-confirming">
+            <g id="icon-confirming">
+                <g id="confirming">
+                    <path d="M40,80 C17.90861,80 0,62.09139 0,40 C0,17.90861 17.90861,0 40,0 C62.09139,0 80,17.90861 80,40 C80,62.09139 62.09139,80 40,80 Z M40,77 C60.4345357,77 77,60.4345357 77,40 C77,19.5654643 60.4345357,3 40,3 C19.5654643,3 3,19.5654643 3,40 C3,60.4345357 19.5654643,77 40,77 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                    <g id="Group" transform="translate(20.500000, 19.375000)" stroke="#FFFFFF" stroke-width="3">
+                        <path d="M0,20.4545455 C0,9.20454545 8.65800866,0 19.2400192,0 C26.7436268,0 33.2852332,4.5 36.3636364,11.25" id="Shape"></path>
+                        <path d="M38.6363636,20.4545455 C38.6363636,31.7045455 29.978355,40.9090909 19.3963444,40.9090909 C11.8927369,40.9090909 5.35113034,36.4090909 2.27272727,29.6590909" id="Shape"></path>
+                        <polyline id="Shape" points="38.6363636 0 37.0320855 11.3636364 25 9.82280432"></polyline>
+                        <polyline id="Shape" points="0 40.9090909 1.60427807 29.5454545 13.6363636 31.0862866"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

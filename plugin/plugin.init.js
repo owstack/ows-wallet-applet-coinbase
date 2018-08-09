@@ -92,6 +92,15 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
         }
       }
     })
+    .state('tabs.wallet', {
+      url: '/wallet/:walletId',
+      views: {
+        'tab-accounts@tabs': {
+          controller: 'WalletCtrl',
+          templateUrl: 'views/wallet/wallet.html'
+        }
+      }
+    })
 
     // Send transaction
 
@@ -117,7 +126,7 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
     // Buy and sell
 
     .state('tabs.buy-sell-amount', {
-      url: '/buy-sell-amount/:action/:accountId',
+      url: '/buy-sell-amount/:action/:accountId/:walletId',
       views: {
         'tab-accounts@tabs': {
           controller: 'BuySellAmountCtrl',
