@@ -101,6 +101,10 @@ svg {
     min-height: 65px;
   }
 
+  &.item-divider {
+    border-top: none;
+  }
+
  	&.item-icon-left {
   	padding-left: 62px;
  	}

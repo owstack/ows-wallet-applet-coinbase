@@ -98,6 +98,8 @@ svg {
   color: #124763; }
   .item:not(.item-divider) {
     min-height: 65px; }
+  .item.item-divider {
+    border-top: none; }
   .item.item-icon-left {
     padding-left: 62px; }
   .item h2 {
