@@ -34,6 +34,30 @@
 	  </span>
   </ion-header-bar>
   <ion-content>
+  	<ion-list>
+			<div class="item item-divider">
+				Pending Transactions
+			</div>
+      <div class="item item-icon-left has-detail" ng-repeat="tx in pendingTransactions track by $index">
+      	<i src="none"></i>
+        <img svg="fill: {{account.currency.color}}" ng-src="img/icon-tx-{{tx.type || 'default'}}.svg">
+				<span>
+	        <h2>{{tx.title}}</h2>
+	        <p>{{trim(tx.subtitle)}}</p>
+	      </span>
+        <span class="item-note two-lines">
+          <h2 ng-class="{'received': tx.amount > 0}">{{format(tx.amount, tx.currency).localized_u}}</h2>
+          <span ng-if="tx.status != 'pending'">
+          	<p>{{format(tx.altAmount, tx.altCurrency).localized_u}}</p>
+          </span>
+          <span ng-if="tx.status == 'pending'">
+          	<p>
+	          	<div class="status-dot" ng-style="{'background': wallet.color}"></div> Pending
+          	</p>
+          </span>
+        </span>
+      </div>
+    </ion-list>	
 		<ows-wallet-transactions transactions="wallet.transactions" on-click="openTxDetail" style-icon-confirming="background: {{wallet.color}}"
 			style-icon-received="background: {{wallet.color}}" style-icon-sent="background: {{wallet.color}}"
 			style-icon-moved="background: {{wallet.color}}">

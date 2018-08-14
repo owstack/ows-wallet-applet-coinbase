@@ -35,8 +35,8 @@
 	  </span>
   </ion-header-bar>
   <ion-content>
-  	<ion-list ng-repeat="tx in transactions track by $index">
-      <div class="item item-icon-left has-detail">
+  	<ion-list>
+      <div class="item item-icon-left has-detail" ng-repeat="tx in transactions track by $index">
       	<i src="none"></i>
         <img svg="fill: {{account.currency.color}}" ng-src="img/icon-tx-{{tx.type || 'default'}}.svg">
 				<span>
