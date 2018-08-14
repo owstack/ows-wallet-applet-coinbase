@@ -126,7 +126,7 @@ angular.module('owsWalletPlugin').config(function($stateProvider) {
     // Buy and sell
 
     .state('tabs.buy-sell-amount', {
-      url: '/buy-sell-amount/:action/:accountId/:walletId',
+      url: '/buy-sell-amount/:action/:accountId/:walletId/:currency',
       views: {
         'tab-accounts@tabs': {
           controller: 'BuySellAmountCtrl',

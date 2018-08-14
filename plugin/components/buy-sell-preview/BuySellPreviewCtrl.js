@@ -38,7 +38,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellPreviewCtrl', f
   $scope.trim = stringUtils.trim;
 
   $scope.confirm = function() {
-    $scope.order.confirm().then(function(order) {
+    $scope.order.commit().then(function(order) {
       $state.go('tabs.buy-sell-confirm', {
         accountId: order.account.id,
         orderId: order.id,

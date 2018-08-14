@@ -22,6 +22,8 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
     }
   };
 
+  var walletId;
+
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
     // Read state params from the currentView object instead of data param.
     // Allows us to get the selected id on goBack() from the linked-accounts view.
@@ -30,19 +32,20 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
 
     // If a wallet is specfied then it is the destination or source for buy/sell.
     // The coinbase account is selected using the wallet currency type.
-    var walletId = $ionicHistory.currentView().stateParams.walletId;
+    walletId = $ionicHistory.currentView().stateParams.walletId;
+    var currency;
 
     if (walletId) {
-      var wallet = Session.getInstance().getWalletById(walletId);
-      $scope.account = coinbase.getAccountByCurrencyCode(wallet.currency);
+      currency = $ionicHistory.currentView().stateParams.currency;
+      $scope.account = coinbase.getAccountByCurrencyCode(currency);
       $scope.accountId = $scope.account.id;
     } else {
       $scope.accountId = $ionicHistory.currentView().stateParams.accountId; // crypto account
       $scope.account = coinbase.getAccountById($scope.accountId);
+      currency = $scope.account.currency.code;
     }
 
     var selectedPaymentMethodId = $ionicHistory.currentView().stateParams.paymentMethodId; // User selected, if undefined choose default
-    var currency = $scope.account.currency.code;
     $scope.title = actionMap[$scope.action].title + ' ' + coinbase.getCurrencyByCode(currency).name;
     $scope.button = actionMap[$scope.action].button;
 
@@ -156,7 +159,8 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
     createOrder({
       amount: $scope.keypad.amount,
       currency: $scope.keypad.currency,
-      paymentMethodId: $scope.paymentMethod.id
+      paymentMethodId: $scope.paymentMethod.id,
+      walletId: walletId
     }).then(function(order) {
       $state.go('tabs.buy-sell-preview', {
         accountId: $scope.accountId,

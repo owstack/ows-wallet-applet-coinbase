@@ -19,14 +19,14 @@
 		  </div>
 	    <div class="button-group row">
 	    	<span class="col col-50">
-		      <button class="button button-block button-primary" ui-sref="tabs.buy-sell-amount({action: 'buy', walletId: wallet.id})"
-		      	ng-style="{'background-color': wallet.color}" translate>
+		      <button class="button button-block button-primary" ng-style="{'background-color': wallet.color}"
+		      	ui-sref="tabs.buy-sell-amount({action: 'buy', walletId: wallet.id, currency: wallet.currency})" translate>
 		        Buy
 		      </button>
 		    </span>
 	    	<span class="col">
-		      <button class="button button-block button-primary" ui-sref="tabs.buy-sell-amount({action: 'sell', walletId: wallet.id})"
-		      	ng-style="{'background-color': wallet.color}" translate>
+		      <button class="button button-block button-primary" ng-style="{'background-color': wallet.color}"
+		      	ui-sref="tabs.buy-sell-amount({action: 'sell', walletId: wallet.id, currency: wallet.currency})" translate>
 		      	Sell
 		      </button>
 		    </span>

@@ -4,8 +4,9 @@ angular.module('owsWalletPlugin.controllers').controller('WalletCtrl', function(
   /* @namespace owsWalletPluginClient.api */ Session) {
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
-    var wallet = Session.getInstance().getWalletById(data.stateParams.walletId);
-    $scope.wallet = wallet;
+    var wallet = Session.getInstance().getWalletById(data.stateParams.walletId).then(function(wallet) {
+	    $scope.wallet = wallet;
+    });
   });
 
 });
