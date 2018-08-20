@@ -12,6 +12,7 @@ angular.module('owsWalletPlugin.services').factory('coinbaseService', function($
   // The Coinbase servlet may notify us that it has logged out (e.g., when token is not useful).
   owswallet.Plugin.onEvent('coinbase.logout', function(event) {
     $log.info('Logged out by Coinbase servlet');
+    $state.go('onboarding.start');
   });
 
   root.whenAvailable = function(cb) {

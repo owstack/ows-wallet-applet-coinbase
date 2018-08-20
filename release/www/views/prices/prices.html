@@ -16,11 +16,13 @@
       <div class="list card" ng-repeat="c in currencies track by $index">
         <div class="item item-body">
           <div class="row">
-            <div class="currency-name col col-50">
-              {{c.label}}
-            </div>
-            <div class="currency-amount col">
-              {{format(c.amount, currency, {decimals: c.decimals}).localized_u}}
+            <div class="col">
+              <div class="currency-name">
+                {{c.label}}
+              </div>
+              <div class="currency-amount">
+                {{format(c.amount, currency, {decimals: c.decimals}).localized_u}}
+              </div>
             </div>
           </div>
           <div class="row">

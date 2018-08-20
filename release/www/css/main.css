@@ -853,7 +853,8 @@ svg {
       #prices .card-group .card .item.item-body .currency-name {
         font-size: 24px;
         position: relative;
-        top: 5px; }
+        top: 5px;
+        float: left; }
       #prices .card-group .card .item.item-body .currency-amount {
         font-size: 24px;
         position: relative;

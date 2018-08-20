@@ -46,7 +46,7 @@ angular.module('owsWalletPlugin.controllers').controller('BuySellAmountCtrl', fu
     }
 
     var selectedPaymentMethodId = $ionicHistory.currentView().stateParams.paymentMethodId; // User selected, if undefined choose default
-    $scope.title = actionMap[$scope.action].title + ' ' + coinbase.getCurrencyByCode(currency).name;
+    $scope.title = actionMap[$scope.action].title + ' ' + Constants.currencyMap(currency, 'name');
     $scope.button = actionMap[$scope.action].button;
 
     // Set default payment method.

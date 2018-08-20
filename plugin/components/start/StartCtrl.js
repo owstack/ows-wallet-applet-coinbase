@@ -155,9 +155,7 @@ angular.module('owsWalletPlugin.controllers').controller('StartCtrl', function($
         spotPrice[k].decimals = Constants.currencyMap(spotPrice[k].currency, 'decimals');
 
         // Set a sort order.
-        spotPrice[k].sort = lodash.find(coinbase.currencies, function(c) {
-          return c.code == spotPrice[k].base;
-        }).sort;
+        spotPrice[k].sort = coinbase.preferredSort(spotPrice[k].base);
 
         return spotPrice[k];
       });

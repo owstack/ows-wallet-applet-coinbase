@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>img/icon-etc</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img/icon-etc" fill="#FFFFFF">
+            <g id="icon-etc">
+                <g id="etc">
+                    <path d="M40,80 C17.90861,80 0,62.09139 0,40 C0,17.90861 17.90861,0 40,0 C62.09139,0 80,17.90861 80,40 C80,62.09139 62.09139,80 40,80 Z M24.0456423,44.3025 L40.0112227,66.4 L55.9063566,44.3025 L39.9759995,53.5466518 L24.0456423,44.3025 Z M40,31.2864001 L23.9951999,39.666401 L39.9810662,48.9728003 L55.956799,39.666401 L40,31.2864001 Z M24.0456423,35.9 L39.9759995,26.6558482 L55.9063566,35.9 L40.0112227,13.8025 L24.0456423,35.9 Z" id="Combined-Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
