@@ -3,7 +3,7 @@
     "id": "org.openwalletstack.wallet.plugin.applet.coinbase",
     "kind": "applet",
     "name": "Coinbase",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "An OWS Wallet applet plugin for Coinbase.",
     "author": "Open Wallet Stack",
     "url": {
@@ -13,7 +13,7 @@
       "terms": "https://openwalletstack.org/terms",
       "git": "https://github.com/owstack/ows-wallet-applet-coinbase/"
     },
-    "commitHash": "936b07f"
+    "commitHash": "ff6ba39"
   },
   "permissions": {
     "delete": false
@@ -58,7 +58,7 @@
   "dependencies": {
     "org.openwalletstack.wallet.plugin.servlet.coinbase": {
       "package": {
-        "@owstack/ows-wallet-servlet-coinbase": "^0.0.9"
+        "@owstack/ows-wallet-servlet-coinbase": "^0.0.10"
       },
       "options": {
         "startMode": "auto"
